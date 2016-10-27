@@ -1,0 +1,94 @@
+.TH lcal 1 "2016" "" "lcal "
+
+.SH NAME
+lcal \- display a calendar.
+
+.SH SYNOPSIS
+.B lcal
+[options] [month] [day] [year]
+.br
+
+.SH DESCRIPTION
+.B lcal
+is a command-line calendar similar to
+.B cal
+and
+.B ncal.
+
+.SH OPTIONS
+.B
+.IP "-d --day-of-week"
+Show day-name for date.
+.B
+.IP  "-e --easter"
+Show the date for Easter (Western).
+.B
+.IP "-h --no-highlight"
+Disable highlighting.
+.B
+.IP "-j --julian"
+Show Julian calendar. Days are one based - Dec 31st is day 365 (or 366 if year is a leap year).
+.B
+.IP "-m --month"
+Show calendar for month. A year may be the next parameter.
+.B
+.IP "-n --next"
+Show next month's calendar.
+.B
+.IP "-o --orthodox"
+Show the date for Easter (Eastern Orthodox).
+.B
+.IP "-p --previous"
+Show last month's calendar.
+.B
+.IP "-y --year"
+Show yearly calendar.
+.B
+.IP "-D --discordian"
+Show date according to the Disordian calendar.
+.B
+.IP "-G --gregorian-to-jdn"
+Convert a Gregorian date to the Julian Day Number (jdn).
+.B
+.IP "-H --html"
+Generate an HTML calendar. Use
+.B -h --html
+to turn off highlighting. Output must be redirected to a file.
+.B
+.IP "-J --jdn-to-gregorian"
+Convert a Julian Day Number (jdn) to Gregorian.
+.B
+.IP "-N --ncal"
+Show the calendar in
+.B ncal
+format.
+.B
+.IP "-O --orthodox-julian"
+Show the date for Orthodox Easter according the the Julian Calendar.
+.B
+.IP "-V --version"
+Show version information.
+.B
+.IP "-1 --one"
+Show only the current calendar. This is the default.
+.B
+.IP "-3 --three"
+Show last month, this month and next month.
+.B
+.IP "--help"
+Show usage information.
+
+.SH AUTHOR
+The utility lcal and this manual were written by Luciano D. Cecere
+
+.SH LICENSE
+Copyright (C) 2014-2016 Luciano D. Cecere <Ldante86@aol.com>
+
+Released under the terms of the GNU General Public License, version 2
+
+This is free software; see the source for copying conditions.
+There is NO warranty, without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+.SH "SEE ALSO"
+.B cal(1), ddate(1), ncal(1), gcal(1)

@@ -1,0 +1,53 @@
+#!/bin/sh -
+
+MANLOC=/usr/share/man/man
+
+#set -- lcal.1
+
+MANPAGE="$1"
+SECTION=${2:-1}
+
+unset GZIP
+
+case $MANPAGE in
+	*.[1-9])
+		GZIP=1
+		;;
+	*.[1-9].gz)
+		true
+		;;
+	'')
+		echo no file given
+		exit 1
+		;;
+	*)
+		echo cannot install that manual
+		exit 1
+		;;
+esac
+
+case $SECTION in
+	[1-9])
+		true
+		;;
+	*)
+		echo not a correct section number
+		exit 1
+		;;
+esac
+
+if [ ! -e $MANPAGE ]; then
+	echo $MANPAGE does not exist
+	exit 1
+fi
+
+if [ $GZIP ]; then
+	/bin/gzip $MANPAGE
+	sudo cp ${MANPAGE}.gz ${MANLOC}${SECTION}
+	/bin/gunzip ${MANPAGE}.gz
+else
+	sudo cp ${MANPAGE} ${MANLOC}${SECTION}
+	/bin/gunzip ${MANPAGE}
+fi
+
+echo complete
