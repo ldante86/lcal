@@ -273,12 +273,6 @@ _main()
 		_exit 0
 	fi
 
-	# -y --year
-	if [ $REQUEST_YEARLY ]; then
-		_print_gregorian_yearly ${1:-$YEAR}
-		_exit 0
-	fi
-
 	# -n --next
 	if [ $REQUEST_NEXT_MONTH ]; then
 		_shift_month_forward $MONTH $YEAR
@@ -293,7 +287,7 @@ _main()
 		_exit 0
 	fi
 
-	ARGS="${1:-$MONTH} ${2:-$DAY} ${3:-$YEAR}"
+	ARGS="$@"
 
 	_is_date_valid $ARGS || _exit 1
 
@@ -306,6 +300,12 @@ _main()
 	# -G --gregorian-to-jdn
 	if [ $REQUEST_GREGORIAN_TO_JDN ]; then
 		_gregorian_date_to_jdn $ARGS
+		_exit 0
+	fi
+
+	# -y --year
+	if [ $REQUEST_YEARLY ]; then
+		_print_gregorian_yearly ${1:-$YEAR}
 		_exit 0
 	fi
 
@@ -354,19 +354,51 @@ _main()
 _is_date_valid()
 {
 	if [ $# -eq 0 ]; then
+		ARGS="$MONTH $DAY $YEAR"
 		return 0
-	fi
-	local m=${1:-$MONTH} d=${2:-$DAY} y=${3:-$YEAR}
-
-	if [ $m -gt 12 ] || [ $m -lt 1 ]; then
-		echo "$PROGRAM: month out of range"
-		return 1
-	fi
-
-	local l=$(_month_len $m $y)
-	if [ $d -gt $l ] || [ $d -le 0 ]; then
-		echo "$PROGRAM: day out of range of month"
-		return 1
+	elif [ $# -eq 1 ]; then
+		local m=$1
+		if [ ${#m} -eq 4 ]; then
+			REQUEST_YEARLY=1
+			ARGS=$m
+			return
+		fi
+		if [ $m -gt 12 ] || [ $m -lt 1 ]; then
+			echo "$PROGRAM: month out of range"
+			return 1
+		else
+			ARGS="$m 0 $YEAR"
+			REQUEST_NO_HIGHLIGHT=1
+		fi
+	elif [ $# -eq 2 ]; then
+		local m=$1 y=$2
+                if [ $m -gt 12 ] || [ $m -lt 1 ]; then
+                        echo "$PROGRAM: month out of range [1-12]"
+                        return 1
+		fi
+		if [ $y -lt 1753 ] || [ $y -gt 9999 ]; then
+			echo "$PROGRAM: year out of range [1753-9999]"
+			return 1
+		else
+			ARGS="$m 0 $y"
+			REQUEST_NO_HIGHLIGHT=1
+		fi
+	elif [ $# -ge 3 ]; then
+                local m=$1 d=$2 y=$3
+                if [ $m -gt 12 ] || [ $m -lt 1 ]; then
+                        echo "$PROGRAM: month out of range [1-12]"
+                        return 1
+		fi
+                if [ $y -lt 1753 ] || [ $y -gt 9999 ]; then
+                        echo "$PROGRAM: year out of range [1753-9999]"
+                else
+                        AGRS="$m $d $y"
+                fi
+		local l=$(_month_len $m $y)
+		if [ $d -gt $l ] || [ $d -le 0 ]; then
+			echo "$PROGRAM: day out of range of month"
+			return 1
+		fi
 	fi
 }
 
