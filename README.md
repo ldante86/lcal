@@ -1,4 +1,9 @@
-## lcal 0.0.1 - display a calendar
+## lcal - display a calendar
+
+### DESCRIPTION
+**lcal** is a command-line calendar similar to cal/ncal. This program can produces Gregorian
+and Julian calendars, an HTML 5 calendar, Discordian dates, dates of Easter (Western, Orthodox,
+Orthodox-Julian), monthly and yearly calendars, and Julian Day Number conversions.
 
 ### USAGE
 **lcal** [option] [month] [day] [year]
@@ -52,12 +57,14 @@ calendar with the day highlighted.
 
 The year range is currently 1753 - 9999.
 
-The **-m** flag is the same as **month** without the flag. The only difference is that **-m**
-stops reading arguments after it.
+The **-m** flag is the same as **month** without the flag. A **year** can be added after **month**.
 
 To disable highlighting for **--html**, use **-h** before this flag.
 
 The **-1** flag stops reading any arguments after it.
+
+### VERSION
+0.0.1
 
 ### LICENSE
 (c) 2014-2016 Luciano D. Cecere - ldante86@aol.com
