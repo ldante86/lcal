@@ -43,8 +43,21 @@
 *     **--help**
 	* show this usage and exit
 
-### NOTES
-A date string can be taken as an argument for most flags.
+### PARAMETERS
+Most flags can take a date string as an argument. A single parameter is either a **month** -- this
+will print the month for the current year -- or it is a **year** -- this will print the yearly calendar
+for the specified year. Two parameters are **month** and **year** -- this will print the month for the
+specified year. Three parameters are **month**, **day** and **year** -- this will print the specified
+calendar with the day highlighted.
+
+The year range is currently 1753 - 9999.
+
+The **-m** flag is the same as **month** without the flag. The only difference is that **-m**
+stops reading arguments after it.
+
+To disable highlighting for **--html**, use **-h** before this flag.
+
+The **-1** flag stops reading any arguments after it.
 
 ### LICENSE
 (c) 2014-2016 Luciano D. Cecere - ldante86@aol.com
