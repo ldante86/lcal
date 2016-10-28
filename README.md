@@ -1,7 +1,7 @@
 ## lcal - display a calendar
 
 ### DESCRIPTION
-**lcal** is a command-line calendar similar to cal/ncal. This program can produces Gregorian
+**lcal** is a command-line calendar similar to cal/ncal. This program produces Gregorian
 and Julian calendars, an HTML 5 calendar, Discordian dates, dates of Easter (Western, Orthodox,
 Orthodox-Julian), monthly and yearly calendars, and Julian Day Number conversions.
 
