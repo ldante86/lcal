@@ -1,5 +1,5 @@
 
-Function documentation manual for ../lcal
+Function documentation manual for lcal
 
 ----------------------------
 
