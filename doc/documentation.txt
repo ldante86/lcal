@@ -1,5 +1,5 @@
 
-Function documentation manual for lcal
+Function documentation manual for ../lcal
 
 ----------------------------
 
@@ -37,7 +37,7 @@ usage: _day_of_week month day year
 
 Function: _gregorian_array
 usage: _gregorian_array month year
-	 Loads the GREGORIAN_DATA array with correctly
+	 Loads the CALENDAR_DATA array with correctly
 	 spaced numbers for later printing.
 ----------------------------
 
@@ -49,7 +49,7 @@ usage: _print_gregorian_monthly month day year
 
 Function: _julian_array
 usage: _julian_array month day year
-	 Loads the JULIAN_DATA array with correctly
+	 Loads the CALENDAR_DATA array with correctly
 	 spaced numbers for later printing.
 ----------------------------
 
@@ -101,21 +101,14 @@ usage: _gregorian_date_to_jdn month day year
 	 Julian day number.
 ----------------------------
 
-Function: _ncal_gregorian_array
-usage: _ncal_gregorian_array month year
-	 Loads the NCAL array with correctly
-	 spaced numbers for printing the Gregorian calendar
-	 in the ncal format.
-----------------------------
-
 Function: _print_ncal_gregorian
 usage: _print_ncal_gregorian month day year
 	 Print the Gregorian calendar for date in ncal
 	 format. To prevent highlighting, set the day value to 0.
 ----------------------------
 
-Function: _ncal_julian_array
-usage: _ncal_julian_array month day year
+Function: _ncal_array
+usage: _ncal_array month day year
 	 Loads the NCAL array with correctly
 	 spaced numbers for printing the Julian calendar
 	 in the ncal format.
