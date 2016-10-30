@@ -456,11 +456,11 @@ _day_of_week()
 }
 
 #%% usage: _gregorian_array month year
-#%  purpose: Loads the GREGORIAN_DATA array with correctly
+#%  purpose: Loads the CALENDAR_DATA array with correctly
 #%  spaced numbers for later printing.
 _gregorian_array()
 {
-	GREGORIAN_DATA=()
+	CALENDAR_DATA=()
 	local m=$1 y=$2
 	first_day_number_of_month=$(_day_of_week $m 1 $y)
 	local len=$(_month_len $m $y)
@@ -469,16 +469,16 @@ _gregorian_array()
 		if [ $first_day_number_of_month -eq 0 ]; then
 			break
 		fi
-		GREGORIAN_DATA+=("   ")
+		CALENDAR_DATA+=("   ")
 	done
 
 	for ((i=1; i<=$((42 - first_day_number_of_month)); i++)); do
 		if [ $i -lt 10 ]; then
-			GREGORIAN_DATA+=(" $i ")
+			CALENDAR_DATA+=(" $i ")
 		elif [ $i -gt $len ]; then
-			GREGORIAN_DATA+=("   ")
+			CALENDAR_DATA+=("   ")
 		else
-			GREGORIAN_DATA+=("$i ")
+			CALENDAR_DATA+=("$i ")
 		fi
 	done
 }
@@ -500,7 +500,7 @@ _print_gregorian_monthly()
 
 	echo "$GREGORIAN_HEADER"
 
-	for ((i=0; i<${#GREGORIAN_DATA[@]}; i++)); do
+	for ((i=0; i<${#CALENDAR_DATA[@]}; i++)); do
 		if [ $((i % 7)) -eq 0 ] && [ $i -ne 0 ]; then
 			echo
 		fi
@@ -513,18 +513,18 @@ _print_gregorian_monthly()
                    [ $d -gt 0 ]; then
 			echo -n "${BOLD}${d}${UNBOLD} "
 		else
-			echo -n "${GREGORIAN_DATA[i]}"
+			echo -n "${CALENDAR_DATA[i]}"
 		fi
 	done
 	echo
 }
 
 #%% usage: _julian_array month day year
-#%  purpose: Loads the JULIAN_DATA array with correctly
+#%  purpose: Loads the CALENDAR_DATA array with correctly
 #%  spaced numbers for later printing.
 _julian_array()
 {
-        JULIAN_DATA=()
+        CALENDAR_DATA=()
         local m=$1 d=$2 y=$3
         first_day_number_of_month=$(_day_of_week $m 1 $y)
         local len=$(_month_len $m $y)
@@ -534,20 +534,20 @@ _julian_array()
                 if [ $first_day_number_of_month -eq 0 ]; then
                         break
                 fi
-                JULIAN_DATA+=("    ")
+                CALENDAR_DATA+=("    ")
         done
 
 	local x=0
         for ((i=dnum; i<=$(( dnum + len - 1)); i++)); do
 		((x++))
                 if [ $i -lt 10 ]; then
-                        JULIAN_DATA+=("  $i ")
+                        CALENDAR_DATA+=("  $i ")
                 elif [ $x -gt $len ]; then
-                        JULIAN_DATA+=("    ")
+                        CALENDAR_DATA+=("    ")
 		elif [ $i -lt 100 ] && [ $i -gt 9 ]; then
-			JULIAN_DATA+=(" $i ")
+			CALENDAR_DATA+=(" $i ")
                 else
-                        JULIAN_DATA+=("$i ")
+                        CALENDAR_DATA+=("$i ")
                 fi
         done
 }
@@ -570,7 +570,7 @@ _print_julian_monthly()
 
         echo "$JULIAN_HEADER"
 
-        for ((i=0; i<${#JULIAN_DATA[@]}; i++)); do
+        for ((i=0; i<${#CALENDAR_DATA[@]}; i++)); do
                 if [ $((i % 7)) -eq 0 ] && [ $i -ne 0 ]; then
                         echo
                 fi
@@ -584,7 +584,7 @@ _print_julian_monthly()
                    [ $jd -gt 99 ] && [ $d -gt 0 ]; then
                         echo -n "${BOLD}${jd}${UNBOLD} "
                 else
-                        echo -n "${JULIAN_DATA[i]}"
+                        echo -n "${CALENDAR_DATA[i]}"
                 fi
         done
         echo
@@ -685,34 +685,6 @@ _gregorian_date_to_jdn()
 	echo $(( d + (153 * t + 2) / 5 + 365 * yy + yy / 4 - yy / 100 + yy / 400 - 32045 ))
 }
 
-#%% usage: _ncal_gregorian_array month year
-#%  purpose: Loads the NCAL array with correctly
-#%  spaced numbers for printing the Gregorian calendar
-#%  in the ncal format.
-_ncal_gregorian_array()
-{
-	local m=$1 d=$2 y=$3
-
-	_gregorian_array $m $y
-
-	NCAL=(
-        	"${GREGORIAN_DATA[0]}" "${GREGORIAN_DATA[7]}" "${GREGORIAN_DATA[14]}"
-	        "${GREGORIAN_DATA[21]}" "${GREGORIAN_DATA[28]}" "${GREGORIAN_DATA[35]}"
-	        "${GREGORIAN_DATA[1]}" "${GREGORIAN_DATA[8]}" "${GREGORIAN_DATA[15]}"
-	        "${GREGORIAN_DATA[22]}" "${GREGORIAN_DATA[29]}" "${GREGORIAN_DATA[36]}"
-	        "${GREGORIAN_DATA[2]}" "${GREGORIAN_DATA[9]}" "${GREGORIAN_DATA[16]}"
-	        "${GREGORIAN_DATA[23]}" "${GREGORIAN_DATA[30]}" "${GREGORIAN_DATA[37]}"
-	        "${GREGORIAN_DATA[3]}" "${GREGORIAN_DATA[10]}" "${GREGORIAN_DATA[17]}"
-	        "${GREGORIAN_DATA[24]}" "${GREGORIAN_DATA[31]}" "${GREGORIAN_DATA[38]}"
-	        "${GREGORIAN_DATA[4]}" "${GREGORIAN_DATA[11]}" "${GREGORIAN_DATA[18]}"
-	        "${GREGORIAN_DATA[25]}" "${GREGORIAN_DATA[32]}" "${GREGORIAN_DATA[39]}"
-	        "${GREGORIAN_DATA[5]}" "${GREGORIAN_DATA[12]}" "${GREGORIAN_DATA[19]}"
-	        "${GREGORIAN_DATA[26]}" "${GREGORIAN_DATA[33]}" "${GREGORIAN_DATA[40]}"
-	        "${GREGORIAN_DATA[6]}" "${GREGORIAN_DATA[13]}" "${GREGORIAN_DATA[20]}"
-	        "${GREGORIAN_DATA[27]}" "${GREGORIAN_DATA[34]}" "${GREGORIAN_DATA[41]}"
-	)
-}
-
 #%% usage: _print_ncal_gregorian month day year
 #%  purpose: Print the Gregorian calendar for date in ncal
 #%  format. To prevent highlighting, set the day value to 0.
@@ -720,7 +692,7 @@ _print_ncal_gregorian()
 {
 	local m=$1 d=$2 y=$3
 
-	_ncal_gregorian_array $m $d $y
+	_ncal_array $m $d $y
 
         if [ $REQUEST_NO_HIGHLIGHT ]; then
                 d=0
@@ -753,31 +725,35 @@ _print_ncal_gregorian()
 	echo
 }
 
-#%% usage: _ncal_julian_array month day year
+#%% usage: _ncal_array month day year
 #%  purpose: Loads the NCAL array with correctly
 #%  spaced numbers for printing the Julian calendar
 #%  in the ncal format.
-_ncal_julian_array()
+_ncal_array()
 {
         local m=$1 d=$2 y=$3
 
-        _julian_array $m $d $y
+        if [ $REQUEST_JULIAN ]; then
+            _julian_array $m $d $y
+        else
+            _gregorian_array $m $d $y
+        fi
 
         NCAL=(
-	        "${JULIAN_DATA[0]}" "${JULIAN_DATA[7]}" "${JULIAN_DATA[14]}"
-	        "${JULIAN_DATA[21]}" "${JULIAN_DATA[28]}" "${JULIAN_DATA[35]}"
-	        "${JULIAN_DATA[1]}" "${JULIAN_DATA[8]}" "${JULIAN_DATA[15]}"
-	        "${JULIAN_DATA[22]}" "${JULIAN_DATA[29]}" "${JULIAN_DATA[36]}"
-	        "${JULIAN_DATA[2]}" "${JULIAN_DATA[9]}" "${JULIAN_DATA[16]}"
-	        "${JULIAN_DATA[23]}" "${JULIAN_DATA[30]}" "${JULIAN_DATA[37]}"
-	        "${JULIAN_DATA[3]}" "${JULIAN_DATA[10]}" "${JULIAN_DATA[17]}"
-	        "${JULIAN_DATA[24]}" "${JULIAN_DATA[31]}" "${JULIAN_DATA[38]}"
-	        "${JULIAN_DATA[4]}" "${JULIAN_DATA[11]}" "${JULIAN_DATA[18]}"
-	        "${JULIAN_DATA[25]}" "${JULIAN_DATA[32]}" "${JULIAN_DATA[39]}"
-	        "${JULIAN_DATA[5]}" "${JULIAN_DATA[12]}" "${JULIAN_DATA[19]}"
-	        "${JULIAN_DATA[26]}" "${JULIAN_DATA[33]}" "${JULIAN_DATA[40]}"
-	        "${JULIAN_DATA[6]}" "${JULIAN_DATA[13]}" "${JULIAN_DATA[20]}"
-	        "${JULIAN_DATA[27]}" "${JULIAN_DATA[34]}" "${JULIAN_DATA[41]}"
+	        "${CALENDAR_DATA[0]}" "${CALENDAR_DATA[7]}" "${CALENDAR_DATA[14]}"
+	        "${CALENDAR_DATA[21]}" "${CALENDAR_DATA[28]}" "${CALENDAR_DATA[35]}"
+	        "${CALENDAR_DATA[1]}" "${CALENDAR_DATA[8]}" "${CALENDAR_DATA[15]}"
+	        "${CALENDAR_DATA[22]}" "${CALENDAR_DATA[29]}" "${CALENDAR_DATA[36]}"
+	        "${CALENDAR_DATA[2]}" "${CALENDAR_DATA[9]}" "${CALENDAR_DATA[16]}"
+	        "${CALENDAR_DATA[23]}" "${CALENDAR_DATA[30]}" "${CALENDAR_DATA[37]}"
+	        "${CALENDAR_DATA[3]}" "${CALENDAR_DATA[10]}" "${CALENDAR_DATA[17]}"
+	        "${CALENDAR_DATA[24]}" "${CALENDAR_DATA[31]}" "${CALENDAR_DATA[38]}"
+	        "${CALENDAR_DATA[4]}" "${CALENDAR_DATA[11]}" "${CALENDAR_DATA[18]}"
+	        "${CALENDAR_DATA[25]}" "${CALENDAR_DATA[32]}" "${CALENDAR_DATA[39]}"
+	        "${CALENDAR_DATA[5]}" "${CALENDAR_DATA[12]}" "${CALENDAR_DATA[19]}"
+	        "${CALENDAR_DATA[26]}" "${CALENDAR_DATA[33]}" "${CALENDAR_DATA[40]}"
+	        "${CALENDAR_DATA[6]}" "${CALENDAR_DATA[13]}" "${CALENDAR_DATA[20]}"
+	        "${CALENDAR_DATA[27]}" "${CALENDAR_DATA[34]}" "${CALENDAR_DATA[41]}"
 	)
 }
 
@@ -789,7 +765,7 @@ _print_ncal_julian()
         local m=$1 d=$2 y=$3
 	local jd=$(_day_in_year $m $d $y)
 
-        _ncal_julian_array $m $d $y
+        _ncal_array $m $d $y
 
         if [ $REQUEST_NO_HIGHLIGHT ]; then
                 jd=0
@@ -918,30 +894,30 @@ _print_gregorian_yearly()
 		((++m))
 		echo "${ROW[i]}"
 		_gregorian_array $m $y
-		c1_row1="${GREGORIAN_DATA[0]}${GREGORIAN_DATA[1]}${GREGORIAN_DATA[2]}${GREGORIAN_DATA[3]}${GREGORIAN_DATA[4]}${GREGORIAN_DATA[5]}${GREGORIAN_DATA[6]}"
-		c1_row2="${GREGORIAN_DATA[7]}${GREGORIAN_DATA[8]}${GREGORIAN_DATA[9]}${GREGORIAN_DATA[10]}${GREGORIAN_DATA[11]}${GREGORIAN_DATA[12]}${GREGORIAN_DATA[13]}"
-		c1_row3="${GREGORIAN_DATA[14]}${GREGORIAN_DATA[15]}${GREGORIAN_DATA[16]}${GREGORIAN_DATA[17]}${GREGORIAN_DATA[18]}${GREGORIAN_DATA[19]}${GREGORIAN_DATA[20]}"
-		c1_row4="${GREGORIAN_DATA[21]}${GREGORIAN_DATA[22]}${GREGORIAN_DATA[23]}${GREGORIAN_DATA[24]}${GREGORIAN_DATA[25]}${GREGORIAN_DATA[26]}${GREGORIAN_DATA[27]}"
-		c1_row5="${GREGORIAN_DATA[28]}${GREGORIAN_DATA[29]}${GREGORIAN_DATA[30]}${GREGORIAN_DATA[31]}${GREGORIAN_DATA[32]}${GREGORIAN_DATA[33]}${GREGORIAN_DATA[34]}"
-		c1_row6="${GREGORIAN_DATA[35]}${GREGORIAN_DATA[36]}${GREGORIAN_DATA[37]}${GREGORIAN_DATA[38]}${GREGORIAN_DATA[39]}${GREGORIAN_DATA[40]}${GREGORIAN_DATA[41]}"
+		c1_row1="${CALENDAR_DATA[0]}${CALENDAR_DATA[1]}${CALENDAR_DATA[2]}${CALENDAR_DATA[3]}${CALENDAR_DATA[4]}${CALENDAR_DATA[5]}${CALENDAR_DATA[6]}"
+		c1_row2="${CALENDAR_DATA[7]}${CALENDAR_DATA[8]}${CALENDAR_DATA[9]}${CALENDAR_DATA[10]}${CALENDAR_DATA[11]}${CALENDAR_DATA[12]}${CALENDAR_DATA[13]}"
+		c1_row3="${CALENDAR_DATA[14]}${CALENDAR_DATA[15]}${CALENDAR_DATA[16]}${CALENDAR_DATA[17]}${CALENDAR_DATA[18]}${CALENDAR_DATA[19]}${CALENDAR_DATA[20]}"
+		c1_row4="${CALENDAR_DATA[21]}${CALENDAR_DATA[22]}${CALENDAR_DATA[23]}${CALENDAR_DATA[24]}${CALENDAR_DATA[25]}${CALENDAR_DATA[26]}${CALENDAR_DATA[27]}"
+		c1_row5="${CALENDAR_DATA[28]}${CALENDAR_DATA[29]}${CALENDAR_DATA[30]}${CALENDAR_DATA[31]}${CALENDAR_DATA[32]}${CALENDAR_DATA[33]}${CALENDAR_DATA[34]}"
+		c1_row6="${CALENDAR_DATA[35]}${CALENDAR_DATA[36]}${CALENDAR_DATA[37]}${CALENDAR_DATA[38]}${CALENDAR_DATA[39]}${CALENDAR_DATA[40]}${CALENDAR_DATA[41]}"
 
 		((++m))
 		_gregorian_array $m $y
-		c2_row1="${GREGORIAN_DATA[0]}${GREGORIAN_DATA[1]}${GREGORIAN_DATA[2]}${GREGORIAN_DATA[3]}${GREGORIAN_DATA[4]}${GREGORIAN_DATA[5]}${GREGORIAN_DATA[6]}"
-		c2_row2="${GREGORIAN_DATA[7]}${GREGORIAN_DATA[8]}${GREGORIAN_DATA[9]}${GREGORIAN_DATA[10]}${GREGORIAN_DATA[11]}${GREGORIAN_DATA[12]}${GREGORIAN_DATA[13]}"
-		c2_row3="${GREGORIAN_DATA[14]}${GREGORIAN_DATA[15]}${GREGORIAN_DATA[16]}${GREGORIAN_DATA[17]}${GREGORIAN_DATA[18]}${GREGORIAN_DATA[19]}${GREGORIAN_DATA[20]}"
-		c2_row4="${GREGORIAN_DATA[21]}${GREGORIAN_DATA[22]}${GREGORIAN_DATA[23]}${GREGORIAN_DATA[24]}${GREGORIAN_DATA[25]}${GREGORIAN_DATA[26]}${GREGORIAN_DATA[27]}"
-		c2_row5="${GREGORIAN_DATA[28]}${GREGORIAN_DATA[29]}${GREGORIAN_DATA[30]}${GREGORIAN_DATA[31]}${GREGORIAN_DATA[32]}${GREGORIAN_DATA[33]}${GREGORIAN_DATA[34]}"
-		c2_row6="${GREGORIAN_DATA[35]}${GREGORIAN_DATA[36]}${GREGORIAN_DATA[37]}${GREGORIAN_DATA[38]}${GREGORIAN_DATA[39]}${GREGORIAN_DATA[40]}${GREGORIAN_DATA[41]}"
+		c2_row1="${CALENDAR_DATA[0]}${CALENDAR_DATA[1]}${CALENDAR_DATA[2]}${CALENDAR_DATA[3]}${CALENDAR_DATA[4]}${CALENDAR_DATA[5]}${CALENDAR_DATA[6]}"
+		c2_row2="${CALENDAR_DATA[7]}${CALENDAR_DATA[8]}${CALENDAR_DATA[9]}${CALENDAR_DATA[10]}${CALENDAR_DATA[11]}${CALENDAR_DATA[12]}${CALENDAR_DATA[13]}"
+		c2_row3="${CALENDAR_DATA[14]}${CALENDAR_DATA[15]}${CALENDAR_DATA[16]}${CALENDAR_DATA[17]}${CALENDAR_DATA[18]}${CALENDAR_DATA[19]}${CALENDAR_DATA[20]}"
+		c2_row4="${CALENDAR_DATA[21]}${CALENDAR_DATA[22]}${CALENDAR_DATA[23]}${CALENDAR_DATA[24]}${CALENDAR_DATA[25]}${CALENDAR_DATA[26]}${CALENDAR_DATA[27]}"
+		c2_row5="${CALENDAR_DATA[28]}${CALENDAR_DATA[29]}${CALENDAR_DATA[30]}${CALENDAR_DATA[31]}${CALENDAR_DATA[32]}${CALENDAR_DATA[33]}${CALENDAR_DATA[34]}"
+		c2_row6="${CALENDAR_DATA[35]}${CALENDAR_DATA[36]}${CALENDAR_DATA[37]}${CALENDAR_DATA[38]}${CALENDAR_DATA[39]}${CALENDAR_DATA[40]}${CALENDAR_DATA[41]}"
 
 		((++m))
 		_gregorian_array $m $y
-		c3_row1="${GREGORIAN_DATA[0]}${GREGORIAN_DATA[1]}${GREGORIAN_DATA[2]}${GREGORIAN_DATA[3]}${GREGORIAN_DATA[4]}${GREGORIAN_DATA[5]}${GREGORIAN_DATA[6]}"
-		c3_row2="${GREGORIAN_DATA[7]}${GREGORIAN_DATA[8]}${GREGORIAN_DATA[9]}${GREGORIAN_DATA[10]}${GREGORIAN_DATA[11]}${GREGORIAN_DATA[12]}${GREGORIAN_DATA[13]}"
-		c3_row3="${GREGORIAN_DATA[14]}${GREGORIAN_DATA[15]}${GREGORIAN_DATA[16]}${GREGORIAN_DATA[17]}${GREGORIAN_DATA[18]}${GREGORIAN_DATA[19]}${GREGORIAN_DATA[20]}"
-		c3_row4="${GREGORIAN_DATA[21]}${GREGORIAN_DATA[22]}${GREGORIAN_DATA[23]}${GREGORIAN_DATA[24]}${GREGORIAN_DATA[25]}${GREGORIAN_DATA[26]}${GREGORIAN_DATA[27]}"
-		c3_row5="${GREGORIAN_DATA[28]}${GREGORIAN_DATA[29]}${GREGORIAN_DATA[30]}${GREGORIAN_DATA[31]}${GREGORIAN_DATA[32]}${GREGORIAN_DATA[33]}${GREGORIAN_DATA[34]}"
-		c3_row6="${GREGORIAN_DATA[35]}${GREGORIAN_DATA[36]}${GREGORIAN_DATA[37]}${GREGORIAN_DATA[38]}${GREGORIAN_DATA[39]}${GREGORIAN_DATA[40]}${GREGORIAN_DATA[41]}"
+		c3_row1="${CALENDAR_DATA[0]}${CALENDAR_DATA[1]}${CALENDAR_DATA[2]}${CALENDAR_DATA[3]}${CALENDAR_DATA[4]}${CALENDAR_DATA[5]}${CALENDAR_DATA[6]}"
+		c3_row2="${CALENDAR_DATA[7]}${CALENDAR_DATA[8]}${CALENDAR_DATA[9]}${CALENDAR_DATA[10]}${CALENDAR_DATA[11]}${CALENDAR_DATA[12]}${CALENDAR_DATA[13]}"
+		c3_row3="${CALENDAR_DATA[14]}${CALENDAR_DATA[15]}${CALENDAR_DATA[16]}${CALENDAR_DATA[17]}${CALENDAR_DATA[18]}${CALENDAR_DATA[19]}${CALENDAR_DATA[20]}"
+		c3_row4="${CALENDAR_DATA[21]}${CALENDAR_DATA[22]}${CALENDAR_DATA[23]}${CALENDAR_DATA[24]}${CALENDAR_DATA[25]}${CALENDAR_DATA[26]}${CALENDAR_DATA[27]}"
+		c3_row5="${CALENDAR_DATA[28]}${CALENDAR_DATA[29]}${CALENDAR_DATA[30]}${CALENDAR_DATA[31]}${CALENDAR_DATA[32]}${CALENDAR_DATA[33]}${CALENDAR_DATA[34]}"
+		c3_row6="${CALENDAR_DATA[35]}${CALENDAR_DATA[36]}${CALENDAR_DATA[37]}${CALENDAR_DATA[38]}${CALENDAR_DATA[39]}${CALENDAR_DATA[40]}${CALENDAR_DATA[41]}"
 
 		echo "$GREGORIAN_HEADER   $GREGORIAN_HEADER   $GREGORIAN_HEADER"
 
@@ -958,38 +934,37 @@ _print_gregorian_yearly()
 #%  purpose: Print last, current and next month on one row.
 _print_gregorian_three_months()
 {
-
 	local y=$YEAR m=$MONTH ROW row
 
 	_shift_month_backward $m $y
 	_ncenter 21 "${MONTH_NAMES_LONG[MONTH]} $YEAR"
-	_gregorian_array $MONTH $YEAR
-	c1_row1="${GREGORIAN_DATA[0]}${GREGORIAN_DATA[1]}${GREGORIAN_DATA[2]}${GREGORIAN_DATA[3]}${GREGORIAN_DATA[4]}${GREGORIAN_DATA[5]}${GREGORIAN_DATA[6]}"
-	c1_row2="${GREGORIAN_DATA[7]}${GREGORIAN_DATA[8]}${GREGORIAN_DATA[9]}${GREGORIAN_DATA[10]}${GREGORIAN_DATA[11]}${GREGORIAN_DATA[12]}${GREGORIAN_DATA[13]}"
-	c1_row3="${GREGORIAN_DATA[14]}${GREGORIAN_DATA[15]}${GREGORIAN_DATA[16]}${GREGORIAN_DATA[17]}${GREGORIAN_DATA[18]}${GREGORIAN_DATA[19]}${GREGORIAN_DATA[20]}"
-	c1_row4="${GREGORIAN_DATA[21]}${GREGORIAN_DATA[22]}${GREGORIAN_DATA[23]}${GREGORIAN_DATA[24]}${GREGORIAN_DATA[25]}${GREGORIAN_DATA[26]}${GREGORIAN_DATA[27]}"
-	c1_row5="${GREGORIAN_DATA[28]}${GREGORIAN_DATA[29]}${GREGORIAN_DATA[30]}${GREGORIAN_DATA[31]}${GREGORIAN_DATA[32]}${GREGORIAN_DATA[33]}${GREGORIAN_DATA[34]}"
-	c1_row6="${GREGORIAN_DATA[35]}${GREGORIAN_DATA[36]}${GREGORIAN_DATA[37]}${GREGORIAN_DATA[38]}${GREGORIAN_DATA[39]}${GREGORIAN_DATA[40]}${GREGORIAN_DATA[41]}"
+   	_gregorian_array $MONTH $YEAR
+	c1_row1="${CALENDAR_DATA[0]}${CALENDAR_DATA[1]}${CALENDAR_DATA[2]}${CALENDAR_DATA[3]}${CALENDAR_DATA[4]}${CALENDAR_DATA[5]}${CALENDAR_DATA[6]}"
+	c1_row2="${CALENDAR_DATA[7]}${CALENDAR_DATA[8]}${CALENDAR_DATA[9]}${CALENDAR_DATA[10]}${CALENDAR_DATA[11]}${CALENDAR_DATA[12]}${CALENDAR_DATA[13]}"
+	c1_row3="${CALENDAR_DATA[14]}${CALENDAR_DATA[15]}${CALENDAR_DATA[16]}${CALENDAR_DATA[17]}${CALENDAR_DATA[18]}${CALENDAR_DATA[19]}${CALENDAR_DATA[20]}"
+	c1_row4="${CALENDAR_DATA[21]}${CALENDAR_DATA[22]}${CALENDAR_DATA[23]}${CALENDAR_DATA[24]}${CALENDAR_DATA[25]}${CALENDAR_DATA[26]}${CALENDAR_DATA[27]}"
+	c1_row5="${CALENDAR_DATA[28]}${CALENDAR_DATA[29]}${CALENDAR_DATA[30]}${CALENDAR_DATA[31]}${CALENDAR_DATA[32]}${CALENDAR_DATA[33]}${CALENDAR_DATA[34]}"
+	c1_row6="${CALENDAR_DATA[35]}${CALENDAR_DATA[36]}${CALENDAR_DATA[37]}${CALENDAR_DATA[38]}${CALENDAR_DATA[39]}${CALENDAR_DATA[40]}${CALENDAR_DATA[41]}"
 
 	_shift_month_forward $m $y
 	_ncenter 32 "${MONTH_NAMES_LONG[MONTH]} $YEAR"
-	_gregorian_array $MONTH $YEAR
-	c2_row1="${GREGORIAN_DATA[0]}${GREGORIAN_DATA[1]}${GREGORIAN_DATA[2]}${GREGORIAN_DATA[3]}${GREGORIAN_DATA[4]}${GREGORIAN_DATA[5]}${GREGORIAN_DATA[6]}"
-	c2_row2="${GREGORIAN_DATA[7]}${GREGORIAN_DATA[8]}${GREGORIAN_DATA[9]}${GREGORIAN_DATA[10]}${GREGORIAN_DATA[11]}${GREGORIAN_DATA[12]}${GREGORIAN_DATA[13]}"
-	c2_row3="${GREGORIAN_DATA[14]}${GREGORIAN_DATA[15]}${GREGORIAN_DATA[16]}${GREGORIAN_DATA[17]}${GREGORIAN_DATA[18]}${GREGORIAN_DATA[19]}${GREGORIAN_DATA[20]}"
-	c2_row4="${GREGORIAN_DATA[21]}${GREGORIAN_DATA[22]}${GREGORIAN_DATA[23]}${GREGORIAN_DATA[24]}${GREGORIAN_DATA[25]}${GREGORIAN_DATA[26]}${GREGORIAN_DATA[27]}"
-	c2_row5="${GREGORIAN_DATA[28]}${GREGORIAN_DATA[29]}${GREGORIAN_DATA[30]}${GREGORIAN_DATA[31]}${GREGORIAN_DATA[32]}${GREGORIAN_DATA[33]}${GREGORIAN_DATA[34]}"
-	c2_row6="${GREGORIAN_DATA[35]}${GREGORIAN_DATA[36]}${GREGORIAN_DATA[37]}${GREGORIAN_DATA[38]}${GREGORIAN_DATA[39]}${GREGORIAN_DATA[40]}${GREGORIAN_DATA[41]}"
+   	_gregorian_array $MONTH $YEAR
+	c2_row1="${CALENDAR_DATA[0]}${CALENDAR_DATA[1]}${CALENDAR_DATA[2]}${CALENDAR_DATA[3]}${CALENDAR_DATA[4]}${CALENDAR_DATA[5]}${CALENDAR_DATA[6]}"
+	c2_row2="${CALENDAR_DATA[7]}${CALENDAR_DATA[8]}${CALENDAR_DATA[9]}${CALENDAR_DATA[10]}${CALENDAR_DATA[11]}${CALENDAR_DATA[12]}${CALENDAR_DATA[13]}"
+	c2_row3="${CALENDAR_DATA[14]}${CALENDAR_DATA[15]}${CALENDAR_DATA[16]}${CALENDAR_DATA[17]}${CALENDAR_DATA[18]}${CALENDAR_DATA[19]}${CALENDAR_DATA[20]}"
+	c2_row4="${CALENDAR_DATA[21]}${CALENDAR_DATA[22]}${CALENDAR_DATA[23]}${CALENDAR_DATA[24]}${CALENDAR_DATA[25]}${CALENDAR_DATA[26]}${CALENDAR_DATA[27]}"
+	c2_row5="${CALENDAR_DATA[28]}${CALENDAR_DATA[29]}${CALENDAR_DATA[30]}${CALENDAR_DATA[31]}${CALENDAR_DATA[32]}${CALENDAR_DATA[33]}${CALENDAR_DATA[34]}"
+	c2_row6="${CALENDAR_DATA[35]}${CALENDAR_DATA[36]}${CALENDAR_DATA[37]}${CALENDAR_DATA[38]}${CALENDAR_DATA[39]}${CALENDAR_DATA[40]}${CALENDAR_DATA[41]}"
 
 	_shift_month_forward $m $y
 	_center 34 "${MONTH_NAMES_LONG[MONTH]} $YEAR"
-	_gregorian_array $MONTH $YEAR
-	c3_row1="${GREGORIAN_DATA[0]}${GREGORIAN_DATA[1]}${GREGORIAN_DATA[2]}${GREGORIAN_DATA[3]}${GREGORIAN_DATA[4]}${GREGORIAN_DATA[5]}${GREGORIAN_DATA[6]}"
-	c3_row2="${GREGORIAN_DATA[7]}${GREGORIAN_DATA[8]}${GREGORIAN_DATA[9]}${GREGORIAN_DATA[10]}${GREGORIAN_DATA[11]}${GREGORIAN_DATA[12]}${GREGORIAN_DATA[13]}"
-	c3_row3="${GREGORIAN_DATA[14]}${GREGORIAN_DATA[15]}${GREGORIAN_DATA[16]}${GREGORIAN_DATA[17]}${GREGORIAN_DATA[18]}${GREGORIAN_DATA[19]}${GREGORIAN_DATA[20]}"
-	c3_row4="${GREGORIAN_DATA[21]}${GREGORIAN_DATA[22]}${GREGORIAN_DATA[23]}${GREGORIAN_DATA[24]}${GREGORIAN_DATA[25]}${GREGORIAN_DATA[26]}${GREGORIAN_DATA[27]}"
-	c3_row5="${GREGORIAN_DATA[28]}${GREGORIAN_DATA[29]}${GREGORIAN_DATA[30]}${GREGORIAN_DATA[31]}${GREGORIAN_DATA[32]}${GREGORIAN_DATA[33]}${GREGORIAN_DATA[34]}"
-	c3_row6="${GREGORIAN_DATA[35]}${GREGORIAN_DATA[36]}${GREGORIAN_DATA[37]}${GREGORIAN_DATA[38]}${GREGORIAN_DATA[39]}${GREGORIAN_DATA[40]}${GREGORIAN_DATA[41]}"
+   	_gregorian_array $MONTH $YEAR
+	c3_row1="${CALENDAR_DATA[0]}${CALENDAR_DATA[1]}${CALENDAR_DATA[2]}${CALENDAR_DATA[3]}${CALENDAR_DATA[4]}${CALENDAR_DATA[5]}${CALENDAR_DATA[6]}"
+	c3_row2="${CALENDAR_DATA[7]}${CALENDAR_DATA[8]}${CALENDAR_DATA[9]}${CALENDAR_DATA[10]}${CALENDAR_DATA[11]}${CALENDAR_DATA[12]}${CALENDAR_DATA[13]}"
+	c3_row3="${CALENDAR_DATA[14]}${CALENDAR_DATA[15]}${CALENDAR_DATA[16]}${CALENDAR_DATA[17]}${CALENDAR_DATA[18]}${CALENDAR_DATA[19]}${CALENDAR_DATA[20]}"
+	c3_row4="${CALENDAR_DATA[21]}${CALENDAR_DATA[22]}${CALENDAR_DATA[23]}${CALENDAR_DATA[24]}${CALENDAR_DATA[25]}${CALENDAR_DATA[26]}${CALENDAR_DATA[27]}"
+	c3_row5="${CALENDAR_DATA[28]}${CALENDAR_DATA[29]}${CALENDAR_DATA[30]}${CALENDAR_DATA[31]}${CALENDAR_DATA[32]}${CALENDAR_DATA[33]}${CALENDAR_DATA[34]}"
+	c3_row6="${CALENDAR_DATA[35]}${CALENDAR_DATA[36]}${CALENDAR_DATA[37]}${CALENDAR_DATA[38]}${CALENDAR_DATA[39]}${CALENDAR_DATA[40]}${CALENDAR_DATA[41]}"
 
 	echo "$GREGORIAN_HEADER   $GREGORIAN_HEADER   $GREGORIAN_HEADER"
 
@@ -1380,9 +1355,9 @@ bottom="\
 </body>
 </html>"
 
-	if [ "${GREGORIAN_DATA[29]}" = "   " ]; then
+	if [ "${CALENDAR_DATA[29]}" = "   " ]; then
 		pr=4
-	elif [ "${GREGORIAN_DATA[35]}" = "   " ]; then
+	elif [ "${CALENDAR_DATA[35]}" = "   " ]; then
 		pr=5
 	else
 		pr=6
@@ -1395,38 +1370,38 @@ bottom="\
 	echo "$css"
 	echo "$wbar"
 
-	for ((i=0; i<${#GREGORIAN_DATA[@]}; i++)); do
-		GREGORIAN_DATA[i]=$(sed 's/^ *//' <<< "${GREGORIAN_DATA[i]}")
+	for ((i=0; i<${#CALENDAR_DATA[@]}; i++)); do
+		CALENDAR_DATA[i]=$(sed 's/^ *//' <<< "${CALENDAR_DATA[i]}")
 	done
 
 	until [ $row -eq $pr ]; do
-		case "${GREGORIAN_DATA[su]}" in
-			"$d ")  printf "\t    <tr> <td class=\"today\">${GREGORIAN_DATA[su]} </td> <!--today-->\n" ;;
-			*)  printf "\t    <tr> <td class=\"sunday\">${GREGORIAN_DATA[su]} </td>\n"
+		case "${CALENDAR_DATA[su]}" in
+			"$d ")  printf "\t    <tr> <td class=\"today\">${CALENDAR_DATA[su]} </td> <!--today-->\n" ;;
+			*)  printf "\t    <tr> <td class=\"sunday\">${CALENDAR_DATA[su]} </td>\n"
 		esac
-		case "${GREGORIAN_DATA[mo]}" in
-			"$d ")  printf "\t\t <td class=\"today\">${GREGORIAN_DATA[mo]} </td> <!--today-->\n" ;;
-			*)  printf "\t\t <td class=\"weekday\">${GREGORIAN_DATA[mo]} </td>\n"
+		case "${CALENDAR_DATA[mo]}" in
+			"$d ")  printf "\t\t <td class=\"today\">${CALENDAR_DATA[mo]} </td> <!--today-->\n" ;;
+			*)  printf "\t\t <td class=\"weekday\">${CALENDAR_DATA[mo]} </td>\n"
 		esac
-		case "${GREGORIAN_DATA[tu]}" in
-			"$d ")  printf "\t\t <td class=\"today\">${GREGORIAN_DATA[tu]} </td> <!--today-->\n" ;;
-			*)  printf "\t\t <td class=\"weekday\">${GREGORIAN_DATA[tu]} </td>\n"
+		case "${CALENDAR_DATA[tu]}" in
+			"$d ")  printf "\t\t <td class=\"today\">${CALENDAR_DATA[tu]} </td> <!--today-->\n" ;;
+			*)  printf "\t\t <td class=\"weekday\">${CALENDAR_DATA[tu]} </td>\n"
 		esac
-		case "${GREGORIAN_DATA[we]}" in 
-			"$d ")  printf "\t\t <td class=\"today\">${GREGORIAN_DATA[we]} </td> <!--today-->\n" ;;
-			*)  printf "\t\t <td class=\"weekday\">${GREGORIAN_DATA[we]} </td>\n"
+		case "${CALENDAR_DATA[we]}" in 
+			"$d ")  printf "\t\t <td class=\"today\">${CALENDAR_DATA[we]} </td> <!--today-->\n" ;;
+			*)  printf "\t\t <td class=\"weekday\">${CALENDAR_DATA[we]} </td>\n"
 		esac
-		case "${GREGORIAN_DATA[th]}" in 
-			"$d ")  printf "\t\t <td class=\"today\">${GREGORIAN_DATA[th]} </td> <!--today-->\n" ;;
-			*)  printf "\t\t <td class=\"weekday\">${GREGORIAN_DATA[th]} </td>\n"
+		case "${CALENDAR_DATA[th]}" in 
+			"$d ")  printf "\t\t <td class=\"today\">${CALENDAR_DATA[th]} </td> <!--today-->\n" ;;
+			*)  printf "\t\t <td class=\"weekday\">${CALENDAR_DATA[th]} </td>\n"
 		esac
-		case "${GREGORIAN_DATA[fr]}" in 
-			"$d ")  printf "\t\t <td class=\"today\">${GREGORIAN_DATA[fr]} </td> <!--today-->\n" ;;
-			*)  printf "\t\t <td class=\"weekday\">${GREGORIAN_DATA[fr]} </td>\n"
+		case "${CALENDAR_DATA[fr]}" in 
+			"$d ")  printf "\t\t <td class=\"today\">${CALENDAR_DATA[fr]} </td> <!--today-->\n" ;;
+			*)  printf "\t\t <td class=\"weekday\">${CALENDAR_DATA[fr]} </td>\n"
 		esac
-		case "${GREGORIAN_DATA[sa]}" in 
-			"$d ")  printf "\t\t <td class=\"today\">${GREGORIAN_DATA[sa]} </td> </tr> <!--today-->\n" ;;
-			*)  printf "\t\t <td class=\"weekday\">${GREGORIAN_DATA[sa]} </td> </tr>\n"
+		case "${CALENDAR_DATA[sa]}" in 
+			"$d ")  printf "\t\t <td class=\"today\">${CALENDAR_DATA[sa]} </td> </tr> <!--today-->\n" ;;
+			*)  printf "\t\t <td class=\"weekday\">${CALENDAR_DATA[sa]} </td> </tr>\n"
 		esac
 		echo
 
