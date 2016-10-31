@@ -1434,6 +1434,10 @@ bottom="\
 	echo "$bottom"
 }
 
+#%% usage: _date_diff month day year (month day year)
+#%  purpose: Show the time difference between two dates.
+#%  3 parameters: compute today's date against specified date.
+#%  6 parameters: computer one date against the other.
 _date_diff()
 {
         case $# in
