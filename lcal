@@ -1441,7 +1441,7 @@ bottom="\
 _date_diff()
 {
         case $# in
-                [1-2]|[4-5])
+                [0-2]|[4-5])
                         echo "$PROGRAM: --date-diff usage: MM DD YYYY MM DD YYYY -or- MM DD YYYY"
                         _exit 1
                         ;;
