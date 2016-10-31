@@ -27,6 +27,9 @@ Orthodox-Julian), monthly and yearly calendars, and Julian Day Number conversion
 	* show last month's calendar
 * **-y  --year**
 	* show yearly calendar
+* **-x  --date-diff**
+	* show time between two dates. This option takes either 3 parameters or 6, as in MM DD **YYYY MM DD YYYY** or **MM DD YYYY**.
+	  If three, the current date is computed against it; if six, one date is computed against the other.
 * **-D  --discordian**
 	* show Discordian date
 * **-G  --gregorian-to-jdn**
