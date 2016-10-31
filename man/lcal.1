@@ -44,6 +44,9 @@ Show last month's calendar.
 .IP "-y --year"
 Show yearly calendar.
 .B
+.IP "-x --date-diff"
+Show time between two dates. This option takes either 3 parameters or 6, as in MM DD YYYY MM DD YYYY or MM DD YYYY. If three, the current date is computed against it; if six, one date is computed against the other.
+.B
 .IP "-D --discordian"
 Show date according to the Disordian calendar.
 .B
@@ -77,6 +80,23 @@ Show last month, this month and next month.
 .B
 .IP "--help"
 Show usage information.
+
+.SH PARAMETERS
+Most flags can take a date string as an argument. A single parameter is either a
+.B month
+-- this will print the month for the current year -- or it is a
+.B year
+-- this will print the yearly calendarfor the specified year. Two parameters are
+.B month 
+and
+.B year
+-- this will print the month for the specified year. Three parameters are
+.B month
+,
+.B day
+and
+.B year
+-- this will print the specified calendar with the day highlighted.
 
 .SH AUTHOR
 The utility lcal and this manual were written by Luciano D. Cecere

@@ -73,6 +73,8 @@ Options:
 	-n  --next			show next month's calendar
 	-o  --orthodox			show the date for Easter (Orthodox)
 	-p  --previous			show last month's calendar
+	-x  --date-diff			show time between two dates -
+					  MM DD YYYY MM DD YYYY or MM DD YYYY
 	-y  --year			show yearly calendar
 	-D  --discordian		show Discordian date
 	-G  --gregorian-to-jdn		convert Gregorian date to Julian day number
@@ -109,6 +111,7 @@ _main()
 	unset REQUEST_VERSION
 	unset REQUEST_PREVIOUS_MONTH
 	unset REQUEST_YEARLY
+	unset REQUEST_DATE_DIFF
 	unset REQUEST_DISCORDIAN
 	unset REQUEST_GREGORIAN_TO_JDN
 	unset REQUEST_HTML
@@ -160,6 +163,11 @@ _main()
 			-y|--year)
 				shift
 				REQUEST_YEARLY=1
+				break
+				;;
+			-x|--date-diff)
+				shift
+				REQUEST_DATE_DIFF=1
 				break
 				;;
 			-D|--discordian)
@@ -285,6 +293,12 @@ _main()
 		_shift_month_backward $MONTH $YEAR
 		_print_gregorian_monthly $MONTH $DAY $YEAR
 		_exit 0
+	fi
+
+	# -x --date-diff
+	if [ $REQUEST_DATE_DIFF ];then
+		_date_diff "$@"
+		_exit 1
 	fi
 
 	ARGS="$@"
@@ -1420,6 +1434,41 @@ bottom="\
 	echo "$bottom"
 }
 
+_date_diff()
+{
+        case $# in
+                [1-2]|[4-5])
+                        echo "$PROGRAM: --date-diff usage: MM DD YYYY MM DD YYYY -or- MM DD YYYY"
+                        _exit 1
+                        ;;
+                3)
+                        local m1=$1 d1=$2 y1=$3
+                        local m2=$MONTH d2=$DAY y2=$YEAR
+                        ;;
+                *)
+                        local m1=$1 d1=$2 y1=$3
+                        local m2=$4 d2=$5 y2=$6
+                        ;;
+
+        esac
+
+
+        local len1=$(_month_len $m1 $y1)
+        local len2=$(_month_len $m2 $y2)
+
+        if [ $d1 -gt $len1 ] || [ $d2 -gt $len2 ]; then
+                echo "$PROGRAM: day out of range"
+                _exit 1
+        fi
+
+        local jdn1=$(_gregorian_date_to_jdn $m1 $d1 $y1)
+        local jdn2=$(_gregorian_date_to_jdn $m2 $d2 $y2)
+
+        local jdn=$(( jdn2 - jdn1 ))
+
+        echo "$jdn days"
+	echo "$(bc <<< "scale=2; $jdn / 365") years"
+}
 
 #%% usage: _exit exit-status
 #%  purpose: Clean up the terminal and exit according
