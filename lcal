@@ -1455,13 +1455,17 @@ _date_diff()
                         ;;
                 3)
                         local m1=$1 d1=$2 y1=$3
+			_is_date_valid $m1 $d1 $y1
                         local m2=$MONTH d2=$DAY y2=$YEAR
                         ;;
                 *)
                         local m1=$1 d1=$2 y1=$3
                         local m2=$4 d2=$5 y2=$6
+			_is_date_valid $m1 $d1 $y1
+			_is_date_valid $m2 $d2 $y2
                         ;;
         esac
+
 
         local len1=$(_month_len $m1 $y1)
         local len2=$(_month_len $m2 $y2)
