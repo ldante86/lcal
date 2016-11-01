@@ -216,8 +216,8 @@ _main()
 				shift $# # Shift out of all remaining parameters.
 				break
 				;;
-			*[!0-9]*|-*)
-				# Need a function for this.
+			-*)
+				echo "$PROGRAM: invalid flag. Use --help for information."
 				_exit 1
 				;;
 			*)
@@ -367,6 +367,16 @@ _main()
 #%  is used.
 _is_date_valid()
 {
+	for i
+	do
+		case $i in
+			*[!0-9]*)
+				echo "$PROGRAM: invalid date"
+				_exit 1
+				;;
+		esac
+	done
+
 	if [ $# -eq 0 ]; then
 		ARGS="$MONTH $DAY $YEAR"
 		return 0
