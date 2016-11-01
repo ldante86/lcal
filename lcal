@@ -386,7 +386,7 @@ _is_date_valid()
 			return
 		fi
 		if [ $m -gt 12 ] || [ $m -lt 1 ]; then
-			echo "$PROGRAM: month out of range"
+			echo "$PROGRAM: month out of range [1-12]"
 			return 1
 		else
 			ARGS="$m 0 $YEAR"
@@ -413,6 +413,7 @@ _is_date_valid()
 		fi
                 if [ $y -lt 1753 ] || [ $y -gt 9999 ]; then
                         echo "$PROGRAM: year out of range [1753-9999]"
+			return 1
                 else
                         AGRS="$m $d $y"
                 fi
@@ -1465,7 +1466,6 @@ _date_diff()
 			_is_date_valid $m2 $d2 $y2
                         ;;
         esac
-
 
         local len1=$(_month_len $m1 $y1)
         local len2=$(_month_len $m2 $y2)

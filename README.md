@@ -2,8 +2,8 @@
 
 ### DESCRIPTION
 **lcal** is a command-line calendar similar to cal/ncal. This program produces Gregorian
-and Julian calendars, an HTML 5 calendar, Discordian dates, dates of Easter (Western, Orthodox,
-Orthodox-Julian), monthly and yearly calendars, and Julian Day Number conversions.
+and Julian calendars, an HTML 5 calendar, an ncal formatted calendar, Discordian dates, dates
+of Easter (Western, Orthodox, Orthodox-Julian), monthly and yearly calendars, and Julian Day Number conversions.
 
 ### USAGE
 **lcal** [option] [month] [day] [year]
@@ -28,7 +28,7 @@ Orthodox-Julian), monthly and yearly calendars, and Julian Day Number conversion
 * **-y  --year**
 	* show yearly calendar
 * **-x  --date-diff**
-	* show time between two dates. This option takes either 3 parameters or 6, as in MM DD **YYYY MM DD YYYY** or **MM DD YYYY**.
+	* show time between two dates. This option takes either 3 parameters or 6, as in **MM DD YYYY MM DD YYYY** or **MM DD YYYY**.
 	  If three, the current date is computed against it; if six, one date is computed against the other.
 * **-D  --discordian**
 	* show Discordian date
@@ -58,7 +58,7 @@ for the specified year. Two parameters are **month** and **year** -- this will p
 specified year. Three parameters are **month**, **day** and **year** -- this will print the specified
 calendar with the day highlighted.
 
-The year range is currently 1753 - 9999.
+The year range is currently **1753 - 9999**.
 
 The **-m** flag is the same as **month** without the flag. A **year** can be added after **month**.
 
@@ -70,4 +70,4 @@ The **-1** flag stops reading any arguments after it.
 0.0.1
 
 ### LICENSE
-(c) 2014-2016 Luciano D. Cecere - ldante86@aol.com
+**(c) 2014-2016 Luciano D. Cecere - ldante86@aol.com**
