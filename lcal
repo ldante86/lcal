@@ -141,12 +141,10 @@ _main()
 				REQUEST_JULIAN=1
 				;;
 			-m|--month)
-				shift
 				REQUEST_MONTH=1
 				break
 				;;
 			-n|--next)
-				shift
 				REQUEST_NEXT_MONTH=1
 				break
 				;;
