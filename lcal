@@ -418,7 +418,7 @@ _is_date_valid()
                 fi
 		local l=$(_month_len $m $y)
 		if [ $d -gt $l ] || [ $d -le 0 ]; then
-			echo "$PROGRAM: day out of range of month"
+			echo "$PROGRAM: day out of range of month [1-${l}]"
 			return 1
 		fi
 	fi
@@ -1461,9 +1461,7 @@ _date_diff()
                         local m1=$1 d1=$2 y1=$3
                         local m2=$4 d2=$5 y2=$6
                         ;;
-
         esac
-
 
         local len1=$(_month_len $m1 $y1)
         local len2=$(_month_len $m2 $y2)
