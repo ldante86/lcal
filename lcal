@@ -759,7 +759,7 @@ _ncal_array()
         if [ $REQUEST_JULIAN ]; then
             _julian_array $m $d $y
         else
-            _gregorian_array $m $d $y
+            _gregorian_array $m $y
         fi
 
         NCAL=(
