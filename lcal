@@ -313,10 +313,15 @@ _main()
 
 	# -y --year
 	if [ $REQUEST_YEARLY ]; then
-		_is_year_valid ${1:-$YEAR} && {
-			_print_gregorian_yearly ${1:-$YEAR}
+		if [ $1 ]; then
+			_is_year_valid $1 && {
+				_print_gregorian_yearly $1
+				_exit 0
+			} || _exit 1
+		else
+			_print_gregorian_yearly $YEAR
 			_exit 0
-		} || _exit 1
+		fi
 	fi
 
 	ARGS="$@"
@@ -451,12 +456,12 @@ _is_date_valid()
 				REQUEST_YEARLY=1
 				ARGS=$m
 				return 0
-			} ||	_exit 1
+			} || _exit 1
 		fi
 		_is_month_valid $m && {
 			ARGS="$m 0 $YEAR"
 			REQUEST_NO_HIGHLIGHT=1
-		}
+		} || _exit 1
 	elif [ $# -eq 2 ]; then
 		m=$1 y=$2
 		_is_month_valid $m || _exit 1
