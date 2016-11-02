@@ -89,6 +89,7 @@ Options:
 
 Notes:
 A date string can be taken as an argument for most flags.
+Months can be numbers or jan, feb, etc.
 
 License: (c) $SCRIPT_YEAR ${AUTHOR} <${EMAIL}>
 "
@@ -141,6 +142,7 @@ _main()
 				REQUEST_JULIAN=1
 				;;
 			-m|--month)
+				shift
 				REQUEST_MONTH=1
 				break
 				;;
@@ -252,7 +254,15 @@ _main()
 	# -m --month
 	if [ $REQUEST_MONTH ]; then
 		if [ $1 ]; then
-			MONTH="$1"
+			_parse_month $1
+			ex=$?
+			case $ex in
+				255)
+					echo "$PROGRAM: invalid date"
+					_exit 1
+					;;
+			esac
+			MONTH=$ex
 			REQUEST_NO_HIGHLIGHT=1
 		fi
 		if [ $2 ]; then
@@ -365,7 +375,22 @@ _main()
 #%  is used.
 _is_date_valid()
 {
-	local m d y l
+	local m d y l ex
+
+	case $1 in
+		*[!0-9]*)
+			_parse_month $1
+                        ex=$?
+                        case $ex in
+                        	255)
+                                	echo "$PROGRAM: invalid date"
+                                        _exit 1
+                                        ;;
+				*)
+					shift
+					;;
+                                esac
+	esac
 
 	for i
 	do
@@ -376,6 +401,10 @@ _is_date_valid()
 				;;
 		esac
 	done
+
+	set -- $ex $@
+	ARGS="$@"
+
 
 	if [ $# -eq 0 ]; then
 		ARGS="$MONTH $DAY $YEAR"
@@ -426,6 +455,30 @@ _is_date_valid()
 			return 1
 		fi
 	fi
+}
+
+#%% usage: _parse_month month
+#%  purpose: return month number [1-12] if month was
+#%  typed as a name. Stop reading after third character.
+#%  Return 255 if not found.
+_parse_month()
+{
+        declare -l y=$1
+        case $y in
+                1|jan* )   return 1 ;;
+                2|feb* )   return 2 ;;
+                3|mar* )   return 3 ;;
+                4|apr* )   return 4 ;;
+                5|may* )   return 5 ;;
+                6|jun* )   return 6 ;;
+                7|jul* )   return 7 ;;
+                8|aug* )   return 8 ;;
+                9|sep* )   return 9 ;;
+                10|oct*)   return 10 ;;
+                11|nov*)   return 11 ;;
+                12|dec*)   return 12 ;;
+                      *)   return 255 ;;
+        esac
 }
 
 #%% usage: _month_len month year
@@ -1451,6 +1504,13 @@ bottom="\
 _date_diff()
 {
 	local m1 d1 y1 m2 d2 y2 len1 len2 jdn1 jdn2 jdn
+
+	case $@ in
+		*[a-zA-Z]*)
+			echo "$PROGRAM: --date-diff usage: MM DD YYYY MM DD YYYY -or- MM DD YYYY"
+			_exit 1
+			;;
+	esac
 
         case $# in
                 [0-2]|[4-5])

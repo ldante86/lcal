@@ -19,6 +19,13 @@ usage: _is_date_valid month day year
 	 is used.
 ----------------------------
 
+Function: _parse_month
+usage: _parse_month month
+	 return month number [1-12] if month was
+	 typed as a name. Stop reading after third character.
+	 Return 255 if not found.
+----------------------------
+
 Function: _month_len
 usage: _month_len month year
 	 Print the length of the month. Calls
