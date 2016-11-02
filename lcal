@@ -35,7 +35,7 @@ VERSION="0.0.1"
 EMAIL=ldante86@aol.com
 
 DAY_NAMES_LONG=(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
-DAY_NAMES_SHORT=(Sun Mon Tue Wed Thu Fri Sat)
+#DAY_NAMES_SHORT=(Sun Mon Tue Wed Thu Fri Sat)
 NCAL_DAY_NAMES=(Su Mo Tu We Th Fr Sa)
 
 GREGORIAN_HEADER="Su Mo Tu We Th Fr Sa"
@@ -43,7 +43,7 @@ JULIAN_HEADER="Sun Mon Tue Wed Thu Fri Sat"
 
 MONTH_NAMES_LONG=(UNUSED January February March April May June July
 	          August September October November December)
-MONTH_NAMES_SHORT=(UNUSED Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec)
+#MONTH_NAMES_SHORT=(UNUSED Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec)
 
 #STTY=$(stty -g)
 
