@@ -66,7 +66,7 @@ The **-m** flag is the same as **month** without the flag. A **year** can be add
 
 To disable highlighting for **--html**, use **-h** before this flag.
 
-Flags **-1**, **-n** and **-p** stop reading any arguments after them.
+Flags **-1**, **-n** and **-p** stop reading arguments after them.
 
 ### VERSION
 0.0.1

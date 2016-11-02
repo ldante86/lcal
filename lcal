@@ -324,6 +324,17 @@ _main()
 		fi
 	fi
 
+	# -d --day-of-week
+	if [ $REQUEST_DATE_LOOKUP ]; then
+		if [ $# -ne 3 ]; then
+			echo "$PROGRAM: --day-of-week usage: MM DD YYYY"
+			_exit 1
+		fi
+		_is_date_valid "$@" || _exit 1
+		echo ${DAY_NAMES_LONG[$(_day_of_week $ARGS)]}
+		_exit 0
+	fi
+
 	ARGS="$@"
 
 	_is_date_valid $ARGS || _exit 1
@@ -343,12 +354,6 @@ _main()
 	# -G --gregorian-to-jdn
 	if [ $REQUEST_GREGORIAN_TO_JDN ]; then
 		_gregorian_date_to_jdn $ARGS
-		_exit 0
-	fi
-
-	# -d --day-of-week
-	if [ $REQUEST_DATE_LOOKUP ]; then
-		echo ${DAY_NAMES_LONG[$(_day_of_week $ARGS)]}
 		_exit 0
 	fi
 
@@ -518,7 +523,7 @@ _parse_month()
 #%  _isleap in the case of February.
 _month_len()
 {
-	m=$1 y=$2
+	local m=$1 y=$2
 	case $m in
 		4|6|9|11)
 			echo 30
@@ -555,6 +560,7 @@ _is_leap()
 _day_of_week()
 {
 	local m=$1 d=$2 y=$3
+
 	local mcodes=(UNUSED 6 2 2 5 0 3 5 1 4 6 2 4)
 	local w=$(( ((y / 4) - (y / 100)) + (y / 400) + d + y + ${mcodes[m]} ))
 
