@@ -582,20 +582,24 @@ _is_leap()
 
 #%% usage: _day_of_week month day year
 #%  purpose: Print the day number for date. 0 = Sunday, etc.
+#%  This is the Zeller algorithm.
 _day_of_week()
 {
-	local m=$1 d=$2 y=$3
+        local m=$1 d=$2 y=$3 k a b j t
 
-	local mcodes=(UNUSED 6 2 2 5 0 3 5 1 4 6 2 4)
-	local w=$(( ((y / 4) - (y / 100)) + (y / 400) + d + y + ${mcodes[m]} ))
+        case $m in
+                1)  m=13 ; ((--y)) ;;
+                2)  m=14 ; ((--y)) ;;
+        esac
 
-	_is_leap $y
-	if [ $LEAP ] && [ $m -lt 3 ]; then
-		((w--))
-	fi
-
-	echo $((w % 7))
+        k=$(( y % 100 ))
+        a=$(( ( (13 * (m + 1) ) / 5)))
+        b=$(( k / 4 ))
+        j=$((y / 100))
+        t=$((j / 4))
+        echo $(( (d + a + k + b + t + (5 * j)) % 7 - 1))
 }
+
 
 #%% usage: _gregorian_array month year
 #%  purpose: Loads the CALENDAR_DATA array with correctly
