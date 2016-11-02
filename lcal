@@ -328,6 +328,12 @@ _main()
 
 	_is_date_valid $ARGS || _exit 1
 
+	# YYYY
+	if [ $REQUEST_YEARLY ];then
+		_print_gregorian_yearly $ARGS
+		_exit 0
+	fi
+
 	# -H --html
 	if [ $REQUEST_HTML ]; then
 		_show_html_calendar $ARGS
