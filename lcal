@@ -266,8 +266,10 @@ _main()
 			REQUEST_NO_HIGHLIGHT=1
 		fi
 		if [ $2 ]; then
-			YEAR="$2"
-			DAY=1
+			_is_year_valid $2 && {
+				YEAR="$2"
+				DAY=1
+			} || _exit 1
 		fi
 		shift $#
 	fi
@@ -309,6 +311,14 @@ _main()
 		_exit 1
 	fi
 
+	# -y --year
+	if [ $REQUEST_YEARLY ]; then
+		_is_year_valid ${1:-$YEAR} && {
+			_print_gregorian_yearly ${1:-$YEAR}
+			_exit 0
+		} || _exit 1
+	fi
+
 	ARGS="$@"
 
 	_is_date_valid $ARGS || _exit 1
@@ -322,12 +332,6 @@ _main()
 	# -G --gregorian-to-jdn
 	if [ $REQUEST_GREGORIAN_TO_JDN ]; then
 		_gregorian_date_to_jdn $ARGS
-		_exit 0
-	fi
-
-	# -y --year
-	if [ $REQUEST_YEARLY ]; then
-		_print_gregorian_yearly ${1:-$YEAR}
 		_exit 0
 	fi
 
@@ -367,6 +371,38 @@ _main()
 	_exit 0
 }
 
+#%% usage: _is_year_valid year
+#%  purpose: return 1 if year is not in range.
+_is_year_valid()
+{
+	if [ $1 -lt 1753 ] || [ $1 -gt 9999 ]; then
+        	echo "$PROGRAM: year out of range [1753-9999]"
+                return 1
+	fi
+}
+
+#%% usage: _is_month_valid month
+#%  purpose: return 1 if month is not in range.
+_is_month_valid()
+{
+	if [ $1 -gt 12 ] || [ $1 -lt 1 ]; then
+		 echo "$PROGRAM: month out of range [1-12]"
+		return 1
+	fi
+}
+
+#%% usage: _is_day_valid month day year
+#%  purpose: return 1 if day is not in range of month
+#%  in the specified year.
+_is_day_valid()
+{
+	local l=$(_month_len $1 $3)
+	if [ $2 -gt $l ] || [ $2 -le 0 ]; then
+		echo "$PROGRAM: day out of range of month [1-${l}]"
+		return 1
+	fi
+}
+
 #%% usage: _is_date_valid month day year
 #%  purpose: This function should be called before any other.
 #%  It checks if months, days or years are within valid limits -
@@ -375,7 +411,7 @@ _main()
 #%  is used.
 _is_date_valid()
 {
-	local m d y l ex
+	local m d y ex
 
 	case $1 in
 		*[!0-9]*)
@@ -405,55 +441,34 @@ _is_date_valid()
 	set -- $ex $@
 	ARGS="$@"
 
-
 	if [ $# -eq 0 ]; then
 		ARGS="$MONTH $DAY $YEAR"
 		return 0
 	elif [ $# -eq 1 ]; then
 		m=$1
 		if [ ${#m} -eq 4 ]; then
-			REQUEST_YEARLY=1
-			ARGS=$m
-			# $1 is a year, so stop here.
-			return 0
+			_is_year_valid $m && {
+				REQUEST_YEARLY=1
+				ARGS=$m
+				return 0
+			} ||	_exit 1
 		fi
-		if [ $m -gt 12 ] || [ $m -lt 1 ]; then
-			echo "$PROGRAM: month out of range [1-12]"
-			return 1
-		else
+		_is_month_valid $m && {
 			ARGS="$m 0 $YEAR"
 			REQUEST_NO_HIGHLIGHT=1
-		fi
+		}
 	elif [ $# -eq 2 ]; then
 		m=$1 y=$2
-                if [ $m -gt 12 ] || [ $m -lt 1 ]; then
-                        echo "$PROGRAM: month out of range [1-12]"
-                        return 1
-		fi
-		if [ $y -lt 1753 ] || [ $y -gt 9999 ]; then
-			echo "$PROGRAM: year out of range [1753-9999]"
-			return 1
-		else
+		_is_month_valid $m || _exit 1
+		_is_year_valid $y && {
 			ARGS="$m 0 $y"
 			REQUEST_NO_HIGHLIGHT=1
-		fi
+		} || _exit 1
 	elif [ $# -ge 3 ]; then
                 m=$1 d=$2 y=$3
-                if [ $m -gt 12 ] || [ $m -lt 1 ]; then
-                        echo "$PROGRAM: month out of range [1-12]"
-                        return 1
-		fi
-                if [ $y -lt 1753 ] || [ $y -gt 9999 ]; then
-                        echo "$PROGRAM: year out of range [1753-9999]"
-			return 1
-                else
-                        AGRS="$m $d $y"
-                fi
-		l=$(_month_len $m $y)
-		if [ $d -gt $l ] || [ $d -le 0 ]; then
-			echo "$PROGRAM: day out of range of month [1-${l}]"
-			return 1
-		fi
+		_is_month_valid $m || _exit 1
+		_is_year_valid $y && AGRS="$m $d $y" || _exit 1
+		_is_day_valid $m $d $y || _exit 1
 	fi
 }
 

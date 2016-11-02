@@ -10,6 +10,22 @@ usage: _main flags parameters
 	 to the appropriate function calls.
 ----------------------------
 
+Function: _is_year_valid
+usage: _is_year_valid year
+	 return 1 if year is not in range.
+----------------------------
+
+Function: _is_month_valid
+usage: _is_month_valid month
+	 return 1 if month is not in range.
+----------------------------
+
+Function: _is_day_valid
+usage: _is_day_valid month day year
+	 return 1 if day is not in range of month
+	 in the specified year.
+----------------------------
+
 Function: _is_date_valid
 usage: _is_date_valid month day year
 	 This function should be called before any other.
