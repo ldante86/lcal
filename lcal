@@ -73,6 +73,7 @@ Options:
 	-n  --next			show next month's calendar
 	-o  --orthodox			show the date for Easter (Orthodox)
 	-p  --previous			show last month's calendar
+	-w  --week-number		show week-number
 	-x  --date-diff			show time between two dates -
 					  MM DD YYYY MM DD YYYY or MM DD YYYY
 	-y  --year			show yearly calendar
@@ -112,6 +113,7 @@ _main()
 	unset REQUEST_VERSION
 	unset REQUEST_PREVIOUS_MONTH
 	unset REQUEST_YEARLY
+	unset REQUEST_WEEK_NUMBER
 	unset REQUEST_DATE_DIFF
 	unset REQUEST_DISCORDIAN
 	unset REQUEST_GREGORIAN_TO_JDN
@@ -163,6 +165,11 @@ _main()
 			-y|--year)
 				shift
 				REQUEST_YEARLY=1
+				break
+				;;
+			-w|--week-number)
+				shift
+				REQUEST_WEEK_NUMBER=1
 				break
 				;;
 			-x|--date-diff)
@@ -326,13 +333,31 @@ _main()
 
 	# -d --day-of-week
 	if [ $REQUEST_DATE_LOOKUP ]; then
-		if [ $# -ne 3 ]; then
+		if [ $# -eq 0 ]; then
+			echo ${DAY_NAMES_LONG[$(_day_of_week $MONTH $DAY $YEAR)]}
+			_exit 0
+		elif [ $# -ne 3 ]; then
 			echo "$PROGRAM: --day-of-week usage: MM DD YYYY"
 			_exit 1
 		fi
 		_is_date_valid "$@" || _exit 1
 		echo ${DAY_NAMES_LONG[$(_day_of_week $ARGS)]}
 		_exit 0
+	fi
+
+	# -w --week-number
+	if [ $REQUEST_WEEK_NUMBER ]; then
+		if [ $# -eq 0 ]; then
+			_week_number $MONTH $DAY $YEAR
+			_exit 0
+		elif [ $# -ne 3 ]; then
+			echo "$PROGRAM: --week-number usage: MM DD YYYY"
+			_exit 1
+		else
+			_is_date_valid "$@" || _exit 1
+			_week_number $ARGS
+			_exit 0
+		fi
 	fi
 
 	ARGS="$@"
@@ -1091,6 +1116,44 @@ _print_gregorian_three_months()
 	echo "$c1_row4  $c2_row4  $c3_row4"
 	echo "$c1_row5  $c2_row5  $c3_row5"
 	echo "$c1_row6  $c2_row6  $c3_row6"
+}
+
+#%% usage: _week_number month day year
+#%  purpose: Return week-number of date. If the week-number
+#%  is 0, return the last week-number of last year.
+_week_number()
+{
+        local m=$1 d=$2 y=$3
+        local wn
+        local dow=$(_day_of_week $m $d $y)
+        local diy=$(_day_in_year $m $d $y)
+
+        if [ $dow -eq 0 ]; then
+                dow=7
+        fi
+
+        _is_leap $y
+
+        if [ $LEAP ] && [ $m -gt 2 ]; then
+                if [ $dow -eq 7 ]; then
+                        wn=$((  ((((diy + 1) - dow) + 10)) / 7 ))
+                else
+                        wn=$((  ((((diy + 1 ) - dow) + 10)) / 7 - 1 ))
+                fi
+        else 
+                if [ $dow -eq 7 ]; then
+                        wn=$((  (((diy - dow) + 10)) / 7 + 1 ))
+                else
+                        wn=$((  (((diy - dow) + 10)) / 7 ))
+                fi
+        fi
+
+        if [ $wn -eq 0 ]; then
+		# Hey, a subshell!
+                ( _week_number 12 31 $((y - 1)) )
+        else
+                echo $wn
+        fi
 }
 
 #%% usage: _western_pfm_date year
