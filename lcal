@@ -1560,7 +1560,7 @@ bottom="\
 			*)  printf "\t    <tr> <td class=\"sunday\">${CALENDAR_DATA[su]} </td>\n"
 		esac
 		case "${CALENDAR_DATA[mo]}" in
-			"$d "|"$d ")  printf "\t\t <td class=\"today\">${CALENDAR_DATA[mo]} </td> <!--today-->\n" ;;
+			" $d "|"$d ")  printf "\t\t <td class=\"today\">${CALENDAR_DATA[mo]} </td> <!--today-->\n" ;;
 			*)  printf "\t\t <td class=\"weekday\">${CALENDAR_DATA[mo]} </td>\n"
 		esac
 		case "${CALENDAR_DATA[tu]}" in
