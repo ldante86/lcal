@@ -1,0 +1,60 @@
+#!/bin/bash -
+
+if [ ! "$1" ]; then
+  exit 1
+fi
+
+in_file="$1"
+
+if [ ! -e "$in_file" ] || [ -d "$in_file" ]; then
+  exit 1
+fi
+
+egrep -on '[A-Za-z0-9_]+[(]+[)]' "$in_file" >/dev/null || exit 1
+
+lineno=()
+fname=()
+comment=()
+
+echo "<table style=\"width:100%\" border=\"1\">"
+echo "<tr>"
+echo "<th>Functions for $in_file</th>"
+echo "<th>Line Number</th>"
+echo "<th>Parameters</td>"
+echo "</tr>"
+
+for i in $(egrep -on '[A-Za-z0-9_]+[(]+[)]' "$in_file"  | awk -F ":" '{print $1}')
+do
+  lineno+=( "$i" )
+done
+
+for i in $(egrep -on '[A-Za-z0-9_]+[(]+[)]' "$in_file"  | awk -F ":" '{print $2}')
+do
+  fname+=( "$i" )
+done
+
+while read
+do
+        if [ "${REPLY:0:3}" = "#%%" ]; then
+                comment+=( "$(echo $REPLY | sed 's/#%% //' | sed 's/usage: //' | cut -d " " -f 2- )" )
+        fi
+done < "$in_file"
+
+
+#echo "${comment[@]}"
+#exit
+#echo "${fname[@]}" | tr -d '()' > file
+
+n=-1
+for i in $(echo "${fname[@]}" | tr -d '()')
+do
+  ((++n))
+  echo "<tr>"
+  echo "<td>$i</td>"
+  echo "<td>${lineno[n]}</td>"
+  echo "<td>${comment[n]}</td>"
+  echo "</tr>"
+done
+
+echo "</table>"
+
