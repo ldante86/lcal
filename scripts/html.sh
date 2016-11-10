@@ -12,7 +12,7 @@ browser=/usr/bin/firefox
 #browser=w3m
 #browser=lynx
 
-calendar="/tmp/$(date +%m-%d-%Y).html"
+calendar="/tmp/${RANDOM}.html"
 ../lcal --html "$@" > "$calendar"
 "$browser" "$calendar"
 
