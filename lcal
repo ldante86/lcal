@@ -417,7 +417,7 @@ _main()
 _is_year_valid()
 {
 	case $1 in
-		*[a-zA-Z]*)
+		0*|*[a-zA-Z]*)
         	echo "$PROGRAM: year out of range [1753-9999]"
                 return 1
 	esac
@@ -460,6 +460,8 @@ _is_date_valid()
 {
 	local m d y ex
 
+#	set -- ${1##+(0)} ${2##+(0)} $3
+
 	case $1 in
 		*[!0-9]*)
 			_parse_month $1
@@ -478,7 +480,7 @@ _is_date_valid()
 	for i
 	do
 		case $i in
-			*[!0-9]*)
+			0*|*[!0-9]*)
 				echo "$PROGRAM: invalid date"
 				_exit 1
 				;;
