@@ -460,8 +460,6 @@ _is_date_valid()
 {
 	local m d y ex
 
-#	set -- ${1##+(0)} ${2##+(0)} $3
-
 	case $1 in
 		*[!0-9]*)
 			_parse_month $1
