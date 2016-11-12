@@ -1,5 +1,20 @@
 #!/bin/echo This file must be sourced.
 
+cmenu()
+{
+echo "\
+cal   date       display a calendar
+ddate date       show Discordian date
+dow   date       show day of week
+jdn   date       show Julian Day Number
+jul   date       show Julian calendar
+ncal  date       display ncal calendar
+html  date       show html calendar
+wn    date       show week number
+yy    year       show yearly calendar\
+"
+}
+
 cal()
 {
 	lcal "$@"
@@ -37,4 +52,14 @@ wn()
 yy()
 {
 	lcal -y "$@"
+}
+
+jul()
+{
+	lcal --julian "$@"
+}
+
+jdn()
+{
+	lcal --gregorian-to-jdn "$@"
 }
