@@ -962,6 +962,8 @@ _print_ncal_julian()
         echo
 }
 
+#%% usage: _show_week_numbers month day year
+#%  purpose: print week numbers next to the Gregorian calendar.
 _show_week_numbers()
 {
 	local m=$1 d=$2 y=$3 g h wn=() j
