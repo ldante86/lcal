@@ -1,6 +1,6 @@
 #!/bin/echo This file must be sourced.
 
-cmenu()
+lmenu()
 {
 echo "\
 cal   date       display a calendar
