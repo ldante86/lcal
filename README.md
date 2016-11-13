@@ -46,6 +46,8 @@ of Easter (Western, Orthodox, Orthodox-Julian), monthly and yearly calendars, an
 	* show the date for Orthodox Easter as Julian date
 * **-V  --version**
 	* show version information and exit
+* **-W  --show-week-number**
+	* show week numbers next to calendar
 * **-1  --one**
 	* show only the current month. Default
 * **-3  --three**
