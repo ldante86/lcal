@@ -84,6 +84,7 @@ Options:
 	-N  --ncal			show calendar in ncal mode
 	-O  --orthodox-julian		show the date for Orthodox Easter as Julian date
 	-V  --version			show version information and exit
+	-W  --show-week-number		show week numbers next to calendar
 	-1  --one			show only the current month. Default
 	-3  --three			show last, current and next month
 	    --help			show this usage and exit
@@ -114,6 +115,7 @@ _main()
 	unset REQUEST_PREVIOUS_MONTH
 	unset REQUEST_YEARLY
 	unset REQUEST_WEEK_NUMBER
+	unset REQUEST_WEEK_NUMBER_CALENDAR
 	unset REQUEST_DATE_DIFF
 	unset REQUEST_DISCORDIAN
 	unset REQUEST_GREGORIAN_TO_JDN
@@ -210,6 +212,10 @@ _main()
 			-V|--version)
 				REQUEST_VERSION=1
 				break
+				;;
+			-W|--show-week-numbers)
+				shift
+				REQUEST_WEEK_NUMBER_CALENDAR=1
 				;;
 			--help)
 				REQUEST_HELP=1
@@ -348,14 +354,20 @@ _main()
 	# -w --week-number
 	if [ $REQUEST_WEEK_NUMBER ]; then
 		if [ $# -eq 0 ]; then
+			_week_number 12 31 $((YEAR - 1))
+			total=$?
 			_week_number $MONTH $DAY $YEAR
+			echo ${?}/$total
 			_exit 0
 		elif [ $# -ne 3 ]; then
 			echo "$PROGRAM: --week-number usage: MM DD YYYY"
 			_exit 1
 		else
 			_is_date_valid "$@" || _exit 1
+			_week_number 12 31 $(($3 - 1))
+			total=$?
 			_week_number $ARGS
+			echo ${?}/$total
 			_exit 0
 		fi
 	fi
@@ -363,6 +375,12 @@ _main()
 	ARGS="$@"
 
 	_is_date_valid $ARGS || _exit 1
+
+	# -W --show-week-numbers
+	if [ $REQUEST_WEEK_NUMBER_CALENDAR ]; then
+		_show_week_numbers $ARGS
+		_exit 0
+	fi
 
 	# YYYY
 	if [ $REQUEST_YEARLY ];then
@@ -944,6 +962,86 @@ _print_ncal_julian()
         echo
 }
 
+_show_week_numbers()
+{
+	local m=$1 d=$2 y=$3 g h wn=() j
+
+	for((i=1; i<27; i+=7))
+	do
+		_week_number $m $i $y
+		wn+=($?)
+	done
+
+	if [ "${wn[0]}" = "0" ]; then
+		_week_number 12 31 $((y - 1))
+		wn[0]=($?)
+	fi
+
+	len=$(_month_len $m $d $y)
+
+	case $len in
+		30)
+			_week_number $m 30 $y
+			wn+=($?)
+			;;
+		29)
+			_week_number $m 29 $y
+			wn+=($?)
+			;;
+		31)
+			_week_number $m 30 $y
+			g=($?)
+			_week_number $m 31 $y
+			h=($?)
+			if [ $g -eq $h ]; then
+				wn+=($g)
+			else
+				wn+=($g)
+				wn+=($h)
+			fi
+			;;
+		28)
+			_week_number $m 22 $y
+			g=$?
+			_week_number $m 28 $y
+			h=$?
+			if [ $g -ne $h ]; then
+				wn+=$h
+			fi
+			;;
+	esac
+
+        _gregorian_array $m $y
+
+        if [ $REQUEST_NO_HIGHLIGHT ]; then
+                d=0
+        fi
+
+        _center 21 "${MONTH_NAMES_LONG[m]} $y"
+
+        echo "$GREGORIAN_HEADER"
+
+	j=0
+        for ((i=0; i<${#CALENDAR_DATA[@]}; i++)); do
+                if [ $((i % 7)) -eq 0 ] && [ $i -ne 0 ]; then
+                        printf "\t%s\n" "${wn[j]}"
+			((++j))
+                fi
+                if [ $(( i - (first_day_number_of_month - 1) )) -eq $d ] &&
+                   [ $(( i - (first_day_number_of_month - 1) )) -lt 10 ] &&
+                   [ $d -gt 0 ]; then
+                        echo -n "${BOLD} ${d}${UNBOLD} "
+                elif [ $(( i - (first_day_number_of_month - 1) )) -eq $d ] &&
+                   [ $(( i - (first_day_number_of_month - 1) )) -gt 9 ] &&
+                   [ $d -gt 0 ]; then
+                        echo -n "${BOLD}${d}${UNBOLD} "
+                else
+                        echo -n "${CALENDAR_DATA[i]}"
+                fi
+        done
+        echo
+}
+
 #%% usage: _ordinal number
 #%  purpose: Print the ordinal of a number: 1st, 2nd, 3rd, etc.
 _ordinal()
@@ -1152,7 +1250,7 @@ _week_number()
 		# Hey, a subshell!
                 ( _week_number 12 31 $((y - 1)) )
         else
-                echo $wn
+                return $wn
         fi
 }
 
@@ -1665,5 +1763,6 @@ _exit()
 ### PROGRAM START ######################################################
 
 _main "$@"
+
 
 ### EOF ################################################################
