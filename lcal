@@ -966,50 +966,20 @@ _print_ncal_julian()
 #%  purpose: print week numbers next to the Gregorian calendar.
 _show_week_numbers()
 {
-	local m=$1 d=$2 y=$3 g h wn=() j
+	local m=$1 d=$2 y=$3 wn
 
-	for((i=1; i<27; i+=7))
-	do
-		_week_number $m $i $y
-		wn+=($?)
-	done
-
-	if [ "${wn[0]}" = "0" ]; then
-		_week_number 12 31 $((y - 1))
-		wn[0]=($?)
-	fi
-
-	len=$(_month_len $m $d $y)
-
-	case $len in
-		30)
-			_week_number $m 30 $y
-			wn+=($?)
-			;;
-		29)
-			_week_number $m 29 $y
-			wn+=($?)
-			;;
-		31)
-			_week_number $m 30 $y
-			g=($?)
-			_week_number $m 31 $y
-			h=($?)
-			if [ $g -eq $h ]; then
-				wn+=($g)
-			else
-				wn+=($g)
-				wn+=($h)
+	case $m in
+		1)
+			_week_number $m 1 $y
+			wn=$?
+			if [ $wn -eq 0 ]; then
+				_week_number 12 31 $((y - 1))
+				wn=$?
 			fi
 			;;
-		28)
-			_week_number $m 22 $y
-			g=$?
-			_week_number $m 28 $y
-			h=$?
-			if [ $g -ne $h ]; then
-				wn+=$h
-			fi
+		*)
+			_week_number $m 1 $y
+			wn=$?
 			;;
 	esac
 
@@ -1023,11 +993,14 @@ _show_week_numbers()
 
         echo "$GREGORIAN_HEADER"
 
-	j=0
         for ((i=0; i<${#CALENDAR_DATA[@]}; i++)); do
                 if [ $((i % 7)) -eq 0 ] && [ $i -ne 0 ]; then
-                        printf "\t%s\n" "${wn[j]}"
-			((++j))
+                        printf "\t%s\n" "$wn"
+			if [ $m -eq 1 ] && [ ${#wn} -gt 1 ]; then
+			wn=1
+			else
+			((++wn))
+			fi
                 fi
                 if [ $(( i - (first_day_number_of_month - 1) )) -eq $d ] &&
                    [ $(( i - (first_day_number_of_month - 1) )) -lt 10 ] &&
