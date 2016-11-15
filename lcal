@@ -997,9 +997,9 @@ _show_week_numbers()
                 if [ $((i % 7)) -eq 0 ] && [ $i -ne 0 ]; then
                         printf "\t%s\n" "$wn"
 			if [ $m -eq 1 ] && [ ${#wn} -gt 1 ]; then
-			wn=1
+				wn=1
 			else
-			((++wn))
+				((++wn))
 			fi
                 fi
                 if [ $(( i - (first_day_number_of_month - 1) )) -eq $d ] &&
