@@ -1,24 +1,17 @@
-
 _lcal()
 {
-
 	COMPREPLY=()
-	word=${COMP_WORDS[COMP_CWORD]}
+	local word=${COMP_WORDS[COMP_CWORD]}
 
-	LONG_FLAGS="--day-of-week --easter --no-highlight --julian --month
+	local LONG_FLAGS="--day-of-week --easter --no-highlight --julian --month
                     --next --orthodox --previous --week-number --date-diff
                     --year --discordian --gregorian-to-jdn --html --jdn-to-gregorian
                     --ncal --orthodox-julian --version --show-week-numbers
                     --one --three --help"
 
-	SHORT_FLAGS="-d -e -h -j -m -n -o -p -w -x -y -D -G -H -J -N -O -V -W -1 -3"
-
+	local SHORT_FLAGS="-d -e -h -j -m -n -o -p -w -x -y -D -G -H -J -N -O -V -W -1 -3"
 
 	case "$word" in
-#		"")	COMPREPLY=( $( compgen -W "1 2 3 4 5 6 7 8 9 10 11 12" -- $word) )
-#			return 0
-#			;;
-
 		--*)	COMPREPLY=( $( compgen -W "$LONG_FLAGS" -- $word) )
 			return 0
 			;;
