@@ -77,7 +77,7 @@ Make permanent:
 
 ````bash
 cd lcal/scripts
-sudo ln -fs "${PWD}/lcal_completion /etc/bash_completion.d/lcal_completion
+sudo ln -fs "${PWD}"/lcal_completion /etc/bash_completion.d/lcal_completion
 ````
 
 Once sourced, **lcal** can generate a list of short and long flags.
