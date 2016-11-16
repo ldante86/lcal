@@ -13,7 +13,7 @@ of Easter (Western, Orthodox, Orthodox-Julian), monthly and yearly calendars, an
 	* return day of week for date
 * **-e  --easter**
 	* show the date for Easter (Western)
-* **-h  --no-highlighting**
+* **-h  --no-highlight**
 	* disable highlighting
 * **-j  --julian**
 	* show Julian calendar
