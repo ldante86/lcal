@@ -15,10 +15,6 @@ _lcal()
 
 
 	case "$word" in
-		"")	COMPREPLY=( $( compgen -W "--help" -- $word) )
-			return 0
-			;;
-
 		""|--*)	COMPREPLY=( $( compgen -W "$LONG_FLAGS" -- $word) )
 			return 0
 			;;
