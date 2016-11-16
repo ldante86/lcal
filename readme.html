@@ -1,6 +1,6 @@
 <h2 id="lcal---display-a-calendar">lcal - display a calendar</h2>
 <h3 id="description">DESCRIPTION</h3>
-<p><strong>lcal</strong> is a command-line calendar similar to cal/ncal. This program produces Gregorian and Julian calendars, an HTML 5 calendar, an ncal formatted calendar, Discordian dates, dates of Easter (Western, Orthodox, Orthodox-Julian), monthly and yearly calendars, and Julian Day Number conversions.</p>
+<p><strong>lcal</strong> is a command-line calendar similar to cal/ncal. This program produces Gregorian and Julian calendars, an HTML 5 calendar, an ncal formatted calendar, weeknumbers, Discordian dates, dates of Easter (Western, Orthodox, Orthodox-Julian), monthly and yearly calendars, and Julian Day Number conversions.</p>
 <h3 id="usage">USAGE</h3>
 <p><strong>lcal</strong> [option] [month] [day] [year]</p>
 <h3 id="options">OPTIONS</h3>
@@ -13,7 +13,7 @@
 <ul>
 <li>show the date for Easter (Western)</li>
 </ul></li>
-<li><strong>-h --no-highlighting</strong>
+<li><strong>-h --no-highlight</strong>
 <ul>
 <li>disable highlighting</li>
 </ul></li>
@@ -96,12 +96,31 @@
 </ul>
 <h3 id="parameters">PARAMETERS</h3>
 <p>Most flags can take a date string as an argument. A single parameter is either a <strong>month</strong> -- this will print the month for the current year -- or it is a <strong>year</strong> -- this will print the yearly calendar for the specified year. Two parameters are <strong>month</strong> and <strong>year</strong> -- this will print the month for the specified year. Three parameters are <strong>month</strong>, <strong>day</strong> and <strong>year</strong> -- this will print the specified calendar with the day highlighted.</p>
-<p><strong>month</strong> can be numbers [1-12], or three or more letters of the month name: jan, feb, mar, etc.</p>
-<p>The year range is currently <strong>1753 - 9999</strong>.</p>
+<p><strong>month</strong> can be numbers [<strong>1-12</strong>], or three or more letters of the month name: <strong>jan</strong>, <strong>feb</strong>, <strong>mar</strong>, etc.</p>
 <p>The <strong>-m</strong> flag is the same as <strong>month</strong> without the flag. A <strong>year</strong> can be added after <strong>month</strong>.</p>
 <p>To disable highlighting for <strong>--html</strong>, use <strong>-h</strong> before this flag.</p>
 <p>Flags <strong>-1</strong>, <strong>-n</strong> and <strong>-p</strong> stop reading arguments after them.</p>
+<h3 id="tab-completion">TAB COMPLETION</h3>
+<p>Source <strong>/scripts/lcal_completion</strong> for <strong>lcal</strong> to support tab completion. The typical location for completion scripts is <strong>/etc/bash_completion.d/</strong>.</p>
+<p>For current shell:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> lcal/scripts
+<span class="kw">source</span> lcal_completion</code></pre>
+<p>Make permanent:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> lcal/scripts
+<span class="kw">sudo</span> ln -fs <span class="st">&quot;</span><span class="ot">${PWD}</span><span class="st">/lcal_completion /etc/bash_completion.d/lcal_completion</span></code></pre>
+<p>Once sourced, <strong>lcal</strong> can generate a list of short and long flags.</p>
+<p>For example:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">%</span> lcal - [TAB][TAB]
+<span class="kw">-1</span>  -3  -d  -D  -e  -G  -h  -H  -j  -J  -m  -n  -N  -o  -O  -p  -V  -w  -W  -x  -y</code></pre>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">%</span> lcal -- [TAB][TAB]
+<span class="kw">--date-diff</span>          --easter             --html               --month              --no-highlight       --orthodox-julian    --three              --year
+<span class="kw">--day-of-week</span>        --gregorian-to-jdn   --jdn-to-gregorian   --ncal               --one                --previous           --version
+<span class="kw">--discordian</span>         --help               --julian             --next               --orthodox           --show-week-numbers  --week-number</code></pre>
+<h3 id="bugs">BUGS</h3>
+<p>So far, <strong>lcal</strong> does not account for the Gregorian Reformation. so the year range is currently <strong>1753 - 9999</strong>. The algorithm I used for calculating the day of week does not use Julian Day Numbers -- which it should.</p>
 <h3 id="version">VERSION</h3>
 <p>0.0.1</p>
+<h3 id="see-also">SEE ALSO</h3>
+<p>cal(1), ncal, gcal, ccal, when</p>
 <h3 id="license">LICENSE</h3>
 <p><strong>(c) 2014-2016 Luciano D. Cecere - ldante86@aol.com</strong></p>
