@@ -67,7 +67,7 @@ Usage: $PROGRAM [option] [[[MM] DD] YYYY]
 Options:
 	-d  --day-of-week 		return day of week for date
 	-e  --easter			show the date for Easter (Western)
-	-h  --no-highlighting		disable highlighting
+	-h  --no-highlight		disable highlighting
 	-j  --julian			show Julian calendar
 	-m  --month			show calendar for month (and year)
 	-n  --next			show next month's calendar
