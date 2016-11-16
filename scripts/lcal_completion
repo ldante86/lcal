@@ -1,0 +1,30 @@
+
+_lcal()
+{
+
+	COMPREPLY=()
+	word=${COMP_WORDS[COMP_CWORD]}
+
+	LONG_FLAGS="--day-of-week --easter --no-highlight --julian --month
+                    --next --orthodox --previous --week-number --date-diff
+                    --year --discordian --gregorian-to-jdn --html --jdn-to-gregorian
+                    --ncal --orthodox-julian --version --show-week-numbers
+                    --one --three --help"
+
+	SHORT_FLAGS="-d -e -h -j -m -n -o -p -w -x -y -D -G -H -J -N -O -V -W -1 -3"
+
+
+	case "$word" in
+		"")	COMPREPLY=( $( compgen -W "--help" -- $word) )
+			return 0
+			;;
+
+		""|--*)	COMPREPLY=( $( compgen -W "$LONG_FLAGS" -- $word) )
+			return 0
+			;;
+
+		-*)	COMPREPLY=( $( compgen -W "$SHORT_FLAGS" -- $word ) )
+			return 0
+			;;
+	esac
+} && complete -F _lcal lcal_completion lcal
