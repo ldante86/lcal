@@ -47,9 +47,9 @@ MONTH_NAMES_LONG=(UNUSED January February March April May June July
 
 #STTY=$(stty -g)
 
-MONTH=$(date +%_m)
-DAY=$(date +%_d)
-YEAR=$(date +%Y)
+MONTH=$(printf "%(%_m)T")
+DAY=$(printf "%(%_d)T")
+YEAR=$(printf "%(%Y)T")
 
 BOLD=$(tput smso)
 UNBOLD=$(tput rmso)
