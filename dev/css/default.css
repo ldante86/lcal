@@ -1,0 +1,16 @@
+body{background:gray}
+table{background:#000;border:2px solid #000}
+table.center{margin-left:auto;margin-right:auto}
+.month{font-size:50px;word-spacing:.5em;color:#FFF;font-weight:700}
+td{font-family:Arial;text-align:center;font-size:25px;width:82px;height:82px;padding:0;font-weight:700}
+.weekbar{height:10px;background:#232323;color:#FFF}
+.sunday{background-color:#606060;color:#FFF;font-style:italic}
+.weekday{background-color:silver}
+.today{background-color:red;font-size:35px;color:#FFF}
+.today:hover{background-color:#000;color:red}
+@media only print {
+body{background:#fff;color:#000}
+.sunday{font-size:30px}
+.weekday{font-size:30px;font-weight:400}
+.today{text-decoration:underline}
+}

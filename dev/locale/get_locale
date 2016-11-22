@@ -1,0 +1,37 @@
+#!/bin/bash -
+
+short_weekdays=$(locale -c LC_TIME | sed -n '2p')
+long_weekdays=$(locale -c LC_TIME | sed -n '3p')
+
+short_months=$(locale -c LC_TIME | sed -n '4p')
+long_months=$(locale -c LC_TIME | sed -n '5p')
+
+unset gweek_header
+unset jweek_header
+unset DAYS
+unset MONTH_LIST
+unset LONG_MONTH_LIST
+
+OLDIFS="$IFS"
+IFS=";"
+
+for i in $short_weekdays; do gweek_header+=( "${i:0:2}" ); done
+for i in $short_weekdays; do jweek_header+=( "$i" ); done
+for i in $long_weekdays; do DAYS+=( "$i" ); done
+for i in $short_months; do MONTH_LIST+=( "$i" ); done
+for i in $long_months; do LONG_MONTH_LIST+=( "$i" ); done
+
+gweek_header="${gweek_header[@]}"
+jweek_header="${jweek_header[@]}"
+
+IFS="$OLDIFS"
+
+#config=lcal.locale
+
+{
+  echo "DAYS=( ${DAYS[@]} )"
+  echo "MONTH_LIST=( ${MONTH_LIST[@]} )"
+  echo "LONG_MONTH_LIST=( ${LONG_MONTH_LIST[@]} )"
+  echo "gweek_header=( $gweek_header )"
+  echo "jweek_header=( $jweek_header )"
+} #> $config
