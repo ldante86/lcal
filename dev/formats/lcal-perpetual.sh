@@ -359,10 +359,10 @@ _parse_month()
 
 if [ "$1" = "-h" ]; then
 	echo "$PROGRAM - a perpetual calendar
-Usage: $PROGRAM [[m-1 [yyyy] [-h]
+Usage: $PROGRAM [[mm [yyyy] [-h]
 
 -h	show this help
-m-1	1-12 or jan-dec
+mm	1-12 or jan-dec
 yyyy	1753-9999"
 	exit 0
 fi
