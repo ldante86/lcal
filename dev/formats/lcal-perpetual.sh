@@ -323,7 +323,7 @@ _is_date_valid()
 				;;
 		esac
 	done
-
+#set -x
 	set -- $ex $1
 	if [ $# -eq 0 ]; then
 		return 0
@@ -392,6 +392,7 @@ dow=$?
 
 # Load array based on the day number of Jan 1st.
 if [ $leap ]; then
+	[ $dow -eq 0 ] && ((dow=7))
 	case $((--dow)) in
 		0) CALENDAR_DATA="${LEAP_CYCLE0[mm]}" ;;
 		1) CALENDAR_DATA="${LEAP_CYCLE1[mm]}" ;;
