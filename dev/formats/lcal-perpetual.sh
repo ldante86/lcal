@@ -270,6 +270,103 @@ _day_of_week()
         return $((w % 7))
 }
 
+_is_year_valid()
+{
+	case $1 in
+		0*|*[a-zA-Z]*)
+        	echo "$PROGRAM: year out of range [1753-9999]"
+                return 1
+	esac
+
+	if [ $1 -lt 1753 ] || [ $1 -gt 9999 ]; then
+        	echo "$PROGRAM: year out of range [1753-9999]"
+                return 1
+	fi
+}
+
+_is_month_valid()
+{
+	if [ $1 -gt 12 ] || [ $1 -lt 1 ]; then
+		 echo "$PROGRAM: month out of range [1-12]"
+		return 1
+	fi
+}
+
+_is_date_valid()
+{
+	local ex
+
+	case $1 in
+		*[!0-9]*)
+			_parse_month $1
+                        ex=$?
+                        case $ex in
+                        	255)
+                                	echo "$PROGRAM: invalid date"
+                                        _exit 1
+                                        ;;
+				*)
+					shift
+					;;
+                                esac
+	esac
+
+	for i
+	do
+		case $i in
+			0*|*[!0-9]*)
+				echo "$PROGRAM: invalid date"
+				exit 1
+				;;
+		esac
+	done
+
+
+	m=$ex
+	y=$1
+
+	set -- $m $y
+
+	if [ $# -eq 0 ]; then
+		return 0
+	elif [ $# -eq 1 ]; then
+		_is_month_valid $m || exit 1
+	elif [ $# -eq 2 ]; then
+		_is_month_valid $m || exit 1
+		_is_year_valid $y || exit 1
+	fi
+}
+
+_parse_month()
+{
+        declare -l m=$1
+        case $m in
+                1|jan* )   return 1 ;;
+                2|feb* )   return 2 ;;
+                3|mar* )   return 3 ;;
+                4|apr* )   return 4 ;;
+                5|may* )   return 5 ;;
+                6|jun* )   return 6 ;;
+                7|jul* )   return 7 ;;
+                8|aug* )   return 8 ;;
+                9|sep* )   return 9 ;;
+                10|oct*)   return 10 ;;
+                11|nov*)   return 11 ;;
+                12|dec*)   return 12 ;;
+                      *)   return 255 ;;
+        esac
+}
+
+if [ "$1" = "-h" ]; then
+	echo "$PROGRAM - a perpetual calendar
+Usage: $PROGRAM [[mm [yyyy] [-h]
+
+-h	show this help
+mm	1-12 or jan-dec
+yyyy	1753-9999"
+	exit 0
+fi
+
 case $# in
 	1)
 		m=$1
@@ -283,6 +380,8 @@ case $# in
 		m=$(date +%m)
 		y=$(date +%Y)
 esac
+
+_is_date_valid $m $y || exit 1
 
 unset leap
 
@@ -315,5 +414,3 @@ else
 fi
 
 _print_gregorian_monthly $m $y
-
-
