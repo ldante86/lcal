@@ -13,7 +13,7 @@ browser=/usr/bin/firefox
 #browser=lynx
 
 calendar="/tmp/${RANDOM}.html"
-../lcal --html "$@" > "$calendar"
+../bin/lcal --html "$@" > "$calendar"
 "$browser" "$calendar"
 
 rm "$calendar"

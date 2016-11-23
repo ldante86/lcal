@@ -1,6 +1,6 @@
 #!/bin/bash -
 
-set ../lcal
+set ../bin/lcal
 
 if [ ! "$1" ]; then
   exit 1
