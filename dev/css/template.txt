@@ -1,0 +1,59 @@
+/*
+ * Body definition
+ */
+body{}
+
+/*
+ * Table definition.
+ */
+table{}
+
+/*
+ * Center table.
+ */
+table.center{margin-left:auto;margin-right:auto}
+
+/*
+ * Month name row.
+ */
+.month{}
+
+/*
+ * Body of calendar.
+ */
+td{}
+
+/*
+ *The week name row.
+ */
+.weekbar{}
+
+/*
+ * Sunday column should look different than .weekday
+ */
+.sunday{}
+
+/*
+ * Formatting for days other than Sunday.
+ */
+.weekday{}
+
+/*
+ * Make today look special!
+ */
+.today{}
+
+/*
+ * Mouse-over today - change color.
+ */
+.today:hover{}
+
+/*
+ * Instructions for sending to a printer.
+ */
+@media only print {
+	body{}
+	.sunday{}
+	.weekday{}
+	.today{}
+}
