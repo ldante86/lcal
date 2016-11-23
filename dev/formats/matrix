@@ -11,15 +11,15 @@ _gregorian_array_matrix()
                 if [ $first_day_number_of_month -eq 0 ]; then
                         break
                 fi
-                CALENDAR_DATA+=(0)
+                CALENDAR_DATA+=("  ")
         done
 
-#        for ((i=1; i<=first_day_number_of_month; i++)); do
+#        for ((i=1; i<=42; i++)); do
         for ((i=1; i<=$((60 - first_day_number_of_month)); i++)); do
-#                if [ $i -lt 10 ]; then
-#                        CALENDAR_DATA+=($i)
-                if [ $i -gt $len ]; then
-                        CALENDAR_DATA+=(0)
+                if [ $i -lt 10 ]; then
+                        CALENDAR_DATA+=(" $i")
+                elif [ $i -gt $len ]; then
+                        CALENDAR_DATA+=("  ")
                 else
                         CALENDAR_DATA+=($i)
                 fi

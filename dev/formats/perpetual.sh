@@ -37,9 +37,7 @@ _is_leap $y
 _day_of_week $y
 dow=$?
 
-#echo $dow
 if [ $leap ]; then
-#echo LEAP_CYCLE$dow
 	case $dow in
 	0)  echo "${LEAP_CYCLE0[m-1]}" ;;
 	1)  echo "${LEAP_CYCLE1[m-1]}" ;;
