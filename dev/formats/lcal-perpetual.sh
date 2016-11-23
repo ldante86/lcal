@@ -291,7 +291,7 @@ _day_of_week $y
 dow=$?
 ((mm=m-1))
 
-# Load array base on day number of Jan 1st.
+# Load array based on the day number of Jan 1st.
 if [ $leap ]; then
 	case $((--dow)) in
 		0) CALENDAR_DATA="${LEAP_CYCLE0[mm]}" ;;
