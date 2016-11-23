@@ -1,3 +1,3 @@
 # lcal-python
 
-## Ideas on a pythong version of lcal
+## Ideas on a python version of lcal
