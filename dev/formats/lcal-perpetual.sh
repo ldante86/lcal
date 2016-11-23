@@ -264,7 +264,7 @@ _day_of_week()
         local m=1 d=1 y=$1
 
         local mcodes=(UNUSED 6 2 2 5 0 3 5 1 4 6 2 4)
-        local w=$(( ((y / 4) - (y / 100)) + (y / 400) + d + y + ${mcodes[m]} ))
+        local w=$(( ((y / 4) - (y / 100)) + (y / 400) + d + y + mcodes[m] ))
 
         return $((w % 7))
 }
