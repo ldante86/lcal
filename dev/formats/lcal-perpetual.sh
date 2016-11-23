@@ -225,9 +225,9 @@ leap_years6=(
 "                1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31                                                    "
 )
 
-GREGORIAN_HEADER="Su Mo Tu We Th Fr Sa"
+header="Su Mo Tu We Th Fr Sa"
 
-MONTH_NAMES_LONG=(UNUSED January February March April May June July
+months=(UNUSED January February March April May June July
                   August September October November December)
 
 _center()
@@ -238,9 +238,9 @@ _center()
 # Simply print the calendar.
 _print_month()
 {
-        _center 21 "${MONTH_NAMES_LONG[m]} $y"
+        _center 21 "${months[m]} $y"
 
-        echo "$GREGORIAN_HEADER"
+        echo "$header"
 
 	for ((i=0; i<126; ((i+=21)) ))
 	do
