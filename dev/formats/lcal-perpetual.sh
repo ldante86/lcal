@@ -303,12 +303,16 @@ _is_date_valid()
                         case $ex in
                         	255)
                                 	echo "$PROGRAM: invalid date"
-                                        _exit 1
+                                        exit 1
                                         ;;
 				*)
 					shift
 					;;
                                 esac
+				;;
+		*)
+			ex=$1
+			shift
 	esac
 
 	for i
@@ -321,17 +325,14 @@ _is_date_valid()
 		esac
 	done
 
-
-	m=$ex
-	y=$1
-
-	set -- $m $y
-
+	set -- $ex $1
 	if [ $# -eq 0 ]; then
 		return 0
 	elif [ $# -eq 1 ]; then
+		m=$ex
 		_is_month_valid $m || exit 1
 	elif [ $# -eq 2 ]; then
+		m=$ex
 		_is_month_valid $m || exit 1
 		_is_year_valid $y || exit 1
 	fi
@@ -366,7 +367,7 @@ mm	1-12 or jan-dec
 yyyy	1753-9999"
 	exit 0
 fi
-
+#set -x
 case $# in
 	1)
 		m=$1
