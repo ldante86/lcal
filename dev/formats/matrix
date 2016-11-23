@@ -14,10 +14,11 @@ _gregorian_array_matrix()
                 CALENDAR_DATA+=(0)
         done
 
-        for ((i=1; i<=$((42 - first_day_number_of_month)); i++)); do
-                if [ $i -lt 10 ]; then
-                        CALENDAR_DATA+=($i)
-                elif [ $i -gt $len ]; then
+#        for ((i=1; i<=first_day_number_of_month; i++)); do
+        for ((i=1; i<=$((60 - first_day_number_of_month)); i++)); do
+#                if [ $i -lt 10 ]; then
+#                        CALENDAR_DATA+=($i)
+                if [ $i -gt $len ]; then
                         CALENDAR_DATA+=(0)
                 else
                         CALENDAR_DATA+=($i)
@@ -33,7 +34,7 @@ _print_gregorian_monthly_matrix()
 
 	echo -n "[["
 
-        for ((i=0; i<${#CALENDAR_DATA[@]}-7; i++)); do
+        for ((i=0; i<${#CALENDAR_DATA[@]}; i++)); do
                 if [ $((i % 7)) -eq 0 ] && [ $i -ne 0 ]; then
 			echo "]"
 			echo -n " ["
@@ -57,3 +58,53 @@ _print_gregorian_yearly_matrix()
 
 	echo  "]]"
 }
+
+_print_gregorian_string()
+{
+        local m=$1 d=$2 y=$3
+
+        _gregorian_array_matrix $m $y
+
+#        echo -n "[["
+
+        for ((i=0; i<${#CALENDAR_DATA[@]}-7; i++)); do
+#                if [ $((i % 7)) -eq 0 ] && [ $i -ne 0 ]; then
+#echo
+#                fi
+                echo -n "${CALENDAR_DATA[i]} "
+        done
+
+        echo
+}
+
+_print_gregorian_string_yearly()
+{
+        local m=$1 d=$2 y=$3
+
+	for n in {1..12}
+	do
+		echo "\"$(_print_gregorian_string $n $d $y)\""
+	done
+}
+
+leap_cycle=( LEAP_CYCLE0 LEAP_CYCLE1 LEAP_CYCLE2 LEAP_CYCLE3 LEAP_CYCLE4 LEAP_CYCLE5 LEAP_CYCLE6 )
+non_leap_cycle=( NON_LEAP_CYCLE0 NON_LEAP_CYCLE1 NON_LEAP_CYCLE2 NON_LEAP_CYCLE3 NON_LEAP_CYCLE4 NON_LEAP_CYCLE5 NON_LEAP_CYCLE6 )
+
+t=0
+for x in 1905 1906 1907 1913 1914 1915 1921
+do
+	echo "${non_leap_cycle[t]}=("
+	_print_gregorian_string_yearly 1 1 $x
+	echo ")"
+	((t++))
+done >> arrays
+
+t=0
+for x in 1928 1940 1952 1964 1976 1988 2000
+do
+	echo "${leap_cycle[t]}=("
+	_print_gregorian_string_yearly 1 1 $x
+	echo ")"
+	((t++))
+done >> arrays
+
