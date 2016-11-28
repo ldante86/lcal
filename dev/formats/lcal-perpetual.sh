@@ -225,22 +225,30 @@ leap_years6=(
 "                1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31                                                    "
 )
 
-header="Su Mo Tu We Th Fr Sa"
+PROGRAM="${0##*/}"
 
-months=(UNUSED January February March April May June July
-                  August September October November December)
+USAGE="$PROGRAM - a perpetual calendar
+Usage: $PROGRAM [[mm [yyyy] [-h]
+
+-h      show this help
+mm      1-12 or jan-dec
+yyyy    1753-9999
+"
+
 
 _center()
 {
         printf "%*s\n" $(( (${1} + ${#2}) / 2)) "$2"
 }
 
-# Simply print the calendar.
 _print_month()
 {
+	months=(UNUSED January February March April May June July
+		August September October November December)
+
         _center 21 "${months[m]} $y"
 
-        echo "$header"
+        echo "Su Mo Tu We Th Fr Sa"
 
 	for ((i=0; i<126; ((i+=21)) ))
 	do
@@ -250,21 +258,17 @@ _print_month()
 
 _is_leap()
 {
-        local y=$1
-        if [ $((y % 4)) -eq 0 ] && 
-           [ $((y % 100)) -ne 0 ] || 
-           [ $((y % 400)) -eq 0 ]; then
+        if [ $(($1 % 4)) -eq 0 ] && 
+           [ $(($1 % 100)) -ne 0 ] || 
+           [ $(($1 % 400)) -eq 0 ]; then
                 leap=1
         fi
 }
 
-# All we need here is the day number of Jan 1st!
 _day_of_week()
 {
-        local m=1 d=1 y=$1
-
-        local mcodes=(UNUSED 6 2 2 5 0 3 5 1 4 6 2 4)
-        local w=$(( ((y / 4) - (y / 100)) + (y / 400) + d + y + mcodes[m] ))
+        mcodes=(UNUSED 6 2 2 5 0 3 5 1 4 6 2 4)
+        w=$(( (($1 / 4) - ($1 / 100)) + ($1 / 400) + 1 + $1 + mcodes[1] ))
 
         return $((w % 7))
 }
@@ -293,7 +297,7 @@ _is_month_valid()
 
 _is_date_valid()
 {
-	local ex
+	ex= m=
 
 	case $1 in
 		*[!0-9]*)
@@ -339,8 +343,7 @@ _is_date_valid()
 
 _parse_month()
 {
-        declare -l m=$1
-        case $m in
+        case $1 in
                 1|jan* )   return 1 ;;
                 2|feb* )   return 2 ;;
                 3|mar* )   return 3 ;;
@@ -358,27 +361,22 @@ _parse_month()
 }
 
 if [ "$1" = "-h" ]; then
-	echo "$PROGRAM - a perpetual calendar
-Usage: $PROGRAM [[mm [yyyy] [-h]
-
--h	show this help
-mm	1-12 or jan-dec
-yyyy	1753-9999"
+	echo "$USAGE"
 	exit 0
 fi
 
 case $# in
 	1)
 		m=$1
-		y=$(date +%Y)
+		y=$(printf "%(%_Y)T")
 		;;
 	2)
 		m=$1
 		y=$2
 		;;
 	*)
-		m=$(date +%m)
-		y=$(date +%Y)
+		m=$(printf "%(%_m)T")
+		y=$(printf "%(%_Y)T")
 esac
 
 _is_date_valid $m $y || exit 1
@@ -389,7 +387,6 @@ _is_leap $y
 _day_of_week $y
 dow=$?
 
-# Load array based on the day number of Jan 1st.
 if [ $leap ]; then
 	[ $dow -eq 0 ] && ((dow=7))
 	case $((--dow)) in
