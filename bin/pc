@@ -245,7 +245,7 @@ _print_month()
 
         _center 21 "${months[m]} $y"
 
-        echo "Su Mo Tu We Th Fr Sa"
+        printf "%s\n" "Su Mo Tu We Th Fr Sa"
 
 	for ((i=0; i<126; ((i+=21)) ))
 	do
@@ -253,11 +253,11 @@ _print_month()
 		do
 			if [ "$d" = "${cal:n:3}" ]; then
 				case ${#d} in
-					1) echo -n "$(tput smso)${cal:n:1}$(tput rmso)" ;;
-					3) echo -n "$(tput smso)${cal:n:2}$(tput rmso) " ;;
+					1) printf "\e[7m${cal:n:1}\e[27m" ;;
+					3) printf "\e[7m${cal:n:2}\e[27m " ;;
 				esac
 			else
-			echo -n "${cal:n:3}"
+			printf "${cal:n:3}"
 			fi
 		done
 		echo
@@ -266,8 +266,8 @@ _print_month()
 
 _month_array()
 {
-	if [ $(($1 % 4)) -eq 0 ] && 
-	   [ $(($1 % 100)) -ne 0 ] || 
+	if [ $(($1 % 4)) -eq 0 ] &&
+	   [ $(($1 % 100)) -ne 0 ] ||
 	   [ $(($1 % 400)) -eq 0 ]; then
 		len=("" 31 29 31 30 31 30 31 31 30 31 30 31)
 	else
@@ -277,8 +277,8 @@ _month_array()
 
 _is_leap()
 {
-        if [ $(($1 % 4)) -eq 0 ] && 
-           [ $(($1 % 100)) -ne 0 ] || 
+        if [ $(($1 % 4)) -eq 0 ] &&
+           [ $(($1 % 100)) -ne 0 ] ||
            [ $(($1 % 400)) -eq 0 ]; then
                 leap=1
         fi
@@ -393,6 +393,7 @@ if [ "$1" = "--help" ]; then
 	exit 0
 fi
 
+unset no_highlight
 if [ "$1" = "-h" ]; then
 	no_highlight=1
 	shift
