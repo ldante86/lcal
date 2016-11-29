@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/usr/bin/ksh
 #
 # SCRIPT: pc
 # AUTHOR: Luciano D. Cecere
