@@ -325,7 +325,7 @@ _is_month_valid()
 
 _is_date_valid()
 {
-	ex= m=
+	ex=
 
 	case $1 in
 		*[!0-9]*)
