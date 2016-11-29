@@ -11,6 +11,6 @@
 * Make a config file, locales, appointments, etc.
 * Add ASCII colors.
 * Make ldoc print function comments.
-* Make a perpetual calendar with arrays.
+* ~~Make a perpetual calendar with arrays.~~ DONE
 
 ## Any contributions or rough-drafts are welcome!
