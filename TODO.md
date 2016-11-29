@@ -13,4 +13,4 @@
 * Make ldoc print function comments.
 * Make a perpetual calendar with arrays.
 
-## Any contribution or rough-drafts are welcome!
+## Any contributions or rough-drafts are welcome!
