@@ -255,7 +255,6 @@ _print_month()
 				case ${#d} in
 					1) echo -n "$(tput smso)${cal:n:1}$(tput rmso)" ;;
 					3) echo -n "$(tput smso)${cal:n:2}$(tput rmso) " ;;
-					2) echo -n "$(tput smso)${cal:n:3}$(tput rmso)" ;;
 				esac
 			else
 			echo -n "${cal:n:3}"
