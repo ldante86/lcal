@@ -232,7 +232,6 @@ mm      1-12 or jan-dec
 yyyy    1753-9999
 "
 
-
 _center()
 {
         printf "%*s\n" $(( (${1} + ${#2}) / 2)) "$2"
@@ -249,8 +248,31 @@ _print_month()
 
 	for ((i=0; i<126; ((i+=21)) ))
 	do
-		echo "${cal:i:21}"
+		for ((n=i; n<=((i+19)); ((n+=3))))
+		do
+			if [ "$d" = "${cal:n:3}" ]; then
+				case ${#d} in
+					1) echo -n "$(tput smso)${cal:n:1}$(tput rmso)" ;;
+					3) echo -n "$(tput smso)${cal:n:2}$(tput rmso) " ;;
+					2) echo -n "$(tput smso)${cal:n:3}$(tput rmso)" ;;
+				esac
+			else
+			echo -n "${cal:n:3}"
+			fi
+		done
+		echo
 	done
+}
+
+_month_array()
+{
+	if [ $(($1 % 4)) -eq 0 ] && 
+	   [ $(($1 % 100)) -ne 0 ] || 
+	   [ $(($1 % 400)) -eq 0 ]; then
+		len=("" 31 29 31 30 31 30 31 31 30 31 30 31)
+	else
+		len=("" 31 28 31 30 31 30 31 31 30 31 30 31)
+	fi
 }
 
 _is_leap()
@@ -268,6 +290,15 @@ _day_of_week()
         w=$(( (($1 / 4) - ($1 / 100)) + ($1 / 400) + 1 + $1 + mcodes[1] ))
 
         return $((w % 7))
+}
+
+_is_day_valid()
+{
+	_month_array $3
+	if (($2 > ${len[$1]} )) || (($2 < 0)); then
+		echo "$PROGRAM: day out of range"
+		return 1
+	fi
 }
 
 _is_year_valid()
@@ -364,19 +395,35 @@ fi
 
 case $# in
 	1)
-		m=$1
-		y=$(printf "%(%_Y)T")
+		m="$1"
+		d="0"
+		y="$(printf "%(%_Y)T")"
 		;;
 	2)
-		m=$1
-		y=$2
+		m="$1"
+		d="0"
+		y="$2"
+		;;
+	3)
+		m="$1"
+		d="$2"
+		y="$3"
 		;;
 	*)
-		m=$(printf "%(%_m)T")
-		y=$(printf "%(%_Y)T")
+		m="$(printf "%(%_m)T")"
+		d="$(printf "%(%_d)T")"
+		y="$(printf "%(%_Y)T")"
+		;;
 esac
 
 _is_date_valid $m $y || exit 1
+
+_is_day_valid $m $d $y || exit 1
+
+case ${#d} in
+	1) d=" $d " ;;
+	2) d="$d " ;;
+esac
 
 unset leap
 
