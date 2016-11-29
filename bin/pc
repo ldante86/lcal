@@ -227,9 +227,10 @@ PROGRAM="${0##*/}"
 USAGE="$PROGRAM - a perpetual calendar
 Usage: $PROGRAM [[mm [yyyy] [-h]
 
--h      show this help
-mm      1-12 or jan-dec
-yyyy    1753-9999
+-h          disable bolding
+--help      show this help
+mm          1-12 or jan-dec
+yyyy        1753-9999
 "
 
 _center()
@@ -388,9 +389,14 @@ _parse_month()
         esac
 }
 
-if [ "$1" = "-h" ]; then
+if [ "$1" = "--help" ]; then
 	echo "$USAGE"
 	exit 0
+fi
+
+if [ "$1" = "-h" ]; then
+	no_highlight=1
+	shift
 fi
 
 case $# in
@@ -417,6 +423,10 @@ case $# in
 esac
 
 _is_date_valid $m $y || exit 1
+
+if [ $no_highlight ]; then
+	d=0
+fi
 
 _is_day_valid $m $d $y || exit 1
 
