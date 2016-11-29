@@ -73,51 +73,13 @@ _gregorian_array_matrix()
         done
 }
 
-_print_gregorian_monthly_matrix()
-{
-        local m=$1 d=$2 y=$3
-
-        _gregorian_array_matrix $m $y
-
-	echo -n "[["
-
-        for ((i=0; i<${#CALENDAR_DATA[@]}; i++)); do
-                if [ $((i % 7)) -eq 0 ] && [ $i -ne 0 ]; then
-			echo "]"
-			echo -n " ["
-		fi
-		echo -n "(${CALENDAR_DATA[i]} $((i % 7))),"
-        done
-
-        echo "]]"
-}
-
-_print_gregorian_yearly_matrix()
-{
-        local m=$1 d=$2 y=$3
-
-	echo  "[["
-
-	for n in {1..12}
-	do
-		_print_gregorian_monthly_matrix $n $d $y
-	done
-
-	echo  "]]"
-}
-
 _print_gregorian_string()
 {
         local m=$1 d=$2 y=$3
 
         _gregorian_array_matrix $m $y
 
-#        echo -n "[["
-
         for ((i=0; i<${#CALENDAR_DATA[@]}-7; i++)); do
-#                if [ $((i % 7)) -eq 0 ] && [ $i -ne 0 ]; then
-#echo
-#                fi
                 echo -n "${CALENDAR_DATA[i]} "
         done
 
@@ -134,8 +96,8 @@ _print_gregorian_string_yearly()
 	done
 }
 
-leap_cycle=( LEAP_CYCLE0 LEAP_CYCLE1 LEAP_CYCLE2 LEAP_CYCLE3 LEAP_CYCLE4 LEAP_CYCLE5 LEAP_CYCLE6 )
-non_leap_cycle=( NON_LEAP_CYCLE0 NON_LEAP_CYCLE1 NON_LEAP_CYCLE2 NON_LEAP_CYCLE3 NON_LEAP_CYCLE4 NON_LEAP_CYCLE5 NON_LEAP_CYCLE6 )
+leap_cycle=( leap_cycle{0..6} )
+non_leap_cycle=( non_leap_cycle{0..6} )
 
 >arrays
 
@@ -145,7 +107,7 @@ do
 	echo "${non_leap_cycle[t]}=("
 	_print_gregorian_string_yearly 1 1 $x
 	echo ")"
-	((t++))
+	((++t))
 done >> arrays
 
 t=0
@@ -154,6 +116,6 @@ do
 	echo "${leap_cycle[t]}=("
 	_print_gregorian_string_yearly 1 1 $x
 	echo ")"
-	((t++))
+	((++t))
 done >> arrays
 
