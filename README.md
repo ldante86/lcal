@@ -96,15 +96,22 @@ For example:
 --discordian         --help               --julian             --next               --orthodox           --show-week-numbers  --week-number
 ````
 
+### OTHER FILES
+**pc** - a perpetual calendar generator.
+
+Using arrays of the 14 possible calendars (7 common years, 7 leap years) and basic functions taken from **lcal** itself, **pc** can generate any monthly calendar. It is fast and lightweight, and unlike **lcal**, **pc** is compatable with the Korn Shell.
+
 ### BUGS
 
 So far, **lcal** does not account for the Gregorian Reformation. so the year range is currently **1753 - 9999**. The algorithm I used for calculating the day of week does not use Julian Day Numbers -- which it should.
+
+Development scripts for **pc** can be found in *dev/perpetual-scripts*
 
 ### VERSION
 0.0.1
 
 ### SEE ALSO
-cal(1), ncal, gcal, ccal, when
+cal, ncal, gcal, ccal, when
 
 ### LICENSE
 **(c) 2014-2016 Luciano D. Cecere - ldante86@aol.com**
