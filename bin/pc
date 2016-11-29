@@ -295,8 +295,8 @@ _day_of_week()
 _is_day_valid()
 {
 	_month_array $3
-	if (($2 > ${len[$1]} )) || (($2 < 0)); then
-		echo "$PROGRAM: day out of range"
+	if (($2 > len[$1] )) || (($2 < 0)); then
+		echo "$PROGRAM: day out of range [1-${len[$1]}]"
 		return 1
 	fi
 }
