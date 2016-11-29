@@ -1,5 +1,7 @@
 ## lcal - display a calendar
 
+<a href="https://codeclimate.com/github/ldante86/lcal"><img src="https://codeclimate.com/github/ldante86/lcal/badges/gpa.svg" /></a> <a href="https://codeclimate.com/github/ldante86/lcal/coverage"><img src="https://codeclimate.com/github/ldante86/lcal/badges/coverage.svg" /></a> <a href="https://codeclimate.com/github/ldante86/lcal"><img src="https://codeclimate.com/github/ldante86/lcal/badges/issue_count.svg" /></a>
+
 ### DESCRIPTION
 **lcal** is a command-line calendar similar to cal/ncal. This program produces Gregorian and Julian calendars, an HTML 5 calendar, an ncal formatted calendar, weeknumbers, Discordian dates, dates of Easter (Western, Orthodox, Orthodox-Julian), monthly and yearly calendars, and Julian Day Number conversions.
 
