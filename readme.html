@@ -1,4 +1,5 @@
 <h2 id="lcal---display-a-calendar">lcal - display a calendar</h2>
+<p><a href="https://codeclimate.com/github/ldante86/lcal"><img src="https://codeclimate.com/github/ldante86/lcal/badges/gpa.svg" /></a> <a href="https://codeclimate.com/github/ldante86/lcal"><img src="https://codeclimate.com/github/ldante86/lcal/badges/issue_count.svg" /></a></p>
 <h3 id="description">DESCRIPTION</h3>
 <p><strong>lcal</strong> is a command-line calendar similar to cal/ncal. This program produces Gregorian and Julian calendars, an HTML 5 calendar, an ncal formatted calendar, weeknumbers, Discordian dates, dates of Easter (Western, Orthodox, Orthodox-Julian), monthly and yearly calendars, and Julian Day Number conversions.</p>
 <h3 id="usage">USAGE</h3>
@@ -116,11 +117,20 @@
 <span class="kw">--date-diff</span>          --easter             --html               --month              --no-highlight       --orthodox-julian    --three              --year
 <span class="kw">--day-of-week</span>        --gregorian-to-jdn   --jdn-to-gregorian   --ncal               --one                --previous           --version
 <span class="kw">--discordian</span>         --help               --julian             --next               --orthodox           --show-week-numbers  --week-number</code></pre>
+<h3 id="other-files">OTHER FILES</h3>
+<ul>
+<li><p><strong>pc</strong> - a perpetual calendar generator.</p>
+<p>Using arrays of the 14 possible calendars (7 common years, 7 leap years) and basic functions taken from <strong>lcal</strong> itself, <strong>pc</strong> can generate any monthly calendar. It is fast and lightweight, and unlike <strong>lcal</strong>, <strong>pc</strong> is compatable with the Korn Shell.</p>
+<p>Development scripts for <strong>pc</strong> can be found in <em>dev/perpetual-scripts</em></p></li>
+<li><p><strong>dcal</strong> - print the Discordian calendar.</p>
+<p>This script prints a formatted calendar based on the Discordian seasons. See the <a href="https://github.com/ldante86/lcal/blob/master/dev/discordian/README.md">README</a> for <strong>dcal</strong> for more information.</p></li>
+</ul>
 <h3 id="bugs">BUGS</h3>
 <p>So far, <strong>lcal</strong> does not account for the Gregorian Reformation. so the year range is currently <strong>1753 - 9999</strong>. The algorithm I used for calculating the day of week does not use Julian Day Numbers -- which it should.</p>
+<p>See: <a href="https://github.com/ldante86/lcal/blob/master/BUGS.md">BUGS</a></p>
 <h3 id="version">VERSION</h3>
 <p>0.0.1</p>
 <h3 id="see-also">SEE ALSO</h3>
-<p>cal(1), ncal, gcal, ccal, when</p>
+<p>cal, ddate, ncal, gcal, ccal, when</p>
 <h3 id="license">LICENSE</h3>
 <p><strong>(c) 2014-2016 Luciano D. Cecere - ldante86@aol.com</strong></p>
