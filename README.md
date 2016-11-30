@@ -1,6 +1,6 @@
 ## lcal - display a calendar
 
-<a href="https://codeclimate.com/github/ldante86/lcal"><img src="https://codeclimate.com/github/ldante86/lcal/badges/gpa.svg" /></a> <a href="https://codeclimate.com/github/ldante86/lcal/coverage"><img src="https://codeclimate.com/github/ldante86/lcal/badges/coverage.svg" /></a> <a href="https://codeclimate.com/github/ldante86/lcal"><img src="https://codeclimate.com/github/ldante86/lcal/badges/issue_count.svg" /></a>
+<a href="https://codeclimate.com/github/ldante86/lcal"><img src="https://codeclimate.com/github/ldante86/lcal/badges/gpa.svg" /></a> <a href="https://codeclimate.com/github/ldante86/lcal"><img src="https://codeclimate.com/github/ldante86/lcal/badges/issue_count.svg" /></a>
 
 ### DESCRIPTION
 **lcal** is a command-line calendar similar to cal/ncal. This program produces Gregorian and Julian calendars, an HTML 5 calendar, an ncal formatted calendar, weeknumbers, Discordian dates, dates of Easter (Western, Orthodox, Orthodox-Julian), monthly and yearly calendars, and Julian Day Number conversions.
@@ -103,6 +103,10 @@ For example:
 
 Using arrays of the 14 possible calendars (7 common years, 7 leap years) and basic functions taken from **lcal** itself, **pc** can generate any monthly calendar. It is fast and lightweight, and unlike **lcal**, **pc** is compatable with the Korn Shell.
 
+**dcal** - print the Discordian calendar.
+
+This script prints a formatted calendar based on the Discordian seasons. See the [README](https://github.com/ldante86/lcal/blob/master/dev/discordian/README.md) for **dcal** for more information.
+
 ### BUGS
 
 So far, **lcal** does not account for the Gregorian Reformation. so the year range is currently **1753 - 9999**. The algorithm I used for calculating the day of week does not use Julian Day Numbers -- which it should.
@@ -113,7 +117,7 @@ Development scripts for **pc** can be found in *dev/perpetual-scripts*
 0.0.1
 
 ### SEE ALSO
-cal, ncal, gcal, ccal, when
+cal, ddate, ncal, gcal, ccal, when
 
 ### LICENSE
 **(c) 2014-2016 Luciano D. Cecere - ldante86@aol.com**
