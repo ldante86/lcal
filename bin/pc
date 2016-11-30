@@ -253,11 +253,11 @@ _print_month()
 		do
 			if [ "$d" = "${cal:n:3}" ]; then
 				case ${#d} in
-					1) printf "\e[7m${cal:n:1}\e[27m" ;;
-					3) printf "\e[7m${cal:n:2}\e[27m " ;;
+					1) printf "\e[7m%s\e[27m" "${cal:n:1}";;
+					3) printf "\e[7m%s\e[27m " "${cal:n:2}";;
 				esac
 			else
-			printf "${cal:n:3}"
+			printf "%s" "${cal:n:3}"
 			fi
 		done
 		echo
