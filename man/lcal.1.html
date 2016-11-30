@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+<title>lcal man page</title>
+<meta name="generator" content="roffit">
+<STYLE type="text/css">
+P.level0 {
+ padding-left: 2em;
+}
+
+P.level1 {
+ padding-left: 4em;
+}
+
+P.level2 {
+ padding-left: 6em;
+}
+
+span.emphasis {
+ font-style: italic;
+}
+
+span.bold {
+ font-weight: bold;
+}
+
+span.manpage {
+ font-weight: bold;
+}
+
+h2.nroffsh {
+ background-color: #e0e0e0;
+}
+
+span.nroffip {
+ font-weight: bold;
+ font-size: 120%;
+ font-family: monospace;
+}
+
+p.roffit {
+ text-align: center;
+ font-size: 80%;
+}
+</STYLE>
+</head><body>
+
+<p class="level0">
+<p class="level0"><a name="NAME"></a><h2 class="nroffsh">NAME</h2>
+<p class="level0">lcal - display a calendar. 
+<p class="level0"><a name="SYNOPSIS"></a><h2 class="nroffsh">SYNOPSIS</h2>
+<p class="level0"><span Class="bold">lcal</span> [options] [month] [day] [year] 
+<p class="level0">
+<p class="level0"><a name="DESCRIPTION"></a><h2 class="nroffsh">DESCRIPTION</h2>
+<p class="level0"><span Class="bold">lcal</span> is a command-line calendar similar to <span Class="bold">cal</span> and <span Class="bold">ncal.</span> 
+<p class="level0"><a name="OPTIONS"></a><h2 class="nroffsh">OPTIONS</h2>
+<p class="level0"><span Class="bold"></span> 
+<p class="level0"><a name="-d"></a><span class="nroffip">-d --day-of-week</span> 
+<p class="level1">Show day-name for date. <span Class="bold"></span> 
+<p class="level0"><a name="-e"></a><span class="nroffip">-e --easter</span> 
+<p class="level1">Show the date for Easter (Western). <span Class="bold"></span> 
+<p class="level0"><a name="-h"></a><span class="nroffip">-h --no-highlight</span> 
+<p class="level1">Disable highlighting. <span Class="bold"></span> 
+<p class="level0"><a name="-j"></a><span class="nroffip">-j --julian</span> 
+<p class="level1">Show Julian calendar. Days are one based - Dec 31st is day 365 (or 366 if year is a leap year). <span Class="bold"></span> 
+<p class="level0"><a name="-m"></a><span class="nroffip">-m --month</span> 
+<p class="level1">Show calendar for month. A year may be the next parameter. <span Class="bold"></span> 
+<p class="level0"><a name="-n"></a><span class="nroffip">-n --next</span> 
+<p class="level1">Show next month's calendar. <span Class="bold"></span> 
+<p class="level0"><a name="-o"></a><span class="nroffip">-o --orthodox</span> 
+<p class="level1">Show the date for Easter (Eastern Orthodox). <span Class="bold"></span> 
+<p class="level0"><a name="-p"></a><span class="nroffip">-p --previous</span> 
+<p class="level1">Show last month's calendar. <span Class="bold"></span> 
+<p class="level0"><a name="-w"></a><span class="nroffip">-w --week-number</span> 
+<p class="level1">Show week number. <span Class="bold"></span> 
+<p class="level0"><a name="-x"></a><span class="nroffip">-x --date-diff</span> 
+<p class="level1">Show time between two dates. This option takes either 3 parameters or 6, as in MM DD YYYY MM DD YYYY or MM DD YYYY. If three, the current date is computed against it; if six, one date is computed against the other. <span Class="bold"></span> 
+<p class="level0"><a name="-y"></a><span class="nroffip">-y --year</span> 
+<p class="level1">Show yearly calendar. <span Class="bold"></span> 
+<p class="level0"><a name="-D"></a><span class="nroffip">-D --discordian</span> 
+<p class="level1">Show date according to the Disordian calendar. <span Class="bold"></span> 
+<p class="level0"><a name="-G"></a><span class="nroffip">-G --gregorian-to-jdn</span> 
+<p class="level1">Convert a Gregorian date to the Julian Day Number (jdn). <span Class="bold"></span> 
+<p class="level0"><a name="-H"></a><span class="nroffip">-H --html</span> 
+<p class="level1">Generate an HTML calendar. Use <a class="bold" href="#-h">-h --html</a> to turn off highlighting. Output must be redirected to a file. <span Class="bold"></span> 
+<p class="level0"><a name="-J"></a><span class="nroffip">-J --jdn-to-gregorian</span> 
+<p class="level1">Convert a Julian Day Number (jdn) to Gregorian. <span Class="bold"></span> 
+<p class="level0"><a name="-N"></a><span class="nroffip">-N --ncal</span> 
+<p class="level1">Show the calendar in <span Class="bold">ncal</span> format. <span Class="bold"></span> 
+<p class="level0"><a name="-O"></a><span class="nroffip">-O --orthodox-julian</span> 
+<p class="level1">Show the date for Orthodox Easter according the the Julian Calendar. <span Class="bold"></span> 
+<p class="level0"><a name="-V"></a><span class="nroffip">-V --version</span> 
+<p class="level1">Show version information. <span Class="bold"></span> 
+<p class="level0"><a name="-W"></a><span class="nroffip">-W --show-week-numbers</span> 
+<p class="level1">Show week numbers next to default calendar. <span Class="bold"></span> 
+<p class="level0"><a name="-1"></a><span class="nroffip">-1 --one</span> 
+<p class="level1">Show only the current calendar. This is the default. <span Class="bold"></span> 
+<p class="level0"><a name="-3"></a><span class="nroffip">-3 --three</span> 
+<p class="level1">Show last month, this month and next month. <span Class="bold"></span> 
+<p class="level0"><a name="--help"></a><span class="nroffip">--help</span> 
+<p class="level1">Show usage information. 
+<p class="level1"><a name="PARAMETERS"></a><h2 class="nroffsh">PARAMETERS</h2>
+<p class="level0">Most flags can take a date string as an argument. A single parameter is either a <span Class="bold">month</span> -- this will print the month for the current year -- or it is a <span Class="bold">year</span> -- this will print the yearly calendarfor the specified year. Two parameters are <span Class="bold">month </span> and <span Class="bold">year</span> -- this will print the month for the specified year. Three parameters are <span Class="bold">month</span> , <span Class="bold">day</span> and <span Class="bold">year</span> -- this will print the specified calendar with the day highlighted. 
+<p class="level0"><span Class="bold">month</span> can be numbers [ <span Class="bold">1-12</span> ], or three or more letters of the month name: <span Class="bold">jan</span> , <span Class="bold">feb</span> , <span Class="bold">mar</span> , etc. 
+<p class="level0">The year range is currently <span Class="bold">1753 - 9999</span> 
+<p class="level0">
+<p class="level0">The <a class="bold" href="#-m">-m</a> flag is the same as <span Class="bold">month</span> without the flag. A <span Class="bold">year</span> can be added after <span Class="bold">month</span> 
+<p class="level0">
+<p class="level0">To disable highlighting for <span Class="bold">--html</span> , use <a class="bold" href="#-h">-h</a> before this flag. 
+<p class="level0">Flags <a class="bold" href="#-1">-1</a> , <a class="bold" href="#-n">-n</a> and <a class="bold" href="#-p">-p</a> stop reading arguments after them. 
+<p class="level0"><a name="AUTHOR"></a><h2 class="nroffsh">AUTHOR</h2>
+<p class="level0">The utility lcal and this manual were written by Luciano D. Cecere 
+<p class="level0"><a name="LICENSE"></a><h2 class="nroffsh">LICENSE</h2>
+<p class="level0">Copyright (C) 2014-2016 Luciano D. Cecere &lt;Ldante86@aol.com&gt; 
+<p class="level0">Released under the terms of the GNU General Public License, version 2 
+<p class="level0">This is free software; see the source for copying conditions. There is NO warranty, without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+<p class="level0"><a name="SEE"></a><h2 class="nroffsh">SEE ALSO</h2>
+<p class="level0"><span Class="bold">cal(1), ddate(1), ncal(1), gcal(1)</span> <p class="roffit">
+ This HTML page was made with <a href="http://daniel.haxx.se/projects/roffit/">roffit</a>.
+</body></html>
