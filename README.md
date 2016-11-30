@@ -99,15 +99,15 @@ For example:
 ````
 
 ### OTHER FILES
-**pc** - a perpetual calendar generator.
+* **pc** - a perpetual calendar generator.
 
-Using arrays of the 14 possible calendars (7 common years, 7 leap years) and basic functions taken from **lcal** itself, **pc** can generate any monthly calendar. It is fast and lightweight, and unlike **lcal**, **pc** is compatable with the Korn Shell.
+	Using arrays of the 14 possible calendars (7 common years, 7 leap years) and basic functions taken from **lcal** itself, **pc** can generate any monthly calendar. It is fast and lightweight, and unlike **lcal**, **pc** is compatable with the Korn Shell.
 
-Development scripts for **pc** can be found in *dev/perpetual-scripts*
+	Development scripts for **pc** can be found in *dev/perpetual-scripts*
 
-**dcal** - print the Discordian calendar.
+* **dcal** - print the Discordian calendar.
 
-This script prints a formatted calendar based on the Discordian seasons. See the [README](https://github.com/ldante86/lcal/blob/master/dev/discordian/README.md) for **dcal** for more information.
+	This script prints a formatted calendar based on the Discordian seasons. See the [README](https://github.com/ldante86/lcal/blob/master/dev/discordian/README.md) for **dcal** for more information.
 
 ### BUGS
 
