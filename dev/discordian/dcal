@@ -1,0 +1,201 @@
+#!/bin/bash -
+#
+# SCRIPT: dcal
+# AUTHOR: Luciano D. Cecere
+# DATE: 11/29/2016-04:59:55 PM
+########################################################################
+#
+# dcal - print the Discordian calendar
+# Copyright (C) 2016 Luciano D. Cecere <ldante86@aol.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+########################################################################
+
+PROGRAM="${0##*/}"
+
+_month_array()
+{
+        if (($1 % 4 == 0 )) &&
+           (($1 % 100 == 0 )) ||
+           (($1 % 400 == 0 )); then
+                len=("" 31 29 31 30 31 30 31 31 30 31 30 31)
+        else
+                len=("" 31 28 31 30 31 30 31 31 30 31 30 31)
+        fi
+}
+
+_discordian_date()
+{
+	if (( $# != 3 )); then
+		echo "Invalid date"
+		exit 1
+	fi
+
+	m=$1
+	d=$2
+	y=$3
+	dy=$((y + 1166))
+
+	if (( m > 12 )); then
+		echo "Month ouf of range of year"
+		exit 1
+	fi
+
+	_month_array $y
+	if (( d > len[m] )) || (( d <= 0 )); then
+		echo "Day out of range of month - [1-${len[m]}]"
+		exit 1
+	fi
+
+	unset tib
+	if (( len[m] == 29 )) && (( m == 2 )) && (( d == 29 )); then
+		tib=1
+	fi
+
+	days=$d
+
+	for (( x=1; x<$m; x++ ))
+	do
+		((days+=len[x]))
+	done
+
+	doy=$days
+
+	if (( len[2] == 29 )) && (( doy >= 60 )); then
+		((--doy))
+	fi
+
+	seasonday=$(( doy % 73 ))
+	if (( seasonday == 0 )); then
+		seasonday=73
+	fi
+
+        seasons=(Chaos Discord Confusion Bureaucracy "The Aftermath")
+	case $doy in
+		73|146|219|291|365)
+			season="${seasons[ $(( doy / 73)) - 1 ]}" ;;
+		*)
+			season="${seasons[ $(( doy / 73)) ]}" ;;
+	esac
+}
+
+_discordian_array()
+{
+	disc=()
+	case $season in
+		Chaos)
+			true
+			;;
+		Discord)
+			disc+=("     " "     " "     ")
+			;;
+		Confusion)
+			disc+=("     ")
+			;;
+		Bureaucracy)
+			disc+=("     " "     " "     " "     ")
+			;;
+		"The Aftermath")
+			disc+=("     " "     ")
+			;;
+	esac
+
+	for (( i=1; i<74; i++ ))
+	do
+		if (( i < 10 )); then
+			if (( i == 5 )); then
+				disc+=("  *5 ")
+			else
+				disc+=("   $i ")
+			fi
+		elif (( i == 50 )); then
+			disc+=(" *50 ")
+		else
+			disc+=("  $i ")
+		fi
+	done
+}
+
+_print_discordian_calendar()
+{
+	_discordian_date "$@"
+	_discordian_array
+
+	today=$d
+	d=$seasonday
+	case ${#d} in
+		1)
+			d="   $d"
+			;;
+		2)
+			d="  $d"
+			;;
+	esac
+
+	unset no_highlight
+	if [ $tib ]; then
+		no_highlight=1
+	fi
+
+	case $seasonday in
+		5)
+			d="*5 "
+			;;
+		50)
+			d="*50"
+			;;
+	esac
+
+	echo "     $season $dy"
+	echo "  SM   BT   PD   PP   SO"
+
+	for (( i=0; i<${#disc[@]}; i++ ))
+	do
+		if (( i % 5 == 0 )) && (( i != 0 )); then
+			printf "\n"
+		fi
+		if [ "$d " = "${disc[i]}" ]; then
+			printf "\e[7m%s\e[27m" "${disc[i]}"
+		else
+			printf "%s" "${disc[i]}"
+		fi
+	done
+	echo
+}
+
+case $# in
+        1)
+                m="$1"
+                d="$(printf "%(%_d)T")"
+                y="$(printf "%(%_Y)T")"
+                ;;
+        2)
+                m="$1"
+                d="$(printf "%(%_d)T")"
+                y="$2"
+                ;;
+        3)
+                m="$1"
+                d="$2"
+                y="$3"
+                ;;
+        *)
+                m="$(printf "%(%_m)T")"
+                d="$(printf "%(%_d)T")"
+                y="$(printf "%(%_Y)T")"
+                ;;
+esac
+
+_print_discordian_calendar $m $d $y
