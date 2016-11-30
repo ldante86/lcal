@@ -94,21 +94,22 @@ _discordian_date()
 _discordian_array()
 {
 	disc=()
+	space="     " # 5 spaces
 	case $season in
 		Chaos)
 			true
 			;;
 		Discord)
-			disc+=("     " "     " "     ")
+			disc+=("$space" "$space" "$space")
 			;;
 		Confusion)
-			disc+=("     ")
+			disc+=("$space")
 			;;
 		Bureaucracy)
-			disc+=("     " "     " "     " "     ")
+			disc+=("$space" "$space" "$space" "$space")
 			;;
 		"The Aftermath")
-			disc+=("     " "     ")
+			disc+=("$space" "$space" )
 			;;
 	esac
 
