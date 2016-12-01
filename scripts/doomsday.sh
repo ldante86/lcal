@@ -7,6 +7,32 @@
 # http://homer.freeshell.org/dd.cgi?date=11%2F30%2F2016
 #
 
-year="${1:-$(date +%Y)}"
+y="${1:-$(date +%Y)}"
 
-echo "Doomsday for $year is: $(lcal -d 4 4 $year)"
+days=("" Monday Tuesday Wednesday Thursday Friday Saturday Sunday)
+
+_base_doomsday()
+{
+        case $1 in
+                1500|1900|2300)  echo 3 ;;
+                1600|2000|2400)  echo 2 ;;
+                1700|2100|2500)  echo 0 ;;
+                1800|2200|2500)  echo 5 ;;
+        esac
+}
+
+_doomsday()
+{
+        local cent="${1:0:2}00"
+
+        local year="${1:2}"
+
+        local base="$(_base_doomsday $cent)"
+
+        echo ${days[$(( (base + year + ( year / 4 )) % 7 ))]}
+
+}
+
+echo "Doomsday for $y is: $(_doomsday $y)"
+
+#echo "Doomsday for $year is: $(lcal -d 4 4 $year)"
