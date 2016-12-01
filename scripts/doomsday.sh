@@ -7,9 +7,11 @@
 # http://homer.freeshell.org/dd.cgi?date=11%2F30%2F2016
 #
 
-y="${1:-$(date +%Y)}"
+#m="${1:-$(date +%_m)}"
+#d="${2:-$(date +%_d)}"
+y="${3:-$(date +%Y)}"
 
-days=("" Monday Tuesday Wednesday Thursday Friday Saturday Sunday)
+days=(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
 
 _base_doomsday()
 {
@@ -35,4 +37,3 @@ _doomsday()
 
 echo "Doomsday for $y is: $(_doomsday $y)"
 
-#echo "Doomsday for $year is: $(lcal -d 4 4 $year)"
