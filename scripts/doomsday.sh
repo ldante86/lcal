@@ -11,6 +11,21 @@ y="${1:-$(date +%Y)}"
 
 days=(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
 
+_ddates()
+{
+	case $1 in
+		1)  echo "3/4" ;;
+		2)  echo "28/29" ;;
+		3)  echo 0 ;;
+		5)  echo 9 ;;
+		7)  echo 11 ;;
+		9)  echo 5 ;;
+		11) echo 7 ;;
+		4|6|8|10|12)  echo $1 ;;
+	esac
+
+}
+
 _base_doomsday()
 {
         case $1 in
@@ -41,11 +56,11 @@ _doomsday_2()
 
         local base="$(_base_doomsday $cent)"
 
-	doomsday=$(( base + (((year / 12) + (year % 12) + ((year % 12) / 4)) % 7) ))
+	local doomsday=$(( base + (((year / 12) + (year % 12) + ((year % 12) / 4)) % 7) ))
 
 	if (( doomsday > 7 )); then
-		echo ${days[ $((doomsday - 7)) ]}
+		echo $((doomsday - 7))
 	else
-		echo ${days[doomsday]}
+		echo $doomsday
 	fi
 }
