@@ -1,6 +1,18 @@
 #!/bin/bash -
 
+REGULAR_HEBREW_MONTHS=(Tishrei Marcheshvan Kisleiv Teveis Shevat Adar
+	Nissan Iyar Sivan Tammuz Av Elul)
+
+LEAP_HEBREW_MONTHS=(Tishrei Marcheshvan Kisleiv Teveis Shevat
+	"Adar Rishon" Nissan Iyar Sivan Tammuz Av Elul "Adar Sheini")
+
 HEBREW_EPOC=-1373429
+
+CHALAKIM_IN_HOUR=1080
+HOURS_IN_DAY=24
+DAYS_IN_WEEK=7
+MINUTES_IN_HOUR=60
+CHALAKIM_IN_MINUTE=$((CHALAKIM_IN_HOUR / MINUTES_IN_HOUR))
 
 _is_hebrew_leap_year()
 {
