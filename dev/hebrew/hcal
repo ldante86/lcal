@@ -1,0 +1,18 @@
+#!/bin/bash -
+
+HEBREW_EPOC=-1373429
+
+_is_hebrew_leap_year()
+{
+	if (( ((($1 * 7) + 1) % 19) < 7 )); then
+		return 1
+	else
+		return 0
+	fi
+
+}
+
+_last_hebrew_month()
+{
+	_is_hebrew_leap_year $1 && echo 13 || echo 12
+}
