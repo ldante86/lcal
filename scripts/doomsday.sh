@@ -7,9 +7,7 @@
 # http://homer.freeshell.org/dd.cgi?date=11%2F30%2F2016
 #
 
-#m="${1:-$(date +%_m)}"
-#d="${2:-$(date +%_d)}"
-y="${3:-$(date +%Y)}"
+y="${1:-$(date +%Y)}"
 
 days=(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
 
@@ -31,9 +29,23 @@ _doomsday()
 
         local base="$(_base_doomsday $cent)"
 
-        echo ${days[$(( (base + year + ( year / 4 )) % 7 ))]}
+        echo $(( (base + year + ( year / 4 )) % 7 ))
 
 }
 
-echo "Doomsday for $y is: $(_doomsday $y)"
+_doomsday_2()
+{
+        local cent="${1:0:2}00"
 
+        local year="${1:2}"
+
+        local base="$(_base_doomsday $cent)"
+
+	doomsday=$(( base + (((year / 12) + (year % 12) + ((year % 12) / 4)) % 7) ))
+
+	if (( doomsday > 7 )); then
+		echo ${days[ $((doomsday - 7)) ]}
+	else
+		echo ${days[doomsday]}
+	fi
+}
