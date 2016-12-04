@@ -224,7 +224,7 @@ _main()
 				REQUEST_THREE=1
 				break
 				;;
-			--|-1|--one)
+			--|-|-1|--one)
 				shift $#
 				;;
 			-*)
