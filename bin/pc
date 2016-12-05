@@ -289,7 +289,7 @@ _day_of_week()
         mcodes=(UNUSED 6 2 2 5 0 3 5 1 4 6 2 4)
         w=$(( (($1 / 4) - ($1 / 100)) + ($1 / 400) + 1 + $1 + mcodes[1] ))
 
-        return $((w % 7))
+        echo $((w % 7))
 }
 
 _is_day_valid()
@@ -438,8 +438,8 @@ esac
 unset leap
 
 _is_leap $y
-_day_of_week $y
-dow=$?
+dow=$(_day_of_week $y)
+#dow=$?
 
 if [ $leap ]; then
 	[ $dow -eq 0 ] && ((dow=7))
