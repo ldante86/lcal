@@ -464,4 +464,4 @@ else
 	esac
 fi
 
-_print_month $m $y
+_print_month
