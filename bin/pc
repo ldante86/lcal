@@ -277,11 +277,9 @@ _month_array()
 
 _is_leap()
 {
-        if [ $(($1 % 4)) -eq 0 ] &&
-           [ $(($1 % 100)) -ne 0 ] ||
-           [ $(($1 % 400)) -eq 0 ]; then
-                leap=1
-        fi
+	if ((y % 4 == 0 )) && ((y % 100 != 0 )) || ((y % 400 == 0 )); then
+		leap=1
+	fi
 }
 
 _day_of_week()
