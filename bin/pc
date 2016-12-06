@@ -213,12 +213,14 @@ leap_cycle_6_12="                1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 
 PROGRAM="${0##*/}"
 
 USAGE="$PROGRAM - a perpetual calendar
-Usage: $PROGRAM [[mm [yyyy] [-h]
+Usage: $PROGRAM [[[mm] dd] yyyy] [-h]
 
--h          disable bolding
---help      show this help
-mm          1-12 or jan-dec
-yyyy        1753-9999
+  [mm]          1-12 or jan-dec
+  [dd]          1-28(-31)
+[yyyy]          1753-9999
+
+    -h          disable bolding
+--help          show this help
 "
 
 _center()
