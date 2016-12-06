@@ -101,7 +101,7 @@ For example:
 ### OTHER FILES
 * **pc** - a perpetual calendar generator.
 
-	Using arrays of the 14 possible calendars (7 common years, 7 leap years) and basic functions taken from **lcal** itself, **pc** can generate any monthly calendar. It is fast and lightweight, and unlike **lcal**, **pc** is compatable with the Korn Shell.
+	Using strings of the 14 possible calendars (7 common years, 7 leap years) and basic functions taken from **lcal** itself, **pc** can generate any monthly calendar. It is fast and lightweight, and unlike **lcal**, **pc** is compatable with the Korn Shell.
 
 	Development scripts for **pc** can be found in *dev/perpetual-scripts*
 
