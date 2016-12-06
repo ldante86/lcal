@@ -24,6 +24,7 @@
 ########################################################################
 
 # {type-of-year}_{day-of-week}_{month}
+# Note: day-of-week is the day number of January 1st.
 
 non_leap_cycle_0_x=""
 non_leap_cycle_0_1=" 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31                                                                   "
@@ -253,9 +254,7 @@ _print_month()
 
 _month_array()
 {
-	if [ $(($1 % 4)) -eq 0 ] &&
-	   [ $(($1 % 100)) -ne 0 ] ||
-	   [ $(($1 % 400)) -eq 0 ]; then
+	if (( $1 % 4 == 0 )) && (( $1 % 100 != 0 )) || (( $1 % 400 == 0 )); then
 		len=("" 31 29 31 30 31 30 31 31 30 31 30 31)
 	else
 		len=("" 31 28 31 30 31 30 31 31 30 31 30 31)
@@ -373,16 +372,16 @@ _parse_month()
         esac
 }
 
-if [ "$1" = "--help" ]; then
-	echo "$USAGE"
-	exit 0
-fi
-
-unset no_highlight
-if [ "$1" = "-h" ]; then
-	no_highlight=1
-	shift
-fi
+case "$1" in
+        -h)
+                no_highlight=1
+                shift
+                ;;
+        --help)
+                echo "$USAGE"
+                exit 0
+                ;;
+esac
 
 case $# in
 	1)
