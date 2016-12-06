@@ -8,6 +8,9 @@
 
 Discordian dates are handled by **lcal**
 
+    % lcal --discordian 2 28 2016
+    Today is Prickle-Prickle, the 59th day of Chaos in the YOLD 3182
+
     % lcal --discordian 2 29 2016
     St. Tib's Day, 3182 YOLD
 
