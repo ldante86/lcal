@@ -271,7 +271,6 @@ _is_leap()
 
 _day_of_week()
 {
-#        echo $(( ( (($1 / 4) - ($1 / 100)) + ($1 / 400) + 1 + $1 ) % 7 ))
         mcodes=(UNUSED 6 2 2 5 0 3 5 1 4 6 2 4)
         w=$(( (($1 / 4) - ($1 / 100)) + ($1 / 400) + 1 + $1 + mcodes[1] ))
 
@@ -422,8 +421,8 @@ case ${#d} in
 esac
 
 unset leap
-
 _is_leap $y
+
 dow=$(_day_of_week $y)
 
 if [ $leap ]; then
