@@ -3,11 +3,10 @@
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <meta name="Author" content="Made by 'tree'">
  <meta name="GENERATOR" content="$Version: $ tree v1.6.0 (c) 1996 - 2011 by Steve Baker, Thomas Moore, Francesc Rocher, Kyosuke Tokoro $">
- <title>Directory Tree</title>
 
 </head>
 <body>
-	<h1>Directory Tree</h1><p>
+	<h1>lcal</h1><p>
 	lcal<br>
 	├── lcal<br>
 	│   ├── bin<br>
