@@ -311,12 +311,12 @@ _is_month_valid()
 _is_date_valid()
 {
 	ex=
+	mm=
 
 	case $1 in
 		*[!0-9]*)
-			_parse_month $1
-                        ex=$?
-                        case $ex in
+			mm=$(_parse_month $1)
+                        case $mm in
                         	255)
                                 	echo "$PROGRAM: invalid date"
                                         exit 1
@@ -327,7 +327,7 @@ _is_date_valid()
                                 esac
 				;;
 		*)
-			ex=$1
+			mm=$1
 			shift
 	esac
 
@@ -341,14 +341,14 @@ _is_date_valid()
 		esac
 	done
 
-	set -- $ex $1
+	set -- $mm $1
 	if [ $# -eq 0 ]; then
 		return 0
 	elif [ $# -eq 1 ]; then
-		m=$ex
+		m=$mm
 		_is_month_valid $m || exit 1
 	elif [ $# -eq 2 ]; then
-		m=$ex
+		m=$mm
 		_is_month_valid $m || exit 1
 		_is_year_valid $y || exit 1
 	fi
@@ -357,19 +357,19 @@ _is_date_valid()
 _parse_month()
 {
         case $1 in
-                1|jan* )   return 1 ;;
-                2|feb* )   return 2 ;;
-                3|mar* )   return 3 ;;
-                4|apr* )   return 4 ;;
-                5|may* )   return 5 ;;
-                6|jun* )   return 6 ;;
-                7|jul* )   return 7 ;;
-                8|aug* )   return 8 ;;
-                9|sep* )   return 9 ;;
-                10|oct*)   return 10 ;;
-                11|nov*)   return 11 ;;
-                12|dec*)   return 12 ;;
-                      *)   return 255 ;;
+                1|jan* )   echo 1 ;;
+                2|feb* )   echo 2 ;;
+                3|mar* )   echo 3 ;;
+                4|apr* )   echo 4 ;;
+                5|may* )   echo 5 ;;
+                6|jun* )   echo 6 ;;
+                7|jul* )   echo 7 ;;
+                8|aug* )   echo 8 ;;
+                9|sep* )   echo 9 ;;
+                10|oct*)   echo 10 ;;
+                11|nov*)   echo 11 ;;
+                12|dec*)   echo 12 ;;
+                      *)   echo 255 ;;
         esac
 }
 
