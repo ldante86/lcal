@@ -1,7 +1,8 @@
 <html>
+
 <body>
 	<h1>lcal</h1><p>
-	.<br>
+	lcal<br>
 	├── bin<br>
 	│   ├── cal<br>
 	│   ├── lcal<br>
@@ -36,7 +37,8 @@
 	│   │   ├── matrix<br>
 	│   │   ├── non-leap-cycle.txt<br>
 	│   │   ├── non-leap.sh<br>
-	│   │   └── perpetual-string-arrays<br>
+	│   │   ├── perpetual-string-arrays<br>
+	│   │   └── README.md<br>
 	│   ├── README.md<br>
 	│   └── reformation<br>
 	│   &nbsp;&nbsp;&nbsp; ├── lcal.dev<br>
@@ -75,14 +77,6 @@
 	</p>
 	<p>
 
-13 directories, 56 files
-	<br><br>
-	</p>
-	<hr>
-	<p class="VERSION">
-		 tree v1.6.0 © 1996 - 2011 by Steve Baker and Thomas Moore <br>
-		 HTML output hacked and copyleft © 1998 by Francesc Rocher <br>
-		 Charsets / OS/2 support © 2001 by Kyosuke Tokoro
-	</p>
+13 directories, 57 files
 </body>
 </html>
