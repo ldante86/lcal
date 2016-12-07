@@ -1,9 +1,15 @@
 # Executable files
 
-### lcal - a command-line calendar
+## lcal - a command-line calendar
 
-### pc - a perpetual calendar generator
-	pc [mm [dd [yyyy]]] [-h] [--help]
+## pc - a perpetual calendar generator
 
-### cal - print only the current calendar
-	cal [-h]
+```
+pc [mm [dd [yyyy]]] [-h] [--help]
+```
+
+## cal - print only the current calendar
+
+```
+cal [-h]
+```
