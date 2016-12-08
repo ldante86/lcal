@@ -106,19 +106,21 @@ file=perpetual-strings.txt
 t=0
 for x in 1905 1906 1907 1913 1914 1915 1921
 do
-        if [ "${non_leap_cycle[t]}" = $t ]; then
+        if [ "${non_leap_cycle[t]}" = "$t" ]; then
                 echo "${non_leap_cycle[t]}_${t}=\""
         fi
         _print_gregorian_string_yearly 1 1 $x ${non_leap_cycle[t]}
+	echo
         ((++t))
 done >> $file
 
 t=0
 for x in 1928 1940 1952 1964 1976 1988 2000
 do
-        if [ "${leap_cycle[t]}" = $t ]; then
+        if [ "${leap_cycle[t]}" = "$t" ]; then
                 echo "${leap_cycle[t]}_${t}=\""
         fi
         _print_gregorian_string_yearly 1 1 $x ${leap_cycle[t]}
+	echo
         ((++t))
 done >> $file
