@@ -1,8 +1,5 @@
-<html>
-
-<body>
-	<h1>lcal</h1><p>
-	lcal<br>
+  <h1>lcal</h1><p>
+	.<br>
 	├── bin<br>
 	│   ├── cal<br>
 	│   ├── lcal<br>
@@ -37,8 +34,9 @@
 	│   │   ├── matrix<br>
 	│   │   ├── non-leap-cycle.txt<br>
 	│   │   ├── non-leap.sh<br>
-	│   │   ├── perpetual-string-arrays<br>
-	│   │   └── README.md<br>
+	│   │   ├── perpetual-strings.txt<br>
+	│   │   ├── README.md<br>
+	│   │   └── string-matrix<br>
 	│   ├── README.md<br>
 	│   └── reformation<br>
 	│   &nbsp;&nbsp;&nbsp; ├── lcal.dev<br>
@@ -73,10 +71,5 @@
 	│   ├── lhtml<br>
 	│   └── weeknum_test.sh<br>
 	└── TODO.md<br>
-	<br><br>
-	</p>
-	<p>
 
-13 directories, 57 files
-</body>
-</html>
+13 directories, 58 files
