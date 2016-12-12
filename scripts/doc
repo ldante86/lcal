@@ -10,23 +10,28 @@
 
 FILE="$1"
 
-if [ "x$FILE" = "x" ] || [ ! -e "$FILE" ]; then
+if [ -z "$FILE" ] || [ ! -e "$FILE" ]; then
 	exit 1
 fi
 
-printf "\n%s\n\n" "Function documentation manual for $FILE"
+printf "\n%s\n\n" "# Function documentation manual for $FILE"
 
 while read
 do
 	if [ "${REPLY:0:3}" = "#%%" ]; then
-		echo ----------------------------
+		#echo ----------------------------
 		echo
 		echo -n "Function: "
-		echo -n "$REPLY" | sed 's/#%% //' | awk '{print $2}'
-		echo "$REPLY" | sed 's/#%% //'
+		fn=$(echo "${REPLY}" | sed 's/#%% //' | awk '{print $2}')
+		echo "**${fn}**"
+		echo
+		a=$(echo "$REPLY" | sed 's/#%% //')
+		echo -n "Parameters: **${fn}** "
+		b=$(echo "$a" | cut -d" " -f 3-)
+		echo "*${b}*"
 	fi
 	if [ "${REPLY:0:3}" = "#% " ]; then
-		printf "\t"
+		printf "\n\t"
 		echo "$REPLY" | sed 's/#% //' | sed 's/purpose: //'
 	fi
 done < "$FILE"
