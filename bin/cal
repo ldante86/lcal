@@ -224,12 +224,12 @@ m=$(date +%_m)
 d=$(date +%_d)
 y=$(date +%Y)
 
-if ((y % 4 == 0 )) && ((y % 100 != 0 )) || ((y % 400 == 0 )); then
+if (( y % 4 )) && (( ! y % 100 )) || (( y % 400 )); then
 	leap=1
 fi
 
 mcodes=(UNUSED 6 2 2 5 0 3 5 1 4 6 2 4)
-dow=$(( ( (($y / 4) - ($y / 100)) + ($y / 400) + 1 + $y + mcodes[1] ) % 7 ))
+dow=$(( ( ((y / 4) - (y / 100)) + (y / 400) + 1 + y + mcodes[1] ) % 7 ))
 
 if [ $leap ]; then
 	[ $dow -eq 0 ] && ((dow=7))
