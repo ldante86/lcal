@@ -26,10 +26,11 @@ do
 		echo "**${fn}**"
 		echo
 		a=$(echo "$REPLY" | sed 's/#%% //')
-		echo -n "Parameters: **${fn}** "
+		echo -n "Parameters: "
 		b=$(echo "$a" | cut -d" " -f 3-)
 		echo "*${b}*"
 	fi
+
 	if [ "${REPLY:0:3}" = "#% " ]; then
 		printf "\n\t"
 		echo "$REPLY" | sed 's/#% //' | sed 's/purpose: //'

@@ -4,7 +4,7 @@
 
 Function: **_main**
 
-Parameters: **_main** *flags parameters*
+Parameters: *flags parameters*
 
 	 This function is the starting point of lcal. It processes
 
@@ -14,19 +14,19 @@ Parameters: **_main** *flags parameters*
 
 Function: **_is_year_valid**
 
-Parameters: **_is_year_valid** *year*
+Parameters: *year*
 
 	 return 1 if year is not in range.
 
 Function: **_is_month_valid**
 
-Parameters: **_is_month_valid** *month*
+Parameters: *month*
 
 	 return 1 if month is not in range.
 
 Function: **_is_day_valid**
 
-Parameters: **_is_day_valid** *month day year*
+Parameters: *month day year*
 
 	 return 1 if day is not in range of month
 
@@ -34,7 +34,7 @@ Parameters: **_is_day_valid** *month day year*
 
 Function: **_is_date_valid**
 
-Parameters: **_is_date_valid** *month day year*
+Parameters: *month day year*
 
 	 This function should be called before any other.
 
@@ -48,7 +48,7 @@ Parameters: **_is_date_valid** *month day year*
 
 Function: **_parse_month**
 
-Parameters: **_parse_month** *month*
+Parameters: *month*
 
 	 return month number [1-12] if month was
 
@@ -58,7 +58,7 @@ Parameters: **_parse_month** *month*
 
 Function: **_month_len**
 
-Parameters: **_month_len** *month year*
+Parameters: *month year*
 
 	 Print the length of the month. Calls
 
@@ -66,19 +66,19 @@ Parameters: **_month_len** *month year*
 
 Function: **_is_leap**
 
-Parameters: **_is_leap** *year*
+Parameters: *year*
 
 	 Loads the LEAP variable if year is a leap year.
 
 Function: **_day_of_week**
 
-Parameters: **_day_of_week** *month day year*
+Parameters: *month day year*
 
 	 Print the day number for date. 0 = Sunday, etc.
 
 Function: **_gregorian_array**
 
-Parameters: **_gregorian_array** *month year*
+Parameters: *month year*
 
 	 Loads the CALENDAR_DATA array with correctly
 
@@ -86,7 +86,7 @@ Parameters: **_gregorian_array** *month year*
 
 Function: **_print_gregorian_monthly**
 
-Parameters: **_print_gregorian_monthly** *month day year*
+Parameters: *month day year*
 
 	 Print the Gregorian calendar for date.
 
@@ -94,7 +94,7 @@ Parameters: **_print_gregorian_monthly** *month day year*
 
 Function: **_julian_array**
 
-Parameters: **_julian_array** *month day year*
+Parameters: *month day year*
 
 	 Loads the CALENDAR_DATA array with correctly
 
@@ -102,7 +102,7 @@ Parameters: **_julian_array** *month day year*
 
 Function: **_print_julian_monthly**
 
-Parameters: **_print_julian_monthly** *month day year*
+Parameters: *month day year*
 
 	 Print the Julian calendar for date.
 
@@ -110,7 +110,7 @@ Parameters: **_print_julian_monthly** *month day year*
 
 Function: **_center**
 
-Parameters: **_center** *length "string"*
+Parameters: *length "string"*
 
 	 Center a line of text in a specified width.
 
@@ -118,7 +118,7 @@ Parameters: **_center** *length "string"*
 
 Function: **_ncenter**
 
-Parameters: **_ncenter** *length "string"*
+Parameters: *length "string"*
 
 	 Center a line of text in a specified width.
 
@@ -126,7 +126,7 @@ Parameters: **_ncenter** *length "string"*
 
 Function: **_shift_month_forward**
 
-Parameters: **_shift_month_forward** *month year*
+Parameters: *month year*
 
 	 Moves the month number up by one, or back to one
 
@@ -134,7 +134,7 @@ Parameters: **_shift_month_forward** *month year*
 
 Function: **_shift_month_backward**
 
-Parameters: **_shift_month_backward** *month year*
+Parameters: *month year*
 
 	 Moves the month number back by one, or up to twelve
 
@@ -142,7 +142,7 @@ Parameters: **_shift_month_backward** *month year*
 
 Function: **_day_in_year**
 
-Parameters: **_day_in_year** *day month year*
+Parameters: *day month year*
 
 	 Get the one-based number for date. Day 1 starts
 
@@ -150,7 +150,7 @@ Parameters: **_day_in_year** *day month year*
 
 Function: **_jdn_to_gregorian_date**
 
-Parameters: **_jdn_to_gregorian_date** *jdn*
+Parameters: *jdn*
 
 	 Convert a Julian day number into month, day and
 
@@ -158,7 +158,7 @@ Parameters: **_jdn_to_gregorian_date** *jdn*
 
 Function: **_gregorian_date_to_jdn**
 
-Parameters: **_gregorian_date_to_jdn** *month day year*
+Parameters: *month day year*
 
 	 Convert Gregorian month, day and year into the
 
@@ -166,7 +166,7 @@ Parameters: **_gregorian_date_to_jdn** *month day year*
 
 Function: **_print_ncal_gregorian**
 
-Parameters: **_print_ncal_gregorian** *month day year*
+Parameters: *month day year*
 
 	 Print the Gregorian calendar for date in ncal
 
@@ -174,7 +174,7 @@ Parameters: **_print_ncal_gregorian** *month day year*
 
 Function: **_ncal_array**
 
-Parameters: **_ncal_array** *month day year*
+Parameters: *month day year*
 
 	 Loads the NCAL array with correctly
 
@@ -184,7 +184,7 @@ Parameters: **_ncal_array** *month day year*
 
 Function: **_print_ncal_julian**
 
-Parameters: **_print_ncal_julian** *month day year*
+Parameters: *month day year*
 
 	 Print the Julian calendar for date in ncal
 
@@ -192,19 +192,19 @@ Parameters: **_print_ncal_julian** *month day year*
 
 Function: **_show_week_numbers**
 
-Parameters: **_show_week_numbers** *month day year*
+Parameters: *month day year*
 
 	 print week numbers next to the Gregorian calendar.
 
 Function: **_ordinal**
 
-Parameters: **_ordinal** *number*
+Parameters: *number*
 
 	 Print the ordinal of a number: 1st, 2nd, 3rd, etc.
 
 Function: **_show_discordian_date**
 
-Parameters: **_show_discordian_date** *month day year*
+Parameters: *month day year*
 
 	 Print a date according to the Discordian calendar.
 
@@ -214,19 +214,19 @@ Parameters: **_show_discordian_date** *month day year*
 
 Function: **_print_gregorian_yearly**
 
-Parameters: **_print_gregorian_yearly** *year*
+Parameters: *year*
 
 	 Print the formatted yearly calendar for year.
 
 Function: **_print_gregorian_three_months**
 
-Parameters: **_print_gregorian_three_months** **
+Parameters: **
 
 	 Print last, current and next month on one row.
 
 Function: **_week_number**
 
-Parameters: **_week_number** *month day year*
+Parameters: *month day year*
 
 	 Return week-number of date. If the week-number
 
@@ -234,13 +234,13 @@ Parameters: **_week_number** *month day year*
 
 Function: **_western_pfm_date**
 
-Parameters: **_western_pfm_date** *year*
+Parameters: *year*
 
 	 Find the day number and month of the Paschal Full Moon.
 
 Function: **_orthodox_pfm_date_2**
 
-Parameters: **_orthodox_pfm_date_2** *year*
+Parameters: *year*
 
 	 Find the day number and month of the Paschal Full Moon.
 
@@ -248,7 +248,7 @@ Parameters: **_orthodox_pfm_date_2** *year*
 
 Function: **_western_first_2**
 
-Parameters: **_western_first_2** *year*
+Parameters: *year*
 
 	 Use the first two digits of year to
 
@@ -256,7 +256,7 @@ Parameters: **_western_first_2** *year*
 
 Function: **_orthodox_western_last_2**
 
-Parameters: **_orthodox_western_last_2** *year*
+Parameters: *year*
 
 	 Use the last two digits of year to
 
@@ -264,13 +264,13 @@ Parameters: **_orthodox_western_last_2** *year*
 
 Function: **_show_western_easter**
 
-Parameters: **_show_western_easter** *year*
+Parameters: *year*
 
 	 Find the date of Easter according to the Gregorian calendar.
 
 Function: **_orthodox_first_2**
 
-Parameters: **_orthodox_first_2** *year*
+Parameters: *year*
 
 	 Use the first two digits of year to
 
@@ -278,13 +278,13 @@ Parameters: **_orthodox_first_2** *year*
 
 Function: **_orthodox_pfm_date**
 
-Parameters: **_orthodox_pfm_date** *year*
+Parameters: *year*
 
 	 Find the day number and month of the Paschal Full Moon.
 
 Function: **_orthodox_pfm_date_2**
 
-Parameters: **_orthodox_pfm_date_2** *year*
+Parameters: *year*
 
 	 Find the day number and month of the Paschal Full Moon.
 
@@ -292,7 +292,7 @@ Parameters: **_orthodox_pfm_date_2** *year*
 
 Function: **_convert_to_gregorian**
 
-Parameters: **_convert_to_gregorian** *year*
+Parameters: *year*
 
 	 convert a Julian year to a Gregorian year.
 
@@ -300,7 +300,7 @@ Parameters: **_convert_to_gregorian** *year*
 
 Function: **_show_orthodox_easter**
 
-Parameters: **_show_orthodox_easter** *year*
+Parameters: *year*
 
 	 Find the date of Easter according to the Eastern Orthodox calendar.
 
@@ -308,7 +308,7 @@ Parameters: **_show_orthodox_easter** *year*
 
 Function: **_show_html_calendar**
 
-Parameters: **_show_html_calendar** *month day year*
+Parameters: *month day year*
 
 	 Generate raw html of the specified calendar. A CSS
 
@@ -318,7 +318,7 @@ Parameters: **_show_html_calendar** *month day year*
 
 Function: **_date_diff**
 
-Parameters: **_date_diff** *month day year month day year*
+Parameters: *month day year month day year*
 
 	 Show the time difference between two dates.
 
@@ -328,7 +328,7 @@ Parameters: **_date_diff** *month day year month day year*
 
 Function: **_exit**
 
-Parameters: **_exit** *exit-status*
+Parameters: *exit-status*
 
 	 Clean up the terminal and exit according
 
