@@ -28,7 +28,7 @@ do
 		a=$(echo "$REPLY" | sed 's/#%% //')
 		echo -n "Parameters: "
 		b=$(echo "$a" | cut -d" " -f 3-)
-		echo "*${b}*"
+		echo "*${b:-none}*"
 	fi
 
 	if [ "${REPLY:0:3}" = "#% " ]; then

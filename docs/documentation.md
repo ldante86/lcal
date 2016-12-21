@@ -220,7 +220,7 @@ Parameters: *year*
 
 Function: **_print_gregorian_three_months**
 
-Parameters: **
+Parameters: *none*
 
 	 Print last, current and next month on one row.
 
