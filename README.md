@@ -166,7 +166,7 @@ See: [BUGS](https://github.com/ldante86/lcal/blob/master/BUGS.md)
 
 ## VERSION
 
-0.0.1
+1.0.0
 
 ## SEE ALSO
 
