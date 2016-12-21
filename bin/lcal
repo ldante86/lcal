@@ -589,8 +589,8 @@ _is_leap()
 {
 	local y=$1
 	unset LEAP
-	if [ $((y % 4)) -eq 0 ] && 
-	   [ $((y % 100)) -ne 0 ] || 
+	if [ $((y % 4)) -eq 0 ] &&
+	   [ $((y % 100)) -ne 0 ] ||
 	   [ $((y % 400)) -eq 0 ]; then
 		LEAP=1
 	fi
@@ -1147,9 +1147,9 @@ _print_gregorian_yearly()
 #%  purpose: Print last, current and next month on one row.
 _print_gregorian_three_months()
 {
-	local y=$YEAR m=$MONTH ROW row
+	local ROW row
 
-	_shift_month_backward $m $y
+	_shift_month_backward $MONTH $YEAR
 	_ncenter 21 "${MONTH_NAMES_LONG[MONTH]} $YEAR"
    	_gregorian_array $MONTH $YEAR
 	c1_row1="${CALENDAR_DATA[0]}${CALENDAR_DATA[1]}${CALENDAR_DATA[2]}${CALENDAR_DATA[3]}${CALENDAR_DATA[4]}${CALENDAR_DATA[5]}${CALENDAR_DATA[6]}"
@@ -1159,7 +1159,7 @@ _print_gregorian_three_months()
 	c1_row5="${CALENDAR_DATA[28]}${CALENDAR_DATA[29]}${CALENDAR_DATA[30]}${CALENDAR_DATA[31]}${CALENDAR_DATA[32]}${CALENDAR_DATA[33]}${CALENDAR_DATA[34]}"
 	c1_row6="${CALENDAR_DATA[35]}${CALENDAR_DATA[36]}${CALENDAR_DATA[37]}${CALENDAR_DATA[38]}${CALENDAR_DATA[39]}${CALENDAR_DATA[40]}${CALENDAR_DATA[41]}"
 
-	_shift_month_forward $m $y
+	_shift_month_forward $MONTH $YEAR
 	_ncenter 32 "${MONTH_NAMES_LONG[MONTH]} $YEAR"
    	_gregorian_array $MONTH $YEAR
 	c2_row1="${CALENDAR_DATA[0]}${CALENDAR_DATA[1]}${CALENDAR_DATA[2]}${CALENDAR_DATA[3]}${CALENDAR_DATA[4]}${CALENDAR_DATA[5]}${CALENDAR_DATA[6]}"
@@ -1169,7 +1169,7 @@ _print_gregorian_three_months()
 	c2_row5="${CALENDAR_DATA[28]}${CALENDAR_DATA[29]}${CALENDAR_DATA[30]}${CALENDAR_DATA[31]}${CALENDAR_DATA[32]}${CALENDAR_DATA[33]}${CALENDAR_DATA[34]}"
 	c2_row6="${CALENDAR_DATA[35]}${CALENDAR_DATA[36]}${CALENDAR_DATA[37]}${CALENDAR_DATA[38]}${CALENDAR_DATA[39]}${CALENDAR_DATA[40]}${CALENDAR_DATA[41]}"
 
-	_shift_month_forward $m $y
+	_shift_month_forward $MONTH $YEAR
 	_center 34 "${MONTH_NAMES_LONG[MONTH]} $YEAR"
    	_gregorian_array $MONTH $YEAR
 	c3_row1="${CALENDAR_DATA[0]}${CALENDAR_DATA[1]}${CALENDAR_DATA[2]}${CALENDAR_DATA[3]}${CALENDAR_DATA[4]}${CALENDAR_DATA[5]}${CALENDAR_DATA[6]}"
@@ -1211,7 +1211,7 @@ _week_number()
                 else
                         wn=$((  ((((diy + 1 ) - dow) + 10)) / 7 - 1 ))
                 fi
-        else 
+        else
                 if [ $dow -eq 7 ]; then
                         wn=$((  (((diy - dow) + 10)) / 7 + 1 ))
                 else
@@ -1571,7 +1571,7 @@ td {
 	font-family: Arial;
 	text-align: center;
 	font-size: 25px;
-	width: 82px;    
+	width: 82px;
 	height: 82px;
 	padding: 0px;
 	font-weight: bold; }
@@ -1593,7 +1593,7 @@ td {
 	background-color: #FF0000;
 	font-size: 35px;
 	color: #FFFFFF; }
-	
+
 .today:hover {
 	background-color: #000000;
 	color: #FF0000; }
@@ -1650,19 +1650,19 @@ bottom="\
 			" $d "|"$d ")  printf "\t\t <td class=\"today\">${CALENDAR_DATA[tu]} </td> <!--today-->\n" ;;
 			*)  printf "\t\t <td class=\"weekday\">${CALENDAR_DATA[tu]} </td>\n"
 		esac
-		case "${CALENDAR_DATA[we]}" in 
+		case "${CALENDAR_DATA[we]}" in
 			" $d "|"$d ")  printf "\t\t <td class=\"today\">${CALENDAR_DATA[we]} </td> <!--today-->\n" ;;
 			*)  printf "\t\t <td class=\"weekday\">${CALENDAR_DATA[we]} </td>\n"
 		esac
-		case "${CALENDAR_DATA[th]}" in 
+		case "${CALENDAR_DATA[th]}" in
 			" $d "|"$d ")  printf "\t\t <td class=\"today\">${CALENDAR_DATA[th]} </td> <!--today-->\n" ;;
 			*)  printf "\t\t <td class=\"weekday\">${CALENDAR_DATA[th]} </td>\n"
 		esac
-		case "${CALENDAR_DATA[fr]}" in 
+		case "${CALENDAR_DATA[fr]}" in
 			" $d "|"$d ")  printf "\t\t <td class=\"today\">${CALENDAR_DATA[fr]} </td> <!--today-->\n" ;;
 			*)  printf "\t\t <td class=\"weekday\">${CALENDAR_DATA[fr]} </td>\n"
 		esac
-		case "${CALENDAR_DATA[sa]}" in 
+		case "${CALENDAR_DATA[sa]}" in
 			" $d "|"$d ")  printf "\t\t <td class=\"today\">${CALENDAR_DATA[sa]} </td> </tr> <!--today-->\n" ;;
 			*)  printf "\t\t <td class=\"weekday\">${CALENDAR_DATA[sa]} </td> </tr>\n"
 		esac
@@ -1699,7 +1699,7 @@ _date_diff()
                 3)
                         m1=$1 d1=$2 y1=$3
 			_is_date_valid $m1 $d1 $y1 || _exit 1
-			_parse_month $m1 
+			_parse_month $m1
 			m1=$?
 
                         m2=$MONTH d2=$DAY y2=$YEAR
@@ -1707,7 +1707,7 @@ _date_diff()
                 *)
                         m1=$1 d1=$2 y1=$3
 			_is_date_valid $m1 $d1 $y1 || _exit 1
-			_parse_month $m1 
+			_parse_month $m1
 			m1=$?
 
                         m2=$4 d2=$5 y2=$6
