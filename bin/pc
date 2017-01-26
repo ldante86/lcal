@@ -315,7 +315,7 @@ _is_year_valid()
 
 _is_month_valid()
 {
-	if [ $1 -gt 12 ] || [ $1 -lt 1 ]; then
+	if (( $1 > 12 )) || (( $1 < 1 )); then
 		 echo "$PROGRAM: month out of range [1-12]"
 		return 1
 	fi
@@ -323,9 +323,6 @@ _is_month_valid()
 
 _is_date_valid()
 {
-	ex=
-	mm=
-
 	case $1 in
 		*[!0-9]*)
 			mm=$(_parse_month $1)
