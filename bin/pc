@@ -268,7 +268,7 @@ _print_month()
 
 _month_array()
 {
-	if (( $1 % 4 )) && (( ! $1 % 100 )) || (( $1 % 400 )); then
+	if (( $1 % 4 == 0 )) && (( $1 % 100 != 0 )) || (( $1 % 400 == 0 )); then
 		len=("" 31 29 31 30 31 30 31 31 30 31 30 31)
 	else
 		len=("" 31 28 31 30 31 30 31 31 30 31 30 31)
@@ -437,25 +437,9 @@ dow=$(_day_of_week $y)
 
 if [ $leap ]; then
 	[ $dow -eq 0 ] && ((dow=7))
-	case $((--dow)) in
-		0)	eval cal="\$leap_cycle_0_${m}" ;;
-		1)	eval cal="\$leap_cycle_1_${m}" ;;
-		2)	eval cal="\$leap_cycle_2_${m}" ;;
-		3)	eval cal="\$leap_cycle_3_${m}" ;;
-		4)	eval cal="\$leap_cycle_4_${m}" ;;
-		5)	eval cal="\$leap_cycle_5_${m}" ;;
-		6)	eval cal="\$leap_cycle_6_${m}" ;;
-	esac
+	eval cal="\$leap_cycle_$((--dow))_${m}"
 else
-	case $dow in
-		0)	eval cal="\$non_leap_cycle_0_${m}" ;;
-		1)	eval cal="\$non_leap_cycle_1_${m}" ;;
-		2)	eval cal="\$non_leap_cycle_2_${m}" ;;
-		3)	eval cal="\$non_leap_cycle_3_${m}" ;;
-		4)	eval cal="\$non_leap_cycle_4_${m}" ;;
-		5)	eval cal="\$non_leap_cycle_5_${m}" ;;
-		6)	eval cal="\$non_leap_cycle_6_${m}" ;;
-	esac
+	eval cal="\$non_leap_cycle_${dow}_${m}"
 fi
 
 _print_month

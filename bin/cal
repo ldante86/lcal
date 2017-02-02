@@ -224,7 +224,7 @@ m="$(printf "%(%_m)T")"
 d="$(printf "%(%_d)T")"
 y="$(printf "%(%_Y)T")"
 
-if (( y % 4 == 0 )) && (( y % 100 == 0 )) || (( y % 400 == 0 )); then
+if (( y % 4 == 0 )) && (( y % 100 != 0 )) || (( y % 400 == 0 )); then
 	leap=1
 fi
 
@@ -232,26 +232,26 @@ mcodes=(UNUSED 6 2 2 5 0 3 5 1 4 6 2 4)
 dow=$(( ( ((y / 4) - (y / 100)) + (y / 400) + 1 + y + mcodes[1] ) % 7 ))
 
 if [ $leap ]; then
-	[ $dow -eq 0 ] && ((dow=7))
-	case $((--dow)) in
-		0) cal="${leap_years0[m-1]}" ;;
-		1) cal="${leap_years1[m-1]}" ;;
-		2) cal="${leap_years2[m-1]}" ;;
-		3) cal="${leap_years3[m-1]}" ;;
-		4) cal="${leap_years4[m-1]}" ;;
-		5) cal="${leap_years5[m-1]}" ;;
-		6) cal="${leap_years6[m-1]}" ;;
-	esac
+        [ $dow -eq 0 ] && ((dow=7))
+        case $((--dow)) in
+                0) cal="${leap_years0[m-1]}" ;;
+                1) cal="${leap_years1[m-1]}" ;;
+                2) cal="${leap_years2[m-1]}" ;;
+                3) cal="${leap_years3[m-1]}" ;;
+                4) cal="${leap_years4[m-1]}" ;;
+                5) cal="${leap_years5[m-1]}" ;;
+                6) cal="${leap_years6[m-1]}" ;;
+        esac
 else
-	case $dow in
-		0) cal="${non_leap_years0[m-1]}" ;;
-		1) cal="${non_leap_years1[m-1]}" ;;
-		2) cal="${non_leap_years2[m-1]}" ;;
-		3) cal="${non_leap_years3[m-1]}" ;;
-		4) cal="${non_leap_years4[m-1]}" ;;
-		5) cal="${non_leap_years5[m-1]}" ;;
-		6) cal="${non_leap_years6[m-1]}" ;;
-	esac
+        case $dow in
+                0) cal="${non_leap_years0[m-1]}" ;;
+                1) cal="${non_leap_years1[m-1]}" ;;
+                2) cal="${non_leap_years2[m-1]}" ;;
+                3) cal="${non_leap_years3[m-1]}" ;;
+                4) cal="${non_leap_years4[m-1]}" ;;
+                5) cal="${non_leap_years5[m-1]}" ;;
+                6) cal="${non_leap_years6[m-1]}" ;;
+        esac
 fi
 
 case $1 in
