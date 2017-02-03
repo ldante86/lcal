@@ -232,7 +232,7 @@ mcodes=(UNUSED 6 2 2 5 0 3 5 1 4 6 2 4)
 dow=$(( ( ((y / 4) - (y / 100)) + (y / 400) + 1 + y + mcodes[1] ) % 7 ))
 
 if [ $leap ]; then
-        [ $dow -eq 0 ] && ((dow=7))
+        (( $dow -eq 0 )) && ((dow=7))
         case $((--dow)) in
                 0) cal="${leap_years0[m-1]}" ;;
                 1) cal="${leap_years1[m-1]}" ;;
