@@ -1020,12 +1020,13 @@ _show_week_numbers()
 _ordinal()
 {
 	case ${1:$((${#1}-2)):2} in
-		[2-9][1]|1  )  echo ${1}st ;;
-		[2-9][2]|2  )  echo ${1}nd ;;
-		[2-9][3]    )  echo ${1}rd ;;
+		[2-9][1]|01  )  echo ${1}st ;;
+		[2-9][2]|02  )  echo ${1}nd ;;
+		[2-9][3]|03  )  echo ${1}rd ;;
 		[1][1-9]|*  )  echo ${1}th ;;
 	esac
 }
+
 
 #%% usage: _show_discordian_date month day year
 #%  purpose: Print a date according to the Discordian calendar.
