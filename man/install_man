@@ -2,7 +2,7 @@
 
 MANLOC=/usr/share/man/man
 
-#set -- lcal.1
+set -- lcal.1
 
 MANPAGE="$1"
 SECTION=${2:-1}
@@ -50,4 +50,4 @@ else
 	/bin/gunzip ${MANPAGE}
 fi
 
-echo complete
+echo "...complete - to access use: man $MANPAGE"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/ksh
 #
 # SCRIPT: pc
 # AUTHOR: Luciano D. Cecere
@@ -228,7 +228,7 @@ USAGE="$PROGRAM - a perpetual calendar
 Usage: $PROGRAM [[[mm] dd] yyyy] [-h]
 
   [mm]          1-12 or jan-dec
-  [dd]          1-28(-31)
+  [dd]          1-(28-31)
 [yyyy]          1753-9999
 
     -h          disable bolding
@@ -237,7 +237,7 @@ Usage: $PROGRAM [[[mm] dd] yyyy] [-h]
 
 _center()
 {
-        printf "%*s\n" $(( (${1} + ${#2}) / 2)) "$2"
+        printf "%*s\n" $(( (${1} + ${#2}) / 2 )) "$2"
 }
 
 _print_month()
@@ -395,22 +395,22 @@ case "$1" in
 esac
 
 case $# in
-	1)
+	1) # Month
 		m="$1"
 		d="0"
 		y="$(printf "%(%_Y)T")"
 		;;
-	2)
+	2) # Month Year
 		m="$1"
 		d="0"
 		y="$2"
 		;;
-	3)
+	3) # Month Day Year
 		m="$1"
 		d="$2"
 		y="$3"
 		;;
-	*)
+	*) # Current calendar
 		m="$(printf "%(%_m)T")"
 		d="$(printf "%(%_d)T")"
 		y="$(printf "%(%_Y)T")"
