@@ -96,40 +96,49 @@ sub gregorian_data {
 	&get_month_length($m, $y);
 	my $len = $month_length[$m];
 	my $i;
-	
+
 	for ( $i = 1; $i <= $month_starts_on; $i++ ) {
 		last if ($month_starts_on == 0);
 		push @calendar_data, "$space$space";
 	}
 
 	for ( $i = 1; $i <= ( $calendar_width - $month_starts_on ); $i++ ) {
-		if ( $i < 10 ) { push @calendar_data, "$space$i"; }
-		elsif ( $i > $len ) { push @calendar_data, "$space" x 3; }
-		else { push @calendar_data, "$i"; }
+		if ( $i < 10 ) {
+			push @calendar_data, "$space$i";
+		}
+		elsif ( $i > $len ) {
+			push @calendar_data, "$space" x 3;
+		}
+		else {
+			push @calendar_data, "$i";
+		}
 	}
 }
 
 sub print_gregorian_month {
 	my ($m, $d, $y) = @_;
-
 	&gregorian_data($m, $y);
 
 	if ( defined($request_no_highlight) ) { $d = 0; }
 
 	&center(21, " $month_names_long[$m] $y");
-
 	print " @day_names_shorter\n";
 
 	my $i;
 	for ( $i = 0; $i < scalar @calendar_data; $i++ ) {
-		if ( ($i % 7) == 0 && $i != 0 ) { print "\n"; }
-		if ( ($i - ($month_starts_on - 1) == $d) && 
-		   ($i - ($month_starts_on - 1) < 10) && 
-		   $d > 0 ) { printf "$space\e[7m$space$d\e[27m"; }
-		elsif ( ($i - ($month_starts_on - 1) == $d) && 
-		   ($i - ($month_starts_on - 1) > 9) && 
-		   $d > 0 ) { printf "$space\e[7m$d\e[27m"; }
-		else { print "$space$calendar_data[$i]"; }
+		if ( ($i % 7) == 0 && $i != 0 ) {
+			print "\n";
+		}
+		if ( ($i - ($month_starts_on - 1) == $d) &&
+		($i - ($month_starts_on - 1) < 10) && $d > 0 ) {
+			printf "$space\e[7m$space$d\e[27m";
+		}
+		elsif ( ($i - ($month_starts_on - 1) == $d) &&
+		($i - ($month_starts_on - 1) > 9) && $d > 0 ) {
+			printf "$space\e[7m$d\e[27m"; }
+		else {
+			print "$space$calendar_data[$i]";
+		}
 	}
 	print "\n";
 }
@@ -139,7 +148,9 @@ sub print_gregorian_month {
 ## Parse commandline args ###
 
 if ($params > 0) {
-	if ($ARGV[0] eq "-h") { $request_no_highlight = 1; }
+	if ($ARGV[0] eq "-h") {
+		$request_no_highlight = 1;
+	}
 }
 
 
