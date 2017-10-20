@@ -156,7 +156,7 @@ if ($params > 0) {
 
 ## Program start ##
 
-&print_gregorian_month($month, 5, $year);
+&print_gregorian_month($month, $day, $year);
 
 
 
