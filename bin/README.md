@@ -13,3 +13,8 @@ pc [mm [dd [yyyy]]] [-h] [--help]
 ```
 cal [-h]
 ```
+
+## plcal - a perl version of cal
+```
+plcal [-h]
+```
