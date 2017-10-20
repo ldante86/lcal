@@ -90,7 +90,7 @@ sub center {
 }
 
 sub gregorian_data {
-	@calendar_data = qw();
+	@calendar_data = ();
 	my ($m, $y) = @_;
 	$month_starts_on = &day_of_week($m, 1, $y);
 	&get_month_length($m, $y);
