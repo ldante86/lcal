@@ -46,7 +46,7 @@ my $space = " ";
 my $calendar_width = 42;
 
 my $month = strftime "%m", localtime;
-my $day = strftime "%e" , localtime;
+my $day = strftime "%d" , localtime;
 my $year = strftime "%Y" , localtime;
 
 my $params = @ARGV;
@@ -156,7 +156,7 @@ if ($params > 0) {
 
 ## Program start ##
 
-&print_gregorian_month($month, $day, $year);
+&print_gregorian_month($month, 5, $year);
 
 
 
