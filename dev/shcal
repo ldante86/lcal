@@ -28,6 +28,8 @@ unalias -a
 PROGRAM="${0##*/}"
 
 month_names_long="January February March April May June July August September October November December"
+month_names_short="Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec"
+day_names_short="Su Mo Tu We Thu Fr Sa"
 
 _get_month()
 {
@@ -40,4 +42,31 @@ _get_month()
 			return
 		fi
 	done
+}
+
+_get_month_lengths()
+{
+        if [ $(($1 % 4)) -eq 0 ] && [ $(($1 % 100)) -ne 0 ] || [ $(($1 % 400)) -eq 0 ]; then
+                len="31 29 31 30 31 30 31 31 30 31 30 31"
+	else
+                len="31 28 31 30 31 30 31 31 30 31 30 31"
+        fi
+}
+
+_month_len()
+{
+	local c=0
+	for i in $len
+	do
+		c=$(($c + 1))
+		if [ $c -eq $1 ]; then
+			echo "$i"
+			return
+		fi
+	done
+}
+
+_center()
+{
+        printf "%*s\n" $(( (${1} + ${#2}) / 2 )) "$2"
 }
