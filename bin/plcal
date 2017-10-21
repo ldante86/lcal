@@ -25,9 +25,9 @@
 
 use strict;
 use warnings;
-use 5.010;
-
 use POSIX qw(strftime);
+
+## Global variables ##
 
 my @month_length;
 my $month_length;
@@ -40,21 +40,39 @@ my @month_names_short = qw( "" Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec )
 my @day_names_long = qw( Sunday Monday Tuesday Wednesday Thursday Friday Saturday );
 my @day_names_short = qw ( Sun Mon Tue Wed Thu Fri Sat );
 my @day_names_shorter = qw ( Su Mo Tu We Th Fr Sa );
-my $leap = 0;
 
+my $bold_on = "\e[7m";
+my $bold_off = "\e[27m";
 my $space = " ";
-my $calendar_width = 42;
+my $calendar_length = 42;
+my $calendar_width = 21;
 
 my $month = strftime "%m", localtime;
 my $day = strftime "%d" , localtime;
 my $year = strftime "%Y" , localtime;
 
-my $params = @ARGV;
+my $number_of_params = @ARGV;
 
-my $request_no_highlight;
+my $request_no_highlight = undef;
 
 
 ## Subroutines ##
+
+sub help {
+return << 'HELP';
+
+plcal - display a monthly calendar
+
+Usage:	plcal [option]
+
+Options:
+  -h		disable highlighting
+  --help	display this help and exit
+
+Copyright (C) 2017 Luciano D. Cecere <ldante86@aol.com>
+
+HELP
+}
 
 sub get_month_length {
 	my $y = $_[0];
@@ -99,10 +117,10 @@ sub gregorian_data {
 
 	for ( $i = 1; $i <= $month_starts_on; $i++ ) {
 		last if ($month_starts_on == 0);
-		push @calendar_data, "$space$space";
+		push @calendar_data, "$space" x 2;
 	}
 
-	for ( $i = 1; $i <= ( $calendar_width - $month_starts_on ); $i++ ) {
+	for ( $i = 1; $i <= ( $calendar_length - $month_starts_on ); $i++ ) {
 		if ( $i < 10 ) {
 			push @calendar_data, "$space$i";
 		}
@@ -121,8 +139,8 @@ sub print_gregorian_month {
 
 	if ( defined($request_no_highlight) ) { $d = 0; }
 
-	&center(21, " $month_names_long[$m] $y");
-	print " @day_names_shorter\n";
+	&center($calendar_width, "$space$month_names_long[$m] $y");
+	print "$space@day_names_shorter\n";
 
 	my $i;
 	for ( $i = 0; $i < scalar @calendar_data; $i++ ) {
@@ -131,11 +149,11 @@ sub print_gregorian_month {
 		}
 		if ( ($i - ($month_starts_on - 1) == $d) &&
 		($i - ($month_starts_on - 1) < 10) && $d > 0 ) {
-			printf "$space\e[7m$space$d\e[27m";
+			printf "$space$bold_on$space$d$bold_off";
 		}
 		elsif ( ($i - ($month_starts_on - 1) == $d) &&
 		($i - ($month_starts_on - 1) > 9) && $d > 0 ) {
-			printf "$space\e[7m$d\e[27m"; }
+			printf "$space$bold_on$d$bold_off"; }
 		else {
 			print "$space$calendar_data[$i]";
 		}
@@ -147,10 +165,15 @@ sub print_gregorian_month {
 
 ## Parse commandline args ###
 
-if ($params > 0) {
+## TODO: Getopt::Long
+if ($number_of_params > 0) {
 	if ($ARGV[0] eq "-h") {
 		$request_no_highlight = 1;
 	}
+	if ($ARGV[0] eq "--help") {
+		print &help();
+		exit;
+	}	
 }
 
 
