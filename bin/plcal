@@ -23,6 +23,55 @@
 #
 ########################################################################
 
+## Manpage documentation below. Process with pod2man.
+
+=head1 NAME
+
+plcal - Display a monthly calendar
+
+=head1 SYNOPSIS
+
+        plcal -h
+        plcal --date 1 2017
+        plcal --help
+
+=head1 DESCRIPTION
+
+        plcal is a simple command-line calendar written in perl.
+
+=head1 OPTIONS
+
+=over 12
+
+=item -h
+
+Disable highlighting.
+
+=item --date B<mm> B<yyyy>
+
+Display a calendar for a specified month and year.
+
+=item --help
+
+Display a help text and exit.
+
+=back
+
+=head1 AUTHOR
+
+Luciano D. Cecere <ldante1986@gmail.com>
+
+=head1 LICENSE
+
+B<plcal> is free software; you can redistribute it and/or modify it
+under the terms of the GPL, or, optionally, Perl's license.
+
+=cut
+
+######################
+## Code starts here ##
+######################
+
 use strict;
 use warnings;
 use POSIX qw(strftime);
@@ -52,8 +101,6 @@ my $calendar_width = 21;
 my $month = strftime "%m", localtime;
 my $day = strftime "%d" , localtime;
 my $year = strftime "%Y" , localtime;
-
-my $number_of_params = @ARGV;
 
 
 ## Subroutines ##
@@ -116,7 +163,6 @@ sub gregorian_data {
   my ($m, $y) = @_;
   &get_month_length($y);
   $month_starts_on = &day_of_week($m, 1, $y);
-##  print "$month_starts_on\n";
   my $len = $month_length[$m];
   my $i;
 
@@ -197,8 +243,9 @@ if ($#date_my > 0) {
 
 ## Program start ##
 
-&print_gregorian_month($month, $day, $year);
 
+
+&print_gregorian_month($month, $day, $year);
 
 
 ## END ###
