@@ -1,75 +1,79 @@
-  <h1>lcal</h1><p>
-	.<br>
-	├── bin<br>
-	│   ├── cal<br>
-	│   ├── lcal<br>
-	│   ├── pc<br>
-	│   └── README.md<br>
-	├── BUGS.md<br>
-	├── COPYING<br>
-	├── dev<br>
-	│   ├── css<br>
-	│   │   ├── default.css<br>
-	│   │   ├── README.md<br>
-	│   │   └── template.css<br>
-	│   ├── discordian<br>
-	│   │   ├── dcal<br>
-	│   │   ├── gd_conversion.sh<br>
-	│   │   ├── gdj_conversion.sh<br>
-	│   │   └── README.md<br>
-	│   ├── hebrew<br>
-	│   │   ├── hcal<br>
-	│   │   ├── hebrew.rb<br>
-	│   │   └── TODO.md<br>
-	│   ├── lcal-python<br>
-	│   │   ├── CalendarData.py<br>
-	│   │   └── README.md<br>
-	│   ├── locale<br>
-	│   │   ├── get_locale<br>
-	│   │   └── README.md<br>
-	│   ├── perpetual-scripts<br>
-	│   │   ├── arrays<br>
-	│   │   ├── leap-cycle.txt<br>
-	│   │   ├── leap.sh<br>
-	│   │   ├── matrix<br>
-	│   │   ├── non-leap-cycle.txt<br>
-	│   │   ├── non-leap.sh<br>
-	│   │   ├── perpetual-strings.txt<br>
-	│   │   ├── README.md<br>
-	│   │   └── string-matrix<br>
-	│   ├── README.md<br>
-	│   └── reformation<br>
-	│   &nbsp;&nbsp;&nbsp; ├── lcal.dev<br>
-	│   &nbsp;&nbsp;&nbsp; ├── README.md<br>
-	│   &nbsp;&nbsp;&nbsp; └── sept1752<br>
-	├── docs<br>
-	│   ├── comments.txt<br>
-	│   └── lcal-doc.html<br>
-	├── man<br>
-	│   ├── install_man<br>
-	│   ├── lcal.1<br>
-	│   ├── lcal.1.html<br>
-	│   └── showman.sh<br>
-	├── MANIFEST.md<br>
-	├── readme.html<br>
-	├── README.md<br>
-	├── screenshots<br>
-	│   ├── completion.png<br>
-	│   ├── html.png<br>
-	│   ├── julian.png<br>
-	│   ├── ldoc.png<br>
-	│   ├── ncal.png<br>
-	│   ├── three.png<br>
-	│   ├── weeknumers.png<br>
-	│   └── yearly.png<br>
-	├── scripts<br>
-	│   ├── doc<br>
-	│   ├── doomsday.sh<br>
-	│   ├── lcal_completion<br>
-	│   ├── lcal-funcs.sh<br>
-	│   ├── ldoc<br>
-	│   ├── lhtml<br>
-	│   └── weeknum_test.sh<br>
-	└── TODO.md<br>
+.
+├── bin
+│   ├── cal
+│   ├── dcal
+│   ├── lcal
+│   ├── pc
+│   ├── plcal
+│   └── README.md
+├── BUGS.md
+├── COPYING
+├── dev
+│   ├── css
+│   │   ├── default.css
+│   │   ├── README.md
+│   │   └── template.css
+│   ├── discordian
+│   │   ├── dcal
+│   │   ├── gd_conversion.sh
+│   │   ├── gdj_conversion.sh
+│   │   └── README.md
+│   ├── hebrew
+│   │   ├── hcal
+│   │   ├── hebrew.rb
+│   │   └── TODO.md
+│   ├── lcal-python
+│   │   ├── CalendarData.py
+│   │   └── README.md
+│   ├── locale
+│   │   ├── get_locale
+│   │   └── README.md
+│   ├── perpetual-scripts
+│   │   ├── arrays
+│   │   ├── leap-cycle.txt
+│   │   ├── leap.sh
+│   │   ├── matrix
+│   │   ├── non-leap-cycle.txt
+│   │   ├── non-leap.sh
+│   │   ├── perpetual-strings.txt
+│   │   ├── README.md
+│   │   └── string-matrix
+│   ├── README.md
+│   ├── reformation
+│   │   ├── lcal.dev
+│   │   ├── README.md
+│   │   └── sept1752
+│   └── shcal
+├── docs
+│   ├── documentation.md
+│   └── lcal-doc.html
+├── man
+│   ├── install_man
+│   ├── lcal.1
+│   ├── lcal.1.html
+│   ├── plcal.1
+│   ├── plcal.1.html
+│   └── showman.sh
+├── MANIFEST.md
+├── readme.html
+├── README.md
+├── screenshots
+│   ├── completion.png
+│   ├── html.png
+│   ├── julian.png
+│   ├── ldoc.png
+│   ├── ncal.png
+│   ├── three.png
+│   ├── weeknumers.png
+│   └── yearly.png
+├── scripts
+│   ├── doc
+│   ├── doomsday.sh
+│   ├── lcal_completion
+│   ├── lcal-funcs.sh
+│   ├── ldoc
+│   ├── lhtml
+│   └── weeknum_test.sh
+└── TODO.md
 
-13 directories, 58 files
+13 directories, 63 files
