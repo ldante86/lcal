@@ -144,7 +144,7 @@ sub print_gregorian_month {
   print "$space@day_names_shorter\n";
 
   my $i;
-  for ( $i = 0; $i < scalar @calendar_data; $i++ ) {
+  for ( $i = 0; $i < $#calendar_data; $i++ ) {
     if ( ($i % 7) == 0 && $i != 0 ) {
       print "\n";
     }
