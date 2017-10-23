@@ -304,14 +304,14 @@ _main()
 
 	# -n --next
 	if [ $REQUEST_NEXT_MONTH ]; then
-		_shift_month_forward $MONTH $YEAR
+		_shift_month_forward $MONTH
 		_print_gregorian_monthly $MONTH $DAY $YEAR
 		_exit 0
 	fi
 
 	# -p --previous
 	if [ $REQUEST_PREVIOUS_MONTH ]; then
-		_shift_month_backward $MONTH $YEAR
+		_shift_month_backward $MONTH
 		_print_gregorian_monthly $MONTH $DAY $YEAR
 		_exit 0
 	fi
@@ -765,12 +765,12 @@ _ncenter()
 }
 
 
-#%% usage: _shift_month_forward month year
+#%% usage: _shift_month_forward month
 #%  purpose: Moves the month number up by one, or back to one
 #%  if the current month is December.
 _shift_month_forward()
 {
-	local m=$1 y=$2
+	local m=$1
 	if [ $m -eq 12 ]; then
 		MONTH=1
 		((YEAR++))
@@ -780,12 +780,12 @@ _shift_month_forward()
 	DAY=0
 }
 
-#%% usage: _shift_month_backward month year
+#%% usage: _shift_month_backward month
 #%  purpose: Moves the month number back by one, or up to twelve
 #%  if the current month is January.
 _shift_month_backward()
 {
-	local m=$1 y=$2
+	local m=$1
 	if [ $m -eq 1 ]; then
 		MONTH=12
 		((YEAR--))
