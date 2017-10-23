@@ -68,6 +68,7 @@ Usage:  plcal [option]
 Options:
   -h		disable highlighting
   --help	display this help and exit
+  mm yyyy	display month of year
 
 Copyright (C) 2017 Luciano D. Cecere <ldante86@aol.com>
 
