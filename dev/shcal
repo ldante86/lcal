@@ -31,6 +31,10 @@ month_names_long="January February March April May June July August September Oc
 month_names_short="Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec"
 day_names_short="Su Mo Tu We Thu Fr Sa"
 
+month=$(date +%m)
+day=$(date +%d)
+year=$(date +%Y)
+
 _get_month()
 {
 	local c=0
@@ -53,6 +57,13 @@ _get_month_lengths()
         fi
 }
 
+_is_leap()
+{
+        if [ $(($1 % 4)) -eq 0 ] && [ $(($1 % 100)) -ne 0 ] || [ $(($1 % 400)) -eq 0 ]; then
+		return 1
+        fi
+}
+
 _month_len()
 {
 	local c=0
@@ -60,8 +71,7 @@ _month_len()
 	do
 		c=$(($c + 1))
 		if [ $c -eq $1 ]; then
-			echo "$i"
-			return
+			mlen="$i"
 		fi
 	done
 }
@@ -70,3 +80,31 @@ _center()
 {
         printf "%*s\n" $(( (${1} + ${#2}) / 2 )) "$2"
 }
+
+_ncenter()
+{
+        printf "%*s" $(( (${1} + ${#2}) / 2)) "$2"
+}
+
+_is_day_valid()
+{
+        if [ $1 -gt $mlen ] || [ $1 -le 0 ]; then
+                echo "$PROGRAM: day out of range of month [1-${mlen}]"
+                return 1
+        fi
+}
+
+_is_month_valid()
+{
+        if [ $1 -gt 12 ] || [ $1 -lt 1 ]; then
+                 echo "$PROGRAM: month out of range [1-12]"
+                return 1
+        fi
+}
+
+
+_get_month_lengths $year
+_month_len $month
+
+_is_day_valid $day
+_is_month_valid 13
