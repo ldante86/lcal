@@ -1,5 +1,5 @@
 
-# Function documentation manual for lcal
+# Function documentation manual for ../bin/lcal
 
 
 Function: **_main**
@@ -126,7 +126,7 @@ Parameters: *length "string"*
 
 Function: **_shift_month_forward**
 
-Parameters: *month year*
+Parameters: *month*
 
 	 Moves the month number up by one, or back to one
 
@@ -134,7 +134,7 @@ Parameters: *month year*
 
 Function: **_shift_month_backward**
 
-Parameters: *month year*
+Parameters: *month*
 
 	 Moves the month number back by one, or up to twelve
 
