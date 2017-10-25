@@ -1,6 +1,6 @@
 #!/bin/sh -
 
-set -- lcal.1
+#set -- lcal.1
 
 case $1 in
 	'')
