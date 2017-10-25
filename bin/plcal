@@ -6,7 +6,7 @@
 ########################################################################
 #
 # plcal - Display a calendar
-# Copyright (C) 2017 Luciano D. Cecere <ldante86@aol.com>
+# Copyright (C) 2017 Luciano D. Cecere <ldante1986@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ########################################################################
+
 
 ## Manpage documentation below. Process with pod2man.
 
@@ -80,14 +81,15 @@ use Getopt::Long;
 
 ## Global variables ##
 
+
 my @month_length;
 my $month_length;
 my @calendar_data;
 my $month_starts_on;
 
-my @month_names_long = qw( "" January February March April May June
+my @month_names_long = qw( undef January February March April May June
                            July August September October November December );
-my @month_names_short = qw( "" Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );
+my @month_names_short = qw( undef Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );
 my @day_names_long = qw( Sunday Monday Tuesday Wednesday Thursday Friday Saturday );
 my @day_names_short = qw ( Sun Mon Tue Wed Thu Fri Sat );
 my @day_names_shorter = qw ( Su Mo Tu We Th Fr Sa );
@@ -117,7 +119,7 @@ Options:
   --help		display this help and exit
   --date mm yyyy	display month of year
 
-Copyright (C) 2017 Luciano D. Cecere <ldante86@aol.com>
+Copyright (C) 2017 Luciano D. Cecere <ldante1986@gmail.com>
 
 HELP
 }
@@ -133,7 +135,7 @@ sub get_month_length {
 
 sub day_of_week {
   my ($m, $d, $y) = @_;
-  my @arr = qw( "" 6 2 2 5 0 3 5 1 4 6 2 4 );
+  my @arr = qw( undef 6 2 2 5 0 3 5 1 4 6 2 4 );
   my $w = ((int($y / 4)) - (int($y / 100))) + (int($y / 400)) + $d + $y + $arr[$m];
 
   if ($month_length[2] == 29 && $m < 3) { $w--; }
@@ -220,7 +222,7 @@ my $no_highlight = '';
 my @date_my = ();
 
 GetOptions(
-  'help' => \$help,
+  'help|info' => \$help,
   'h' => \$no_highlight,
   'date=i{2}' => \@date_my,
 );
