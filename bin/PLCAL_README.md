@@ -16,6 +16,7 @@ README for plcal-0.0.1
 
 | Option | Description     |
 | :------------- | :------------- |
+| -b   | Use bracketed bolding (<>).  |
 | --date=**mm yyyy**       | Display a calendar for a specified month and year.       |
 | --h   | Disable highlighting   |
 | --help  | Show hexp text and exit  |
@@ -39,6 +40,10 @@ Su Mo Tu We Th Fr Sa
 26 27 28 29 30 31    
 
 ```
+
+### NOTES
+
+The **-b** option will be the default if the OS is Windows.
 
 ### AUTHOR
 

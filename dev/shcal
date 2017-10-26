@@ -101,10 +101,3 @@ _is_month_valid()
                 return 1
         fi
 }
-
-
-_get_month_lengths $year
-_month_len $month
-
-_is_day_valid $day
-_is_month_valid 13
