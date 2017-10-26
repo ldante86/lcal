@@ -46,15 +46,15 @@
 │   └── shcal
 ├── docs
 │   ├── documentation.md
-│   └── lcal-doc.html
+│   ├── lcal.1.html
+│   ├── lcal-doc.html
+│   └── plcal.1.html
 ├── man
 │   ├── install_man
 │   ├── lcal.1
-│   ├── lcal.1.html
 │   ├── plcal.1
-│   ├── plcal.1.html
 │   └── showman.sh
-├── MANIFEST.md
+├── MANIFEST
 ├── readme.html
 ├── README.md
 ├── screenshots
