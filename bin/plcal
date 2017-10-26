@@ -32,6 +32,7 @@ plcal - Display a monthly calendar
 
 =head1 SYNOPSIS
 
+	plcal -b
         plcal -h
         plcal --date 1 2017
         plcal --help
@@ -213,7 +214,8 @@ sub print_gregorian_month {
     }
     elsif ( ($i - ($month_starts_on - 1) == $d) &&
     ($i - ($month_starts_on - 1) > 9) && $d > 0 ) {
-      printf "$space$bold_on$d$bold_off"; }
+      printf "$space$bold_on$d$bold_off";
+    }
     else {
       print "$space$calendar_data[$i]";
     }
