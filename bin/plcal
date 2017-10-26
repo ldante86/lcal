@@ -44,6 +44,10 @@ plcal - Display a monthly calendar
 
 =over 12
 
+=item -b
+
+Use bracketed bolding (<>).
+
 =item -h
 
 Disable highlighting.
@@ -57,6 +61,10 @@ Display a calendar for a specified month and year.
 Display a help text and exit.
 
 =back
+
+=head1 NOTES
+
+The -b option will be the default if the OS is Windows.
 
 =head1 AUTHOR
 
@@ -213,19 +221,58 @@ sub print_gregorian_month {
   print "\n";
 }
 
+sub print_gregorian_month_WINDOWS {
+  my ($m, $d, $y) = @_;
+  &gregorian_data($m, $y);
+
+  my $sp='';
+
+  print "\n";
+  &center($calendar_width, "$space$month_names_long[$m] $y");
+  print "$space@day_names_shorter\n";
+
+  my $i;
+  for ( $i = 0; $i < $#calendar_data; $i++ ) {
+    if ( ($i % 7) == 0 && $i != 0 ) {
+      print "\n";
+    }
+    if ( ($i - ($month_starts_on - 1) == $d) &&
+    ($i - ($month_starts_on - 1) < 10) && $d > 0 ) {
+        print "<$space$d>";
+        $sp=1;
+    }
+    elsif ( ($i - ($month_starts_on - 1) == $d) &&
+    ($i - ($month_starts_on - 1) > 9) && $d > 0 ) {
+      print "<$d>";
+      $sp=1
+    }
+    else {
+      if ($sp) {
+        print "$calendar_data[$i]";
+	$sp='';
+      } else {
+        print "$space$calendar_data[$i]";
+      }
+    }
+  }
+  print "\n";
+}
+
 
 
 ## Parse commandline args ###
 
 
 my $help = '';
+my $bold = '';
 my $no_highlight = '';
 my @date_my = ();
 
 GetOptions(
-  'help|info' => \$help,
-  'h' => \$no_highlight,
-  'date=i{2}' => \@date_my,
+  'b'		=> \$bold,
+  'help|info'	=> \$help,
+  'h'		=> \$no_highlight,
+  'date=i{2}'	=> \@date_my,
 );
 
 if ($help) {
@@ -247,7 +294,12 @@ if ($#date_my > 0) {
 ## Program start ##
 
 
+if ("$^O" eq 'MSWin32' || $bold) {
+  &print_gregorian_month_WINDOWS($month, $day, $year);
+  exit;
+}
 
+#Standard calendar
 &print_gregorian_month($month, $day, $year);
 
 
