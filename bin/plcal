@@ -211,11 +211,11 @@ sub print_gregorian_month {
     }
     if ( ($i - ($month_starts_on - 1) == $d) &&
     ($i - ($month_starts_on - 1) < 10) && $d > 0 ) {
-      printf "$space$bold_on$space$d$bold_off";
+      print "$space$bold_on$space$d$bold_off";
     }
     elsif ( ($i - ($month_starts_on - 1) == $d) &&
     ($i - ($month_starts_on - 1) > 9) && $d > 0 ) {
-      printf "$space$bold_on$d$bold_off";
+      print "$space$bold_on$d$bold_off";
     }
     else {
       print "$space$calendar_data[$i]";
@@ -252,7 +252,7 @@ sub print_gregorian_month_WINDOWS {
     else {
       if ($sp) {
         print "$calendar_data[$i]";
-	$sp='';
+        $sp='';
       } else {
         print "$space$calendar_data[$i]";
       }
