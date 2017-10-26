@@ -124,6 +124,7 @@ plcal - display a monthly calendar
 Usage:  plcal [option]
 
 Options:
+  -b			use bracketed bolding (<>)
   -h			disable highlighting
   --help		display this help and exit
   --date mm yyyy	display month of year
