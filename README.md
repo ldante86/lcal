@@ -4,7 +4,7 @@
 
 ## DESCRIPTION
 
-**lcal** is a command-line calendar similar to cal/ncal. This program produces Gregorian and Julian calendars, an HTML 5 calendar, an ncal formatted calendar, weeknumbers, Discordian dates, dates of Easter (Western, Orthodox, Orthodox-Julian), monthly and yearly calendars, and Julian Day Number conversions.
+**lcal** is a command-line calendar similar to cal/ncal, but written in bash. This program produces Gregorian and Julian calendars, an HTML 5 calendar, an ncal formatted calendar, weeknumbers, Discordian dates, dates of Easter (Western, Orthodox, Orthodox-Julian), monthly and yearly calendars, and Julian Day Number conversions.
 
 ## USAGE
 
@@ -154,9 +154,21 @@ For example:
 
   Development scripts for **pc** can be found in _dev/perpetual-scripts_
 
+- **cal** - a perpetual calendar generator.
+
+  This is like **pc** above, but it is used to only print the current calendar and does not accept any flags other than the *-h* flag for unbolding. **cal** is designed to be the smallest program of the lot.
+
 - **dcal** - print the Discordian calendar.
 
   This script prints a formatted calendar based on the Discordian seasons. See the [README](https://github.com/ldante86/lcal/blob/master/dev/discordian/README.md) for **dcal** for more information.
+
+- **plcal** - a calendar written in perl.
+
+  This calendar is the start of what might some day become the "finished product." Still in development, yet functional as it is now, **plcal** will discard all of the trappings and disadvantages of bash and be fully portable between operating systems.
+
+- dev/**shcal** - a POSIX compliant calendar.
+
+  This program is slowly coming together, but when it is finished it will be sh-dash-ash-zsh-bash-ksh compliant.
 
 ## BUGS
 
@@ -174,4 +186,4 @@ cal, ddate, ncal, gcal, ccal, when
 
 ## LICENSE
 
-**(c) 2014-2016 Luciano D. Cecere - ldante86@aol.com**
+**(c) 2014-2017 Luciano D. Cecere - ldante86@aol.com**
