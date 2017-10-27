@@ -56,6 +56,105 @@
 │   ├── plcal.1
 │   └── showman.sh
 ├── MANIFEST
+├── rcal
+│   ├── AUTHOR
+│   ├── bin
+│   │   └── rcal
+│   ├── COPYING
+│   ├── doc
+│   │   ├── AUTHOR.html
+│   │   ├── Calendar.html
+│   │   ├── COPYING.html
+│   │   ├── created.rid
+│   │   ├── css
+│   │   │   ├── fonts.css
+│   │   │   └── rdoc.css
+│   │   ├── Discordia.html
+│   │   ├── fonts
+│   │   │   ├── Lato-LightItalic.ttf
+│   │   │   ├── Lato-Light.ttf
+│   │   │   ├── Lato-RegularItalic.ttf
+│   │   │   ├── Lato-Regular.ttf
+│   │   │   ├── SourceCodePro-Bold.ttf
+│   │   │   └── SourceCodePro-Regular.ttf
+│   │   ├── Hebrew.html
+│   │   ├── images
+│   │   │   ├── add.png
+│   │   │   ├── arrow_up.png
+│   │   │   ├── brick_link.png
+│   │   │   ├── brick.png
+│   │   │   ├── bug.png
+│   │   │   ├── bullet_black.png
+│   │   │   ├── bullet_toggle_minus.png
+│   │   │   ├── bullet_toggle_plus.png
+│   │   │   ├── date.png
+│   │   │   ├── delete.png
+│   │   │   ├── find.png
+│   │   │   ├── loadingAnimation.gif
+│   │   │   ├── macFFBgHack.png
+│   │   │   ├── package.png
+│   │   │   ├── page_green.png
+│   │   │   ├── page_white_text.png
+│   │   │   ├── page_white_width.png
+│   │   │   ├── plugin.png
+│   │   │   ├── ruby.png
+│   │   │   ├── tag_blue.png
+│   │   │   ├── tag_green.png
+│   │   │   ├── transparent.png
+│   │   │   ├── wrench_orange.png
+│   │   │   ├── wrench.png
+│   │   │   └── zoom.png
+│   │   ├── index.html
+│   │   ├── js
+│   │   │   ├── darkfish.js
+│   │   │   ├── jquery.js
+│   │   │   ├── navigation.js
+│   │   │   ├── navigation.js.gz
+│   │   │   ├── searcher.js
+│   │   │   ├── searcher.js.gz
+│   │   │   ├── search_index.js
+│   │   │   ├── search_index.js.gz
+│   │   │   └── search.js
+│   │   ├── make_sh.html
+│   │   ├── man
+│   │   │   ├── rcal_1.html
+│   │   │   └── rcal_1_ronn.html
+│   │   ├── Ncal.html
+│   │   ├── Object.html
+│   │   ├── rcal_gemspec.html
+│   │   ├── README.html
+│   │   ├── scripts
+│   │   │   ├── dcal_sh.html
+│   │   │   ├── ddate_sh.html
+│   │   │   ├── gd_conversion_sh.html
+│   │   │   ├── gdj_conversion_sh.html
+│   │   │   ├── rcal-funcs_sh.html
+│   │   │   └── rcalhtml_sh.html
+│   │   └── table_of_contents.html
+│   ├── lib
+│   │   ├── calendar.rb
+│   │   ├── discordia.rb
+│   │   ├── hebrew.rb
+│   │   ├── info.rb
+│   │   └── ncal.rb
+│   ├── make.sh
+│   ├── man
+│   │   ├── rcal.1
+│   │   └── rcal.1.ronn
+│   ├── rcal.gemspec
+│   ├── README
+│   ├── scripts
+│   │   ├── dcal.sh
+│   │   ├── ddate.sh
+│   │   ├── dday.rb
+│   │   ├── gd_conversion.sh
+│   │   ├── gdj_conversion.sh
+│   │   ├── rcal-funcs.sh
+│   │   ├── rcalhtml.sh
+│   │   ├── tcal.rb
+│   │   └── ycal.rb
+│   └── tests
+│       └── weeknum_test.rb
 ├── readme.html
 ├── README.md
 ├── screenshots
@@ -77,4 +176,4 @@
 │   └── weeknum_test.sh
 └── TODO.md
 
-13 directories, 64 files
+26 directories, 150 files
