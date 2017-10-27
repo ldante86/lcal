@@ -144,11 +144,8 @@
 │   ├── rcal.gemspec
 │   ├── README
 │   ├── scripts
-│   │   ├── dcal.sh
 │   │   ├── ddate.sh
 │   │   ├── dday.rb
-│   │   ├── gd_conversion.sh
-│   │   ├── gdj_conversion.sh
 │   │   ├── rcal-funcs.sh
 │   │   ├── rcalhtml.sh
 │   │   ├── tcal.rb
@@ -176,4 +173,4 @@
 │   └── weeknum_test.sh
 └── TODO.md
 
-26 directories, 150 files
+26 directories, 147 files
