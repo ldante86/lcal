@@ -250,10 +250,15 @@ sub print_gregorian_month_WINDOWS {
       $sp=1
     }
     else {
-      if ($sp) {
+      if ($sp && &day_of_week($m, $d, $y) == 6) {
+        print "$space$calendar_data[$i]";
+        $sp='';
+      }
+      elsif ($sp) {
         print "$calendar_data[$i]";
         $sp='';
-      } else {
+      }
+        else {
         print "$space$calendar_data[$i]";
       }
     }
