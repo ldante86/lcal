@@ -1,0 +1,24 @@
+Wed, 27 Sep 2017 18:47:19 -0700
+./man/rcal.1	Sun, 24 Sep 2017 01:45:45 -0700
+./man/rcal.1.ronn	Sun, 24 Sep 2017 01:45:45 -0700
+./lib/info.rb	Sun, 24 Sep 2017 01:45:45 -0700
+./lib/discordia.rb	Sun, 24 Sep 2017 01:45:45 -0700
+./lib/hebrew.rb	Sun, 24 Sep 2017 01:45:45 -0700
+./lib/calendar.rb	Sun, 24 Sep 2017 01:45:45 -0700
+./lib/ncal.rb	Sun, 24 Sep 2017 01:45:45 -0700
+./rcal.gemspec	Sun, 24 Sep 2017 01:45:45 -0700
+./make.sh	Sun, 24 Sep 2017 01:45:45 -0700
+./AUTHOR	Sun, 24 Sep 2017 01:45:45 -0700
+./tests/weeknum_test.rb	Sun, 24 Sep 2017 01:45:45 -0700
+./README	Sun, 24 Sep 2017 01:45:45 -0700
+./COPYING	Sun, 24 Sep 2017 01:45:45 -0700
+./scripts/gd_conversion.sh	Sun, 24 Sep 2017 01:45:45 -0700
+./scripts/gdj_conversion.sh	Sun, 24 Sep 2017 01:45:45 -0700
+./scripts/dday.rb	Sun, 24 Sep 2017 01:45:45 -0700
+./scripts/dcal.sh	Sun, 24 Sep 2017 01:45:45 -0700
+./scripts/ddate.sh	Sun, 24 Sep 2017 01:45:45 -0700
+./scripts/ycal.rb	Sun, 24 Sep 2017 01:45:45 -0700
+./scripts/rcalhtml.sh	Sun, 24 Sep 2017 01:45:45 -0700
+./scripts/rcal-funcs.sh	Sun, 24 Sep 2017 01:45:45 -0700
+./scripts/tcal.rb	Sun, 24 Sep 2017 01:45:45 -0700
+./bin/rcal	Sun, 24 Sep 2017 01:45:45 -0700

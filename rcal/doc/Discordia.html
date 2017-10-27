@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Discordia - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="Calendar.html">Calendar</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-print_discordian_date">#print_discordian_date</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Discordia">
+  <h1 id="class-Discordia" class="class">
+    class Discordia
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="APOSTLE">APOSTLE
+        
+        <dd>
+        
+      
+        <dt id="HOLYDAY">HOLYDAY
+        
+        <dd>
+        
+      
+        <dt id="SEASONS">SEASONS
+        
+        <dd>
+        
+      
+        <dt id="WEEKDAY">WEEKDAY
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(m, d, y)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="Calendar.html#method-c-new">Calendar.new</a>
+            </div>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/discordia.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">m</span>, <span class="ruby-identifier">d</span>, <span class="ruby-identifier">y</span>)
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">m</span>, <span class="ruby-identifier">d</span>, <span class="ruby-identifier">y</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-print_discordian_date" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">print_discordian_date</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="print_discordian_date-source">
+            <pre><span class="ruby-comment"># File lib/discordia.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">print_discordian_date</span>
+  <span class="ruby-identifier">initialize</span>(<span class="ruby-ivar">@m</span>, <span class="ruby-ivar">@d</span>, <span class="ruby-ivar">@y</span>)
+  <span class="ruby-identifier">year</span> = <span class="ruby-ivar">@y</span> <span class="ruby-operator">+</span> <span class="ruby-value">1166</span>
+
+  <span class="ruby-keyword">if</span>(<span class="ruby-identifier">get_month_len</span> <span class="ruby-operator">==</span> <span class="ruby-value">29</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-ivar">@m</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-ivar">@d</span> <span class="ruby-operator">==</span> <span class="ruby-value">29</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">puts</span>(<span class="ruby-node">&quot;St. Tib&#39;s Day, #{year} YOLD&quot;</span>)
+    <span class="ruby-identifier">exit</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">dayofyear</span> = <span class="ruby-identifier">get_diy</span>
+
+  <span class="ruby-keyword">if</span>(<span class="ruby-identifier">is_leap</span>(<span class="ruby-ivar">@y</span>) <span class="ruby-operator">==</span> <span class="ruby-value">29</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">dayofyear</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">60</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">dayofyear</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">seasonday</span> = <span class="ruby-identifier">dayofyear</span> <span class="ruby-operator">%</span> <span class="ruby-value">73</span>
+  <span class="ruby-identifier">seasonday</span> = <span class="ruby-value">73</span> <span class="ruby-keyword">if</span>(<span class="ruby-identifier">seasonday</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">seasonday</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">5</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">puts</span>(<span class="ruby-node">&quot;Today is #{APOSTLE[dayofyear / 73]}, in the YOLD #{year}&quot;</span>)
+    <span class="ruby-identifier">exit</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">50</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">puts</span>(<span class="ruby-node">&quot;Today is #{HOLYDAY[dayofyear / 73]}, in the YOLD #{year}&quot;</span>)
+    <span class="ruby-identifier">exit</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">dayofyear</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">73</span>, <span class="ruby-value">146</span>, <span class="ruby-value">219</span>, <span class="ruby-value">291</span>, <span class="ruby-value">365</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">season</span> = <span class="ruby-constant">SEASONS</span>[(<span class="ruby-identifier">dayofyear</span> <span class="ruby-operator">/</span> <span class="ruby-value">73</span>) <span class="ruby-operator">-</span> <span class="ruby-value">1</span>]
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">season</span> = <span class="ruby-constant">SEASONS</span>[(<span class="ruby-identifier">dayofyear</span> <span class="ruby-operator">/</span> <span class="ruby-value">73</span>)]
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">dayofweek</span> = <span class="ruby-constant">WEEKDAY</span>[(<span class="ruby-identifier">dayofyear</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-operator">%</span> <span class="ruby-value">5</span>]
+
+  <span class="ruby-identifier">ord</span> = <span class="ruby-identifier">ordinal</span>(<span class="ruby-identifier">seasonday</span>)
+  <span class="ruby-identifier">puts</span>(<span class="ruby-node">&quot;Today is #{dayofweek}, the #{ord} day of #{season} in the YOLD #{year}&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

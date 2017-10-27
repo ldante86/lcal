@@ -1,0 +1,125 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "RCAL" "1" "September 2016" "" ""
+.
+.SH "NAME"
+\fBrcal\fR \- display a calendar
+.
+.SH "SYNOPSIS"
+\fBrcal\fR [\fIoptions\fR] [[[day] month] year]
+.
+.SH "DESCRIPTION"
+\fBrcal\fR is a command\-line calendar similar to cal/ncal\.
+.
+.SH "OPTIONS"
+.
+.IP "\(bu" 4
+\fB\-d\fR Show days/years between two dates\.
+.
+.IP "\(bu" 4
+\fB\-e\fR Show Western easter\.
+.
+.IP "\(bu" 4
+\fB\-h\fR Turn off highlighting\.
+.
+.IP "\(bu" 4
+\fB\-j\fR Show the Julian calendar\.
+.
+.IP "\(bu" 4
+\fB\-n\fR Show next month\.
+.
+.IP "\(bu" 4
+\fB\-p\fR Show the previous month\.
+.
+.IP "\(bu" 4
+\fB\-w\fR Show weeknumbers next to default calendar\.
+.
+.IP "\(bu" 4
+\fB\-y\fR Show yearly calendar\.
+.
+.IP "\(bu" 4
+\fB\-D\fR Show day of week\.
+.
+.IP "\(bu" 4
+\fB\-G\fR Show Julian day number (JDN)\.
+.
+.IP "\(bu" 4
+\fB\-J\fR Show Gregorian date for JDN\.
+.
+.IP "\(bu" 4
+\fB\-V\fR Show version information and exit\.
+.
+.IP "\(bu" 4
+\fB\-W\fR Show current week number\.
+.
+.IP "\(bu" 4
+\fB\-\-ddate\fR Show Discordian date\.
+.
+.IP "\(bu" 4
+\fB\-\-help\fR Show usage information and exit\.
+.
+.IP "\(bu" 4
+\fB\-\-html\fR Generate a calendar in raw HTML\.
+.
+.IP "\(bu" 4
+\fB\-\-ncal\fR Show calendar in ncal format\.
+.
+.IP "\(bu" 4
+\fB\-3\fR Show previous, current and next month\.
+.
+.IP "" 0
+.
+.SH "PARAMETERS"
+A single parameter specifies the month (1\-12) to be displayed\.
+.
+.P
+Two parameters specify month and year\.
+.
+.P
+Three parameters specify the month, day and year; the day will be highlighted\.
+.
+.SH "NOTES"
+The \fB\-h\fR flag must precede all other flags and args\.
+.
+.P
+With the \fB\-3\fR flag, the middle month and year can be set\.
+.
+.P
+The \fB\-y\fR flag is optional if a year is the only argument\.
+.
+.P
+The \fB\-y\fR flag may come after \fB\-j\fR and \fB\-\-ncal\fR followed by a year\.
+.
+.P
+The \fB\-y\fR and \fB\-3\fR flags don\'t support highlighting\.
+.
+.SH "EXAMPLES"
+rcal \-\-ncal \-j \-y 2000
+.
+.P
+rcal 10 28 1986
+.
+.P
+rcal \-J 2446732
+.
+.P
+rcal \-h \-j 10
+.
+.P
+rcal \-\-html > today\.html
+.
+.P
+rcal 2015
+.
+.SH "HISTORY"
+This program started its life as a 5000+ line bash script called lcal I wrote several years ago\. It was my favorite shell program \- it has over 50 command\-line flags! \- but because it was so slow, I chose to make an implementation using the Ruby language\.
+.
+.SH "AUTHOR"
+rcal and this manual were written by Luciano D\. Cecere
+.
+.SH "LICENSE"
+GPLv2 \- 2015
+.
+.SH "SEE ALSO"
+cal(1), ddate(1), ncal(1)

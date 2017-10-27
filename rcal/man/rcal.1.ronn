@@ -1,0 +1,96 @@
+rcal(1) -- display a calendar
+=============================
+
+## SYNOPSIS
+
+`rcal` [<options>] [[[day] month] year]
+
+## DESCRIPTION
+
+**rcal** is a command-line calendar similar to cal/ncal. 
+
+## OPTIONS
+
+* `-d`
+Show days/years between two dates.
+* `-e`
+Show Western easter.
+* `-h`
+Turn off highlighting.
+* `-j`
+Show the Julian calendar.
+* `-n`
+Show next month.
+* `-p`
+Show the previous month.
+* `-w`
+Show weeknumbers next to default calendar.
+* `-y`
+Show yearly calendar.
+* `-D`
+Show day of week.
+* `-G`
+Show Julian day number (JDN).
+* `-J`
+Show Gregorian date for JDN.
+* `-V`
+Show version information and exit.
+* `-W`
+Show current week number.
+* `--ddate`
+Show Discordian date.
+* `--help`
+Show usage information and exit.
+* `--html`
+Generate a calendar in raw HTML.
+* `--ncal`
+Show calendar in ncal format.
+* `-3`
+Show previous, current and next month.
+
+##PARAMETERS
+A single parameter specifies the month (1-12) to be displayed.
+
+Two parameters specify month and year.
+
+Three parameters specify the month, day and year; the day will be highlighted.
+
+##NOTES
+The `-h` flag must precede all other flags and args.
+
+With the `-3` flag, the middle month and year can be set.
+
+The `-y` flag is optional if a year is the only argument.
+
+The `-y` flag may come after `-j` and `--ncal` followed by a year.
+
+The `-y` and `-3` flags don't support highlighting.
+
+##EXAMPLES
+
+rcal --ncal -j -y 2000
+
+rcal 10 28 1986
+
+rcal -J 2446732
+
+rcal -h -j 10
+
+rcal --html > today.html
+
+rcal 2015
+
+##HISTORY
+This program started its life as a 5000+ line bash script called lcal
+I wrote several years ago. It was my favorite shell program - it has
+over 50 command-line flags! - but because it was so slow, I chose to make an
+implementation using the Ruby language.
+
+##AUTHOR
+rcal and this manual were written by Luciano D. Cecere
+
+##LICENSE
+GPLv2 - 2015
+
+##SEE ALSO
+cal(1), ddate(1), ncal(1)

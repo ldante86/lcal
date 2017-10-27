@@ -1,0 +1,46 @@
+==README for rcal 0.0.1
+rcal is a command-line calendar similar to cal (unix), gcal, ncal (bsd),
+and ddate (the Discordian calendar). Command-line arguments are easier
+in rcal (in my opinion) than the above programs. Any day can be bolded
+by passing MM DD YYYY as the arguments.
+
+Output of `rcal --help':
+
+PROGRAM: rcal - display a calendar
+AUTHOR: Luciano D. Cecere
+LICENSE: GPLv2 (2015)
+
+USAGE:
+  rcal                            show current calendar
+  rcal MM                         show month of current year
+  rcal MM YYYY                    show month of year
+  rcal MM DD YYYY                 show month and day of year
+  rcal -d MM DD YYYY MM DD YYYY   show days/years between two dates
+  rcal -e YYYY                    show Western easter for YYYY
+  rcal -h                         don't highlight the current day
+  rcal -j MM DD YYYY              show Julian (1..365) calendar
+  rcal -n                         show next month
+  rcal -p                         show previous month
+  rcal -w MM YYY                  show week numbers
+  rcal -y YYYY                    show yearly calendar
+  rcal -D MM DD YYYY              show day of week for date
+  rcal -G MM DD YYYY              show Julian day number (JDN) for date
+  rcal -J JDN                     show Gregorian date for JDN
+  rcal -V                         show version information and exit
+  rcal -W                         show current week number
+  rcal --ddate MM DD YYY          show Discordian date for date
+  rcal --help                     show this help and exit
+  rcal --html MM DD YYYY          generate HTML calendar
+  rcal --ncal MM DD YYYY          show calendar in ncal format
+  rcal -3 MM YYYY                 show previous, current and next month
+
+NOTES:
+  The -h flag must precede all other flags and args.
+  With the -3 flag, the middle month and year can be set.
+  The -y flag is optional if year is by itself.
+
+==INSTALL
+run ./make.sh to:
+* build gem
+* install gem
+* install manpage

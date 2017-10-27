@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>README - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#label-README+for+rcal+0.0.1">README for rcal 0.0.1</a>
+    <li><a href="#label-INSTALL">INSTALL</a>
+  </ul>
+</div>
+
+
+  <div id="project-metadata">
+    <div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./AUTHOR.html">AUTHOR</a>
+  
+    <li><a href="./COPYING.html">COPYING</a>
+  
+    <li><a href="./README.html">README</a>
+  
+    <li><a href="./make_sh.html">make.sh</a>
+  
+    <li><a href="./man/rcal_1.html">rcal.1</a>
+  
+    <li><a href="./man/rcal_1_ronn.html">rcal.1.ronn</a>
+  
+    <li><a href="./rcal_gemspec.html">rcal.gemspec</a>
+  
+    <li><a href="./scripts/dcal_sh.html">dcal.sh</a>
+  
+    <li><a href="./scripts/ddate_sh.html">ddate.sh</a>
+  
+    <li><a href="./scripts/gd_conversion_sh.html">gd_conversion.sh</a>
+  
+    <li><a href="./scripts/gdj_conversion_sh.html">gdj_conversion.sh</a>
+  
+    <li><a href="./scripts/rcal-funcs_sh.html">rcal-funcs.sh</a>
+  
+    <li><a href="./scripts/rcalhtml_sh.html">rcalhtml.sh</a>
+  
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page README">
+
+<h2 id="label-README+for+rcal+0.0.1"><a href="README.html">README</a> for rcal 0.0.1<span><a href="#label-README+for+rcal+0.0.1">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>rcal is a command-line calendar similar to cal (unix), gcal, ncal (bsd),
+and ddate (the Discordian calendar). Command-line arguments are easier in
+rcal (in my opinion) than the above programs. Any day can be bolded by
+passing MM DD YYYY as the arguments.</p>
+
+<p>Output of `rcal –help&#39;:</p>
+
+<p>PROGRAM: rcal - display a calendar AUTHOR: Luciano D. Cecere LICENSE: GPLv2
+(2015)</p>
+
+<p>USAGE:</p>
+
+<pre>rcal                            show current calendar
+rcal MM                         show month of current year
+rcal MM YYYY                    show month of year
+rcal MM DD YYYY                 show month and day of year
+rcal -d MM DD YYYY MM DD YYYY   show days/years between two dates
+rcal -e YYYY                    show Western easter for YYYY
+rcal -h                         don&#39;t highlight the current day
+rcal -j MM DD YYYY              show Julian (1..365) calendar
+rcal -n                         show next month
+rcal -p                         show previous month
+rcal -w MM YYY                  show week numbers
+rcal -y YYYY                    show yearly calendar
+rcal -D MM DD YYYY              show day of week for date
+rcal -G MM DD YYYY              show Julian day number (JDN) for date
+rcal -J JDN                     show Gregorian date for JDN
+rcal -V                         show version information and exit
+rcal -W                         show current week number
+rcal --ddate MM DD YYY          show Discordian date for date
+rcal --help                     show this help and exit
+rcal --html MM DD YYYY          generate HTML calendar
+rcal --ncal MM DD YYYY          show calendar in ncal format
+rcal -3 MM YYYY                 show previous, current and next month</pre>
+
+<p>NOTES:</p>
+
+<pre>The -h flag must precede all other flags and args.
+With the -3 flag, the middle month and year can be set.
+The -y flag is optional if year is by itself.</pre>
+
+<h2 id="label-INSTALL">INSTALL<span><a href="#label-INSTALL">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>run ./make.sh to:</p>
+<ul><li>
+<p>build gem</p>
+</li><li>
+<p>install gem</p>
+</li><li>
+<p>install manpage</p>
+</li></ul>
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

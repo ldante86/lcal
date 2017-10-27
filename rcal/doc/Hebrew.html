@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Hebrew - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-j_to_sdn">::j_to_sdn</a>
+    
+    <li ><a href="#method-c-molad">::molad</a>
+    
+    <li ><a href="#method-c-sdn_to_j">::sdn_to_j</a>
+    
+    <li ><a href="#method-c-tishri1">::tishri1</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Hebrew">
+  <h1 id="module-Hebrew" class="module">
+    module Hebrew
+  </h1>
+
+  <section class="description">
+    
+<p>This module is not finished.</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-j_to_sdn" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">j_to_sdn</span><span
+            class="method-args">(m, d, y)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="j_to_sdn-source">
+            <pre><span class="ruby-comment"># File lib/hebrew.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">j_to_sdn</span>(<span class="ruby-identifier">m</span>, <span class="ruby-identifier">d</span>, <span class="ruby-identifier">y</span>)
+  <span class="ruby-identifier">m</span>, <span class="ruby-identifier">d</span>, <span class="ruby-identifier">y</span> = <span class="ruby-identifier">m</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">d</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">y</span>.<span class="ruby-identifier">to_i</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">y</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">y</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">-4713</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">m</span> <span class="ruby-operator">&lt;=</span><span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">m</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">12</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">m</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">d</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">31</span>
+    <span class="ruby-keyword">return</span>(<span class="ruby-value">0</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">y</span> <span class="ruby-operator">==</span> <span class="ruby-value">-4713</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">m</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">m</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+      <span class="ruby-keyword">return</span>(<span class="ruby-value">0</span>)
+  <span class="ruby-keyword">end</span>
+
+  (<span class="ruby-identifier">y</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">year</span> = <span class="ruby-identifier">y</span> <span class="ruby-operator">+</span> <span class="ruby-value">4801</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">year</span> = <span class="ruby-identifier">y</span> <span class="ruby-operator">+</span> <span class="ruby-value">4800</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">m</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>
+    <span class="ruby-identifier">month</span> = <span class="ruby-identifier">m</span> <span class="ruby-operator">-</span> <span class="ruby-value">3</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">month</span> = <span class="ruby-identifier">m</span> <span class="ruby-operator">+</span> <span class="ruby-value">9</span>
+    <span class="ruby-identifier">year</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+
+  ((<span class="ruby-identifier">year</span> <span class="ruby-operator">*</span> <span class="ruby-value">1461</span>) <span class="ruby-operator">/</span> <span class="ruby-value">4</span>) <span class="ruby-operator">+</span> ((<span class="ruby-identifier">month</span> <span class="ruby-operator">*</span> <span class="ruby-value">153</span> <span class="ruby-operator">+</span> <span class="ruby-value">2</span>) <span class="ruby-operator">/</span> <span class="ruby-value">5</span>) <span class="ruby-operator">+</span> (<span class="ruby-identifier">d</span> <span class="ruby-operator">-</span> <span class="ruby-value">32083</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-molad" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">molad</span><span
+            class="method-args">(mcycle)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="molad-source">
+            <pre><span class="ruby-comment"># File lib/hebrew.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">molad</span>(<span class="ruby-identifier">mcycle</span>)
+  <span class="ruby-identifier">mcycle</span> = <span class="ruby-identifier">mcycle</span>.<span class="ruby-identifier">to_i</span>
+
+  <span class="ruby-identifier">r1</span> = <span class="ruby-value">31524</span>
+  <span class="ruby-identifier">r1</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">mcycle</span> <span class="ruby-operator">*</span> (<span class="ruby-value">765433</span> <span class="ruby-operator">&amp;</span> <span class="ruby-value">65535</span>)
+  <span class="ruby-identifier">r2</span> = <span class="ruby-identifier">ri</span> <span class="ruby-operator">&gt;&gt;</span> <span class="ruby-value">16</span>
+  <span class="ruby-identifier">r2</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">mcycle</span> <span class="ruby-operator">*</span> (<span class="ruby-value">765433</span> <span class="ruby-operator">&gt;&gt;</span> <span class="ruby-value">16</span>) <span class="ruby-operator">&amp;</span> <span class="ruby-value">65535</span>
+  <span class="ruby-identifier">d2</span> = <span class="ruby-identifier">r2</span> <span class="ruby-operator">/</span> <span class="ruby-value">25920</span>
+  <span class="ruby-identifier">r2</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">d2</span> <span class="ruby-operator">*</span> <span class="ruby-value">25920</span>
+  <span class="ruby-identifier">r1</span> = (<span class="ruby-identifier">r2</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">16</span>) <span class="ruby-operator">|</span> ( <span class="ruby-identifier">r1</span> <span class="ruby-operator">&amp;</span> <span class="ruby-value">65535</span>)
+  <span class="ruby-identifier">d1</span> = <span class="ruby-identifier">r1</span> <span class="ruby-operator">/</span> <span class="ruby-value">25920</span>
+  <span class="ruby-identifier">r1</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">d1</span> <span class="ruby-operator">*</span> <span class="ruby-value">25920</span>
+
+  <span class="ruby-identifier">moladday</span> = (<span class="ruby-identifier">d1</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">16</span>) <span class="ruby-operator">|</span> <span class="ruby-identifier">d1</span>
+  <span class="ruby-identifier">mhalakim</span> = <span class="ruby-identifier">r1</span>
+
+  [ <span class="ruby-identifier">moladday</span>, <span class="ruby-identifier">mhalakim</span> ]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-sdn_to_j" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sdn_to_j</span><span
+            class="method-args">(sdn, m, d, y)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="sdn_to_j-source">
+            <pre><span class="ruby-comment"># File lib/hebrew.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">sdn_to_j</span>(<span class="ruby-identifier">sdn</span>, <span class="ruby-identifier">m</span>, <span class="ruby-identifier">d</span>, <span class="ruby-identifier">y</span>)
+  <span class="ruby-identifier">sdn</span>, <span class="ruby-identifier">m</span>, <span class="ruby-identifier">d</span>, <span class="ruby-identifier">y</span> = <span class="ruby-identifier">sdn</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">m</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">d</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">y</span>.<span class="ruby-identifier">to_i</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">sdn</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">347997</span>
+    <span class="ruby-identifier">m</span>, <span class="ruby-identifier">d</span>, <span class="ruby-identifier">y</span> = <span class="ruby-value">0</span>, <span class="ruby-value">0</span>, <span class="ruby-value">0</span>
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">day</span> = <span class="ruby-identifier">sdn</span> <span class="ruby-operator">-</span> <span class="ruby-value">347997</span>
+
+<span class="ruby-comment"># unfinished</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-tishri1" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">tishri1</span><span
+            class="method-args">(myear, mday, mhalakim)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="tishri1-source">
+            <pre><span class="ruby-comment"># File lib/hebrew.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tishri1</span>(<span class="ruby-identifier">myear</span>, <span class="ruby-identifier">mday</span>, <span class="ruby-identifier">mhalakim</span>)
+  <span class="ruby-identifier">myear</span>, <span class="ruby-identifier">mday</span>, <span class="ruby-identifier">mhalakim</span> = <span class="ruby-identifier">myear</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">mday</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">mhalakim</span>.<span class="ruby-identifier">to_i</span>
+
+  <span class="ruby-identifier">tishri1</span> = <span class="ruby-identifier">mday</span>
+  <span class="ruby-identifier">dow</span> = <span class="ruby-identifier">tishri1</span> <span class="ruby-operator">%</span> <span class="ruby-value">7</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">myear</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">2</span>,<span class="ruby-value">5</span>,<span class="ruby-value">7</span>,<span class="ruby-value">10</span>,<span class="ruby-value">13</span>,<span class="ruby-value">16</span>,<span class="ruby-value">18</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">leap</span> = <span class="ruby-identifier">myear</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">myear</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">3</span>,<span class="ruby-value">6</span>,<span class="ruby-value">8</span>,<span class="ruby-value">11</span>,<span class="ruby-value">14</span>,<span class="ruby-value">17</span>,<span class="ruby-value">0</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">lastleap</span> = <span class="ruby-identifier">myear</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">mhalakim</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">101376</span> <span class="ruby-operator">||</span> ((<span class="ruby-operator">!</span><span class="ruby-identifier">leap</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">dow</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">mhalakim</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">229914</span>) <span class="ruby-operator">||</span>
+     (<span class="ruby-identifier">lastleap</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">dow</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">mhalakim</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">560269</span>)
+    <span class="ruby-identifier">tishri1</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">dow</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">dow</span> = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">dow</span> <span class="ruby-operator">==</span> <span class="ruby-value">7</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">dow</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">3</span>,<span class="ruby-value">5</span>,<span class="ruby-value">0</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">tishri1</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">tishri1</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
