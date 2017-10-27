@@ -92,7 +92,6 @@ use Getopt::Long;
 
 
 my @month_length;
-my $month_length;
 my @calendar_data;
 my $month_starts_on;
 
@@ -138,7 +137,8 @@ sub get_month_length {
   my $y = $_[0];
   if ( ($y % 4 == 0 && $y % 100 != 0) || $y % 400 == 0 ) {
     @month_length = qw( 0 31 29 31 30 31 30 31 31 30 31 30 31 );
-  } else {
+  }
+  else {
     @month_length = qw( 0 31 28 31 30 31 30 31 31 30 31 30 31 );
   }
 }
@@ -258,8 +258,8 @@ sub print_gregorian_month_WINDOWS {
         print "$calendar_data[$i]";
         $sp='';
       }
-        else {
-        print "$space$calendar_data[$i]";
+      else {
+      print "$space$calendar_data[$i]";
       }
     }
   }
