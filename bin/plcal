@@ -32,9 +32,7 @@ plcal - Display a monthly calendar
 
 =head1 SYNOPSIS
 
-	plcal -b
-        plcal -h
-        plcal --date 1 2017
+	plcal [option]
         plcal --help
 
 =head1 DESCRIPTION
@@ -53,13 +51,25 @@ Use bracketed bolding (<>).
 
 Disable highlighting.
 
-=item --date B<mm> B<yyyy>
+=item -n
 
-Display a calendar for a specified month and year.
+Show next nomth.
+
+=item -p
+
+Show previous month.
 
 =item --help
 
 Display a help text and exit.
+
+=item --date=B<mm> B<yyyy>
+
+Display a calendar for a specified month and year.
+
+=item --month=B<mm>
+
+Show specified month in current year.
 
 =back
 
@@ -89,7 +99,6 @@ use Getopt::Long;
 
 
 ## Global variables ##
-
 
 my @month_length;
 my @calendar_data;
@@ -125,8 +134,11 @@ Usage:  plcal [option]
 Options:
   -b			use bracketed bolding (<>)
   -h			disable highlighting
+  -n			show next month
+  -p			show previous month
+  --date=mm yyyy	display month of year
   --help		display this help and exit
-  --date mm yyyy	display month of year
+  --month=mm		show specified month
 
 Copyright (C) 2017 Luciano D. Cecere <ldante1986@gmail.com>
 
@@ -266,30 +278,94 @@ sub print_gregorian_month_WINDOWS {
   print "\n";
 }
 
+sub validate_month {
+  my $m = $_[0];
+
+  if ($m < 1 || $m > 12 ) {
+    print "Month out of range [1-12]\n";
+    exit 1;
+  }
+}
+
+sub increment_month {
+  my $m = $_[0];
+
+  if ($m == 12) {
+    $month = 1;
+    $year++;	
+  }
+  else {
+    $month++;
+  }
+
+  $day = 0;
+}
+
+sub decrement_month {
+  my $m = $_[0];
+
+  if ($month == 1) {
+    $month = 12;
+    $year--;
+  }
+  else {
+    $month--;
+  }
+  $day = 0;
+}
+
 
 
 ## Parse commandline args ###
-
 
 my $help = '';
 my $bold = '';
 my $no_highlight = '';
 my @date_my = ();
+my $month1 = '';
+my $next = '';
+my $previous = '';
 
 GetOptions(
   'b'		=> \$bold,
   'help|info'	=> \$help,
   'h'		=> \$no_highlight,
   'date=i{2}'	=> \@date_my,
+  'month=i{0,}'	=> \$month1,
+  'n'		=> \$next,
+  'p'		=> \$previous,
 );
+
+
+
+## Program start ##
 
 if ($help) {
   print &help();
   exit;
 }
 
+if ($previous) {
+  &decrement_month($month);
+  &print_gregorian_month($month, $day, $year);
+  exit;
+}
+
+if ($next) {
+  &increment_month($month);
+  &print_gregorian_month($month, $day, $year);
+  exit;
+}
+
 if ($no_highlight) {
   $day = 0;
+}
+
+if ($month1) {
+  &validate_month($month1);
+  $day = 0;
+  &print_gregorian_month($month1, $day, $year);
+  exit;
 }
 
 if ($#date_my > 0) {
@@ -299,15 +375,12 @@ if ($#date_my > 0) {
 }
 
 
-## Program start ##
-
-
 if ("$^O" eq 'MSWin32' || $bold) {
   &print_gregorian_month_WINDOWS($month, $day, $year);
   exit;
 }
 
-#Standard calendar
+#Standard calendar - no options
 &print_gregorian_month($month, $day, $year);
 
 
