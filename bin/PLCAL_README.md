@@ -16,10 +16,13 @@ README for plcal-0.0.1
 
 | Option | Description     |
 | :------------- | :------------- |
-| -b   | Use bracketed bolding (<>).  |
-| --date=**mm yyyy**       | Display a calendar for a specified month and year.       |
-| --h   | Disable highlighting   |
+| -b   | Use bracketed bolding (<>)  |
+| -h   | Disable highlighting   |
+| -n   | Show next month  |
+| -p   | Show previous month
+| --date=**mm yyyy**       | Display a calendar for a specified month and year       |
 | --help  | Show hexp text and exit  |
+| --month=**mm**           | Show specified month  |
 
 ### EXAMPLE
 
