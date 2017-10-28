@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "PLCAL 1"
-.TH PLCAL 1 "2017-10-26" "perl v5.22.1" "User Contributed Perl Documentation"
+.TH PLCAL 1 "2017-10-28" "perl v5.22.1" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -142,10 +142,8 @@
 plcal \- Display a monthly calendar
 .SH "SYNOPSIS"
 .IX Header "SYNOPSIS"
-.Vb 4
-\&        plcal \-b
-\&        plcal \-h
-\&        plcal \-\-date 1 2017
+.Vb 2
+\&        plcal [option]
 \&        plcal \-\-help
 .Ve
 .SH "DESCRIPTION"
@@ -161,12 +159,21 @@ Use bracketed bolding (<>).
 .IP "\-h" 12
 .IX Item "-h"
 Disable highlighting.
-.IP "\-\-date \fBmm\fR \fByyyy\fR" 12
-.IX Item "--date mm yyyy"
-Display a calendar for a specified month and year.
+.IP "\-n" 12
+.IX Item "-n"
+Show next nomth.
+.IP "\-p" 12
+.IX Item "-p"
+Show previous month.
 .IP "\-\-help" 12
 .IX Item "--help"
 Display a help text and exit.
+.IP "\-\-date=\fBmm\fR \fByyyy\fR" 12
+.IX Item "--date=mm yyyy"
+Display a calendar for a specified month and year.
+.IP "\-\-month=\fBmm\fR" 12
+.IX Item "--month=mm"
+Show specified month in current year.
 .SH "NOTES"
 .IX Header "NOTES"
 The \-b option will be the default if the \s-1OS\s0 is Windows.
