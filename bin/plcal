@@ -24,74 +24,6 @@
 ########################################################################
 
 
-## Manpage documentation below. Process with pod2man.
-
-=head1 NAME
-
-plcal - Display a monthly calendar
-
-=head1 SYNOPSIS
-
-	plcal [option]
-        plcal --help
-
-=head1 DESCRIPTION
-
-        plcal is a simple command-line calendar written in perl.
-
-=head1 OPTIONS
-
-=over 12
-
-=item -b
-
-Use bracketed bolding (<>).
-
-=item -h
-
-Disable highlighting.
-
-=item -n
-
-Show next nomth.
-
-=item -p
-
-Show previous month.
-
-=item --help
-
-Display a help text and exit.
-
-=item --date=B<mm> B<yyyy>
-
-Display a calendar for a specified month and year.
-
-=item --month=B<mm>
-
-Show specified month in current year.
-
-=back
-
-=head1 NOTES
-
-The -b option will be the default if the OS is Windows.
-
-=head1 AUTHOR
-
-Luciano D. Cecere <ldante1986@gmail.com>
-
-=head1 LICENSE
-
-B<plcal> is free software; you can redistribute it and/or modify it
-under the terms of the GPL, or, optionally, Perl's license.
-
-=cut
-
-######################
-## Code starts here ##
-######################
-
 use strict;
 use warnings;
 use POSIX qw(strftime);
@@ -327,13 +259,13 @@ my $next = '';
 my $previous = '';
 
 GetOptions(
-  'b'		=> \$bold,
+  'b|bracket'	=> \$bold,
   'help|info'	=> \$help,
   'h'		=> \$no_highlight,
   'date=i{2}'	=> \@date_my,
   'month=i{0,}'	=> \$month1,
-  'n'		=> \$next,
-  'p'		=> \$previous,
+  'n|next'	=> \$next,
+  'p|previous'	=> \$previous,
 );
 
 
@@ -383,5 +315,68 @@ if ("$^O" eq 'MSWin32' || $bold) {
 #Standard calendar - no options
 &print_gregorian_month($month, $day, $year);
 
+__END__
 
-## END ###
+## Manpage documentation below. Process with pod2man.
+
+=head1 NAME
+
+plcal - Display a monthly calendar
+
+=head1 SYNOPSIS
+
+	plcal [option]
+        plcal --help
+
+=head1 DESCRIPTION
+
+        plcal is a simple command-line calendar written in perl.
+
+=head1 OPTIONS
+
+=over 12
+
+=item -b
+
+Use bracketed bolding (<>).
+
+=item -h
+
+Disable highlighting.
+
+=item -n
+
+Show next nomth.
+
+=item -p
+
+Show previous month.
+
+=item --help
+
+Display a help text and exit.
+
+=item --date=B<mm> B<yyyy>
+
+Display a calendar for a specified month and year.
+
+=item --month=B<mm>
+
+Show specified month in current year.
+
+=back
+
+=head1 NOTES
+
+The -b option will be the default if the OS is Windows.
+
+=head1 AUTHOR
+
+Luciano D. Cecere <ldante1986@gmail.com>
+
+=head1 LICENSE
+
+B<plcal> is free software; you can redistribute it and/or modify it
+under the terms of the GPL, or, optionally, Perl's license.
+
+=cut
