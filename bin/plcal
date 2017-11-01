@@ -142,6 +142,10 @@ sub gregorian_data {
 
 sub print_gregorian_month {
   my ($m, $d, $y) = @_;
+  $d  =~ s/^\s+//;
+  $d  =~ s/^0+//;
+
+  
   &gregorian_data($m, $y);
 
   print "\n";
@@ -170,6 +174,9 @@ sub print_gregorian_month {
 
 sub print_gregorian_month_WINDOWS {
   my ($m, $d, $y) = @_;
+  $d  =~ s/^\s+//;
+  $d  =~ s/^0+//;
+
   &gregorian_data($m, $y);
 
   my $sp='';
