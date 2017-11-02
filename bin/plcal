@@ -143,6 +143,7 @@ sub gregorian_data {
 sub print_gregorian_month {
   my ($m, $d, $y) = @_;
   $d  =~ s/^\s+//;
+  my $dd = $d;
   $d  =~ s/^0+//;
 
   
@@ -157,12 +158,12 @@ sub print_gregorian_month {
     if ( ($i % 7) == 0 && $i != 0 ) {
       print "\n";
     }
-    if ( ($i - ($month_starts_on - 1) == $d) &&
-    ($i - ($month_starts_on - 1) < 10) && $d > 0 ) {
+    if ( ($i - ($month_starts_on - 1) == $dd) &&
+    ($i - ($month_starts_on - 1) < 10) && $dd > 0 ) {
       print "$space$bold_on$space$d$bold_off";
     }
-    elsif ( ($i - ($month_starts_on - 1) == $d) &&
-    ($i - ($month_starts_on - 1) > 9) && $d > 0 ) {
+    elsif ( ($i - ($month_starts_on - 1) == $dd) &&
+    ($i - ($month_starts_on - 1) > 9) && $dd > 0 ) {
       print "$space$bold_on$d$bold_off";
     }
     else {
@@ -236,7 +237,6 @@ sub increment_month {
   else {
     $month++;
   }
-
   $day = 0;
 }
 
