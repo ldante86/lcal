@@ -315,8 +315,15 @@ if ($#date_my > 0) {
 
 
 if ("$^O" eq 'MSWin32' || $bold) {
-  &print_gregorian_month_WINDOWS($month, $day, $year);
-  exit;
+  if ($no_newline) {
+    $day = 0;
+    &print_gregorian_month($month, $day, $year);
+    exit;
+  }
+  else
+    &print_gregorian_month_WINDOWS($month, $day, $year);
+    exit;
+  }
 }
 
 #Standard calendar - no options
