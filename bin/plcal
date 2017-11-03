@@ -146,7 +146,7 @@ sub print_gregorian_month {
   my $dd = $d;
   $d  =~ s/^0+//;
 
-  
+
   &gregorian_data($m, $y);
 
   print "\n";
@@ -232,7 +232,7 @@ sub increment_month {
 
   if ($m == 12) {
     $month = 1;
-    $year++;	
+    $year++;
   }
   else {
     $month++;
@@ -317,8 +317,6 @@ if ($#date_my > 0) {
 if ("$^O" eq 'MSWin32' || $bold) {
   if ($no_highlight) {
     $day = 0;
-    &print_gregorian_month($month, $day, $year);
-    exit;
   }
   else {
     &print_gregorian_month_WINDOWS($month, $day, $year);
