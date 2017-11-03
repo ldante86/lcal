@@ -315,12 +315,12 @@ if ($#date_my > 0) {
 
 
 if ("$^O" eq 'MSWin32' || $bold) {
-  if ($no_newline) {
+  if ($no_highlight) {
     $day = 0;
     &print_gregorian_month($month, $day, $year);
     exit;
   }
-  else
+  else {
     &print_gregorian_month_WINDOWS($month, $day, $year);
     exit;
   }
