@@ -23,12 +23,10 @@
 #
 ########################################################################
 
-
 use strict;
 use warnings;
 use POSIX qw(strftime);
 use Getopt::Long;
-
 
 ## Global variables ##
 
@@ -37,27 +35,28 @@ my @calendar_data;
 my $month_starts_on;
 
 my @month_names_long = qw( undef January February March April May June
-                           July August September October November December );
-my @month_names_short = qw( undef Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );
-my @day_names_long = qw( Sunday Monday Tuesday Wednesday Thursday Friday Saturday );
-my @day_names_short = qw ( Sun Mon Tue Wed Thu Fri Sat );
+  July August September October November December );
+my @month_names_short =
+  qw( undef Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );
+my @day_names_long =
+  qw( Sunday Monday Tuesday Wednesday Thursday Friday Saturday );
+my @day_names_short   = qw ( Sun Mon Tue Wed Thu Fri Sat );
 my @day_names_shorter = qw ( Su Mo Tu We Th Fr Sa );
 
-my $bold_on = "\e[7m";
-my $bold_off = "\e[27m";
-my $space = " ";
+my $bold_on         = "\e[7m";
+my $bold_off        = "\e[27m";
+my $space           = " ";
 my $calendar_length = 42;
-my $calendar_width = 21;
+my $calendar_width  = 21;
 
 my $month = strftime "%m", localtime;
-my $day = strftime "%d" , localtime;
-my $year = strftime "%Y" , localtime;
-
+my $day   = strftime "%d", localtime;
+my $year  = strftime "%Y", localtime;
 
 ## Subroutines ##
 
 sub help {
-return << 'HELP';
+    return << 'HELP';
 
 plcal - display a monthly calendar
 
@@ -78,254 +77,260 @@ HELP
 }
 
 sub get_month_length {
-  my $y = $_[0];
-  if ( ($y % 4 == 0 && $y % 100 != 0) || $y % 400 == 0 ) {
-    @month_length = qw( 0 31 29 31 30 31 30 31 31 30 31 30 31 );
-  }
-  else {
-    @month_length = qw( 0 31 28 31 30 31 30 31 31 30 31 30 31 );
-  }
+    my $y = $_[0];
+    if ( ( $y % 4 == 0 && $y % 100 != 0 ) || $y % 400 == 0 ) {
+        @month_length = qw( 0 31 29 31 30 31 30 31 31 30 31 30 31 );
+    }
+    else {
+        @month_length = qw( 0 31 28 31 30 31 30 31 31 30 31 30 31 );
+    }
 }
 
 sub day_of_week {
-  my ($m, $d, $y) = @_;
-  my @arr = qw( undef 6 2 2 5 0 3 5 1 4 6 2 4 );
-  my $w = ((int($y / 4)) - (int($y / 100))) + (int($y / 400)) + $d + $y + $arr[$m];
+    my ( $m, $d, $y ) = @_;
+    my @arr = qw( undef 6 2 2 5 0 3 5 1 4 6 2 4 );
+    my $w =
+      ( ( int( $y / 4 ) ) - ( int( $y / 100 ) ) ) +
+      ( int( $y / 400 ) ) +
+      $d + $y +
+      $arr[$m];
 
-  if ($month_length[2] == 29 && $m < 3) { $w--; }
+    if ( $month_length[2] == 29 && $m < 3 ) { $w--; }
 
-  $w % 7;
+    $w % 7;
 }
 
 sub day_in_year {
 
-  my ($m, $d, $y) = @_;
-  my $i;
+    my ( $m, $d, $y ) = @_;
+    my $i;
 
-  for ($i = 1; $i <= ( $m - 1 ); $i++) {
-    &get_month_length($y);
-    $d += $month_length[$i];
-  }
-  $d;
+    for ( $i = 1 ; $i <= ( $m - 1 ) ; $i++ ) {
+        &get_month_length($y);
+        $d += $month_length[$i];
+    }
+    $d;
 }
 
 sub center {
-  my ($len, $str) = @_;
-  printf "%*s\n", (length($str) + $len) / 2, $str;
+    my ( $len, $str ) = @_;
+    printf "%*s\n", ( length($str) + $len ) / 2, $str;
 }
 
 sub gregorian_data {
-  @calendar_data = ();
-  my ($m, $y) = @_;
-  &get_month_length($y);
-  $month_starts_on = &day_of_week($m, 1, $y);
-  my $len = $month_length[$m];
-  my $i;
+    @calendar_data = ();
+    my ( $m, $y ) = @_;
+    &get_month_length($y);
+    $month_starts_on = &day_of_week( $m, 1, $y );
+    my $len = $month_length[$m];
+    my $i;
 
-  for ( $i = 1; $i <= $month_starts_on; $i++ ) {
-    last if ($month_starts_on == 0);
-    push @calendar_data, "$space" x 2;
-  }
+    for ( $i = 1 ; $i <= $month_starts_on ; $i++ ) {
+        last if ( $month_starts_on == 0 );
+        push @calendar_data, "$space" x 2;
+    }
 
-  for ( $i = 1; $i <= ( $calendar_length - $month_starts_on ); $i++ ) {
-    if ( $i < 10 ) {
-      push @calendar_data, "$space$i";
+    for ( $i = 1 ; $i <= ( $calendar_length - $month_starts_on ) ; $i++ ) {
+        if ( $i < 10 ) {
+            push @calendar_data, "$space$i";
+        }
+        elsif ( $i > $len ) {
+            push @calendar_data, "$space" x 3;
+        }
+        else {
+            push @calendar_data, "$i";
+        }
     }
-    elsif ( $i > $len ) {
-      push @calendar_data, "$space" x 3;
-    }
-    else {
-      push @calendar_data, "$i";
-    }
-  }
 }
 
 sub print_gregorian_month {
-  my ($m, $d, $y) = @_;
-  $d  =~ s/^\s+//;
-  my $dd = $d;
-  $d  =~ s/^0+//;
+    my ( $m, $d, $y ) = @_;
+    $d =~ s/^\s+//;
+    my $dd = $d;
+    $d =~ s/^0+//;
 
+    &gregorian_data( $m, $y );
 
-  &gregorian_data($m, $y);
+    print "\n";
+    &center( $calendar_width, "$space$month_names_long[$m] $y" );
+    print "$space@day_names_shorter\n";
 
-  print "\n";
-  &center($calendar_width, "$space$month_names_long[$m] $y");
-  print "$space@day_names_shorter\n";
-
-  my $i;
-  for ( $i = 0; $i < $#calendar_data; $i++ ) {
-    if ( ($i % 7) == 0 && $i != 0 ) {
-      print "\n";
+    my $i;
+    for ( $i = 0 ; $i < $#calendar_data ; $i++ ) {
+        if ( ( $i % 7 ) == 0 && $i != 0 ) {
+            print "\n";
+        }
+        if (   ( $i - ( $month_starts_on - 1 ) == $dd )
+            && ( $i - ( $month_starts_on - 1 ) < 10 )
+            && $dd > 0 )
+        {
+            print "$space$bold_on$space$d$bold_off";
+        }
+        elsif (( $i - ( $month_starts_on - 1 ) == $dd )
+            && ( $i - ( $month_starts_on - 1 ) > 9 )
+            && $dd > 0 )
+        {
+            print "$space$bold_on$d$bold_off";
+        }
+        else {
+            print "$space$calendar_data[$i]";
+        }
     }
-    if ( ($i - ($month_starts_on - 1) == $dd) &&
-    ($i - ($month_starts_on - 1) < 10) && $dd > 0 ) {
-      print "$space$bold_on$space$d$bold_off";
-    }
-    elsif ( ($i - ($month_starts_on - 1) == $dd) &&
-    ($i - ($month_starts_on - 1) > 9) && $dd > 0 ) {
-      print "$space$bold_on$d$bold_off";
-    }
-    else {
-      print "$space$calendar_data[$i]";
-    }
-  }
-  print "\n";
+    print "\n";
 }
 
 sub print_gregorian_month_WINDOWS {
-  my ($m, $d, $y) = @_;
-  $d  =~ s/^\s+//;
-  $d  =~ s/^0+//;
+    my ( $m, $d, $y ) = @_;
+    $d =~ s/^\s+//;
+    $d =~ s/^0+//;
 
-  &gregorian_data($m, $y);
+    &gregorian_data( $m, $y );
 
-  my $sp='';
+    my $sp = '';
 
-  print "\n";
-  &center($calendar_width, "$space$month_names_long[$m] $y");
-  print "$space@day_names_shorter\n";
+    print "\n";
+    &center( $calendar_width, "$space$month_names_long[$m] $y" );
+    print "$space@day_names_shorter\n";
 
-  my $i;
-  for ( $i = 0; $i < $#calendar_data; $i++ ) {
-    if ( ($i % 7) == 0 && $i != 0 ) {
-      print "\n";
+    my $i;
+    for ( $i = 0 ; $i < $#calendar_data ; $i++ ) {
+        if ( ( $i % 7 ) == 0 && $i != 0 ) {
+            print "\n";
+        }
+        if (   ( $i - ( $month_starts_on - 1 ) == $d )
+            && ( $i - ( $month_starts_on - 1 ) < 10 )
+            && $d > 0 )
+        {
+            print "<$space$d>";
+            $sp = 1;
+        }
+        elsif (( $i - ( $month_starts_on - 1 ) == $d )
+            && ( $i - ( $month_starts_on - 1 ) > 9 )
+            && $d > 0 )
+        {
+            print "<$d>";
+            $sp = 1;
+        }
+        else {
+            if ( $sp && &day_of_week( $m, $d, $y ) == 6 ) {
+                print "$space$calendar_data[$i]";
+                $sp = '';
+            }
+            elsif ($sp) {
+                print "$calendar_data[$i]";
+                $sp = '';
+            }
+            else {
+                print "$space$calendar_data[$i]";
+            }
+        }
     }
-    if ( ($i - ($month_starts_on - 1) == $d) &&
-    ($i - ($month_starts_on - 1) < 10) && $d > 0 ) {
-        print "<$space$d>";
-        $sp=1;
-    }
-    elsif ( ($i - ($month_starts_on - 1) == $d) &&
-    ($i - ($month_starts_on - 1) > 9) && $d > 0 ) {
-      print "<$d>";
-      $sp=1
-    }
-    else {
-      if ($sp && &day_of_week($m, $d, $y) == 6) {
-        print "$space$calendar_data[$i]";
-        $sp='';
-      }
-      elsif ($sp) {
-        print "$calendar_data[$i]";
-        $sp='';
-      }
-      else {
-      print "$space$calendar_data[$i]";
-      }
-    }
-  }
-  print "\n";
+    print "\n";
 }
 
 sub validate_month {
-  my $m = $_[0];
+    my $m = $_[0];
 
-  if ($m < 1 || $m > 12 ) {
-    print "Month out of range [1-12]\n";
-    exit 1;
-  }
+    if ( $m < 1 || $m > 12 ) {
+        print "Month out of range [1-12]\n";
+        exit 1;
+    }
 }
 
 sub increment_month {
-  my $m = $_[0];
+    my $m = $_[0];
 
-  if ($m == 12) {
-    $month = 1;
-    $year++;
-  }
-  else {
-    $month++;
-  }
-  $day = 0;
+    if ( $m == 12 ) {
+        $month = 1;
+        $year++;
+    }
+    else {
+        $month++;
+    }
+    $day = 0;
 }
 
 sub decrement_month {
-  my $m = $_[0];
+    my $m = $_[0];
 
-  if ($month == 1) {
-    $month = 12;
-    $year--;
-  }
-  else {
-    $month--;
-  }
-  $day = 0;
+    if ( $month == 1 ) {
+        $month = 12;
+        $year--;
+    }
+    else {
+        $month--;
+    }
+    $day = 0;
 }
-
-
 
 ## Parse commandline args ###
 
-my $help = '';
-my $bold = '';
+my $help         = '';
+my $bold         = '';
 my $no_highlight = '';
-my @date_my = ();
-my $month1 = '';
-my $next = '';
-my $previous = '';
+my @date_my      = ();
+my $month1       = '';
+my $next         = '';
+my $previous     = '';
 
 GetOptions(
-  'b|bracket'	=> \$bold,
-  'help|info'	=> \$help,
-  'h'		=> \$no_highlight,
-  'date=i{2}'	=> \@date_my,
-  'month=i{0,}'	=> \$month1,
-  'n|next'	=> \$next,
-  'p|previous'	=> \$previous,
+    'b|bracket'   => \$bold,
+    'help|info'   => \$help,
+    'h'           => \$no_highlight,
+    'date=i{2}'   => \@date_my,
+    'month=i{0,}' => \$month1,
+    'n|next'      => \$next,
+    'p|previous'  => \$previous,
 );
-
-
 
 ## Program start ##
 
 if ($help) {
-  print &help();
-  exit;
+    print &help();
+    exit;
 }
 
 if ($previous) {
-  &decrement_month($month);
-  &print_gregorian_month($month, $day, $year);
-  exit;
+    &decrement_month($month);
+    &print_gregorian_month( $month, $day, $year );
+    exit;
 }
 
 if ($next) {
-  &increment_month($month);
-  &print_gregorian_month($month, $day, $year);
-  exit;
+    &increment_month($month);
+    &print_gregorian_month( $month, $day, $year );
+    exit;
 }
 
 if ($no_highlight) {
-  $day = 0;
+    $day = 0;
 }
 
 if ($month1) {
-  &validate_month($month1);
-  $day = 0;
-  &print_gregorian_month($month1, $day, $year);
-  exit;
-}
-
-if ($#date_my > 0) {
-  $month = $date_my[0];
-  $year = $date_my[1];
-  $day = 0;
-}
-
-
-if ("$^O" eq 'MSWin32' || $bold) {
-  if ($no_highlight) {
+    &validate_month($month1);
     $day = 0;
-  }
-  else {
-    &print_gregorian_month_WINDOWS($month, $day, $year);
+    &print_gregorian_month( $month1, $day, $year );
     exit;
-  }
+}
+
+if ( $#date_my > 0 ) {
+    $month = $date_my[0];
+    $year  = $date_my[1];
+    $day   = 0;
+}
+
+if ( "$^O" eq 'MSWin32' || $bold ) {
+    if ($no_highlight) {
+        $day = 0;
+    }
+    else {
+        &print_gregorian_month_WINDOWS( $month, $day, $year );
+        exit;
+    }
 }
 
 #Standard calendar - no options
-&print_gregorian_month($month, $day, $year);
+&print_gregorian_month( $month, $day, $year );
 
 __END__
 
