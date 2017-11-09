@@ -35,11 +35,11 @@ my @calendar_data;
 my $month_starts_on;
 
 my @month_names_long = qw( undef January February March April May June
-  July August September October November December );
-my @month_names_short =
-  qw( undef Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );
-my @day_names_long =
-  qw( Sunday Monday Tuesday Wednesday Thursday Friday Saturday );
+    July August September October November December );
+my @month_names_short
+    = qw( undef Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );
+my @day_names_long
+    = qw( Sunday Monday Tuesday Wednesday Thursday Friday Saturday );
 my @day_names_short   = qw ( Sun Mon Tue Wed Thu Fri Sat );
 my @day_names_shorter = qw ( Su Mo Tu We Th Fr Sa );
 
@@ -63,13 +63,13 @@ plcal - display a monthly calendar
 Usage:  plcal [option]
 
 Options:
-  -b			use bracketed bolding (<>)
-  -h			disable highlighting
-  -n			show next month
-  -p			show previous month
-  --date=mm yyyy	display month of year
-  --help		display this help and exit
-  --month=mm		show specified month
+  -b            use bracketed bolding (<>)
+  -h            disable highlighting
+  -n            show next month
+  -p            show previous month
+  --date=mm yyyy    display month of year
+  --help        display this help and exit
+  --month=mm        show specified month
 
 Copyright (C) 2017 Luciano D. Cecere <ldante1986@gmail.com>
 
@@ -89,11 +89,11 @@ sub get_month_length {
 sub day_of_week {
     my ( $m, $d, $y ) = @_;
     my @arr = qw( undef 6 2 2 5 0 3 5 1 4 6 2 4 );
-    my $w =
-      ( ( int( $y / 4 ) ) - ( int( $y / 100 ) ) ) +
-      ( int( $y / 400 ) ) +
-      $d + $y +
-      $arr[$m];
+    my $w
+        = ( ( int( $y / 4 ) ) - ( int( $y / 100 ) ) )
+        + ( int( $y / 400 ) )
+        + $d + $y
+        + $arr[$m];
 
     if ( $month_length[2] == 29 && $m < 3 ) { $w--; }
 
@@ -105,7 +105,7 @@ sub day_in_year {
     my ( $m, $d, $y ) = @_;
     my $i;
 
-    for ( $i = 1 ; $i <= ( $m - 1 ) ; $i++ ) {
+    for ( $i = 1; $i <= ( $m - 1 ); $i++ ) {
         &get_month_length($y);
         $d += $month_length[$i];
     }
@@ -125,12 +125,12 @@ sub gregorian_data {
     my $len = $month_length[$m];
     my $i;
 
-    for ( $i = 1 ; $i <= $month_starts_on ; $i++ ) {
+    for ( $i = 1; $i <= $month_starts_on; $i++ ) {
         last if ( $month_starts_on == 0 );
         push @calendar_data, "$space" x 2;
     }
 
-    for ( $i = 1 ; $i <= ( $calendar_length - $month_starts_on ) ; $i++ ) {
+    for ( $i = 1; $i <= ( $calendar_length - $month_starts_on ); $i++ ) {
         if ( $i < 10 ) {
             push @calendar_data, "$space$i";
         }
@@ -156,7 +156,7 @@ sub print_gregorian_month {
     print "$space@day_names_shorter\n";
 
     my $i;
-    for ( $i = 0 ; $i < $#calendar_data ; $i++ ) {
+    for ( $i = 0; $i < $#calendar_data; $i++ ) {
         if ( ( $i % 7 ) == 0 && $i != 0 ) {
             print "\n";
         }
@@ -179,7 +179,7 @@ sub print_gregorian_month {
     print "\n";
 }
 
-sub print_gregorian_month_WINDOWS {
+sub print_gregorian_month_brackets {
     my ( $m, $d, $y ) = @_;
     $d =~ s/^\s+//;
     $d =~ s/^0+//;
@@ -193,7 +193,7 @@ sub print_gregorian_month_WINDOWS {
     print "$space@day_names_shorter\n";
 
     my $i;
-    for ( $i = 0 ; $i < $#calendar_data ; $i++ ) {
+    for ( $i = 0; $i < $#calendar_data; $i++ ) {
         if ( ( $i % 7 ) == 0 && $i != 0 ) {
             print "\n";
         }
@@ -324,7 +324,7 @@ if ( "$^O" eq 'MSWin32' || $bold ) {
         $day = 0;
     }
     else {
-        &print_gregorian_month_WINDOWS( $month, $day, $year );
+        &print_gregorian_month_brackets( $month, $day, $year );
         exit;
     }
 }
@@ -342,7 +342,7 @@ plcal - Display a monthly calendar
 
 =head1 SYNOPSIS
 
-	plcal [option]
+    plcal [option]
         plcal --help
 
 =head1 DESCRIPTION
