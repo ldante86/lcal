@@ -63,13 +63,13 @@ plcal - display a monthly calendar
 Usage:  plcal [option]
 
 Options:
-  -b            use bracketed bolding (<>)
-  -h            disable highlighting
-  -n            show next month
-  -p            show previous month
-  --date=mm yyyy    display month of year
-  --help        display this help and exit
-  --month=mm        show specified month
+  -b			use bracketed bolding (<>)
+  -h    	        disable highlighting
+  -n           		show next month
+  -p    	        show previous month
+  --date=mm yyyy	display month of year
+  --help      		display this help and exit
+  --month=mm       	show specified month
 
 Copyright (C) 2017 Luciano D. Cecere <ldante1986@gmail.com>
 
@@ -342,8 +342,8 @@ plcal - Display a monthly calendar
 
 =head1 SYNOPSIS
 
-    plcal [option]
-        plcal --help
+	plcal [option]
+	plcal --help
 
 =head1 DESCRIPTION
 
