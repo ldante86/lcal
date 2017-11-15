@@ -25,6 +25,7 @@
 
 use strict;
 use warnings;
+use 5.010;
 use POSIX qw(strftime);
 use Getopt::Long;
 
@@ -101,7 +102,6 @@ sub day_of_week {
 }
 
 sub day_in_year {
-
     my ( $m, $d, $y ) = @_;
     my $i;
 
