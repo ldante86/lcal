@@ -1,0 +1,354 @@
+#!/usr/bin/ruby
+# encoding: utf-8
+#
+# SCRIPT: rcal.rb
+# AUTHOR: Luciano D. Cecere
+# DATE: 12/2015
+########################################################################
+#
+# rcal.rb - Display a calendar
+# Copyright (C) 2015 Luciano D. Cecere <ldante86@aol.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+########################################################################
+
+require '../rcal/lib/calendar'
+require '../rcal/lib/ncal'
+require '../rcal/lib/discordia'
+require '../rcal/lib/info'
+
+month = Calendar::MONTH
+day = Calendar::DAY
+year = Calendar::YEAR
+
+USAGE = "\
+
+PROGRAM: rcal - display a calendar
+AUTHOR: Luciano D. Cecere
+LICENSE: GPLv2 (2015)
+
+USAGE:
+  rcal                            show current calendar
+  rcal MM                         show month of current year
+  rcal MM YYYY                    show month of year
+  rcal MM DD YYYY                 show month and day of year
+  rcal -d MM DD YYYY MM DD YYYY   show days/years between two dates
+  rcal -e YYYY                    show Western easter for YYYY
+  rcal -h                         don't highlight the current day
+  rcal -j MM DD YYYY              show Julian (1..365) calendar
+  rcal -n                         show next month
+  rcal -p                         show previous month
+  rcal -w MM DD YYYY              show week numbers
+  rcal -y YYYY                    show yearly calendar
+  rcal -D MM DD YYYY              show day of week for date
+  rcal -G MM DD YYYY              show Julian day number (JDN) for date
+  rcal -J JDN                     show Gregorian date for JDN
+  rcal -V                         show version information and exit
+  rcal -W                         show current week number
+  rcal --ddate MM DD YYYY         show Discordian date for date
+  rcal --help                     show this help and exit
+  rcal --html MM DD YYYY          generate HTML calendar
+  rcal --ncal MM DD YYYY          show calendar in ncal format
+  rcal -3 MM YYYY                 show previous, current and next month
+
+NOTES:
+  The -h flag must precede all other flags and args.
+  With the -3 flag, the middle month and year can be set.
+  The -y flag is optional if year is by itself.
+
+"
+
+### PARSE COMMAND LINE OPTIONS ###
+
+if(ARGV[0] == "--help") then
+  puts(USAGE)
+  exit
+end
+
+if(ARGV[0] == "-V") then
+  puts "rcal #{Rcal_info::VERSION}"
+  puts "#{Rcal_info::INFO}"
+  exit
+end
+
+cal = Calendar.new(month, day, year)
+
+julian = nil
+show_week = nil
+html = nil
+three = nil
+ncal = nil
+no_highlight = nil
+
+if(ARGV[0] == "-3") then
+  ARGV.shift
+  three = 1
+end
+
+if(ARGV[0] == "-y") then
+  ARGV.shift
+  if(ARGV.length == 1) then
+    cal.d = nil
+    cal.y = ARGV[0]
+    cal.yearly
+  else
+    cal.d = nil
+    cal.yearly
+  end
+  exit
+end
+
+if(ARGV[0] == "--ddate") then
+  d = Discordia.new(month, day, year)
+  ARGV.shift
+  if(ARGV.length == 3) then
+    d.m, d.d, d.y =  ARGV[0].to_i, ARGV[1].to_i, ARGV[2].to_i
+  end
+  d.print_discordian_date
+  exit
+end
+
+if(ARGV[0] == "-d") then
+  ARGV.shift
+  if(ARGV.length == 6) then
+    cal.diff_date_2(ARGV[0], ARGV[1], ARGV[2], ARGV[3], ARGV[4], ARGV[5])
+    exit
+  elsif(ARGV.length == 3) then
+    cal.diff_date_1(ARGV[0], ARGV[1], ARGV[2])
+    exit
+  else
+    puts("The -d flag format is: MM DD YYYY MM DD YYYY")
+    puts Calendar::HELP
+    exit 1
+  end
+end
+
+if(ARGV[0] == "-D") then
+  ARGV.shift
+  if(ARGV.length == 3) then
+    cal.m, cal.d, cal.y = ARGV[0], ARGV[1], ARGV[2]
+    puts Calendar::WEEKDAYS[cal.day_of_week(cal.m, cal.d, cal.y)]
+    exit
+  elsif(ARGV.length == 0) then
+    puts Calendar::WEEKDAYS[cal.day_of_week(month, day, year)]
+    exit
+  else
+    puts("Not enought args")
+    puts Calendar::HELP
+    exit 1
+  end
+end
+
+if(ARGV[0] == "-e") then
+  ARGV.shift
+  if(ARGV.length == 1) then
+    month, day, year = cal.western_easter(ARGV[0])
+    m = Calendar::MONTH_NAMES[month]
+    puts("#{m} #{day} #{year}")
+  else
+    month, day, year = cal.get_western_easter
+    m = Calendar::MONTH_NAMES[month]
+    puts("#{m} #{day} #{year}")
+  end
+  exit
+end
+
+if(ARGV[0] == "-G") then
+  ARGV.shift
+  if(ARGV.length == 3) then
+    month, day, year = ARGV[0], ARGV[1], ARGV[2]
+  end
+  puts(cal.gregorian_date_to_julian_date(month, day, year))
+  exit
+end
+
+if(ARGV[0] == "-J") then
+  ARGV.shift
+  if(ARGV.length != 1) then
+    puts("Mising Julian day number")
+    puts Calendar::HELP
+    exit 1
+  end
+  month, day, year = cal.julian_day_to_gregorian_day(ARGV[0])
+  puts("#{month} #{day} #{year}")
+  exit
+end
+
+if(ARGV[0] == "-h") then
+  ARGV.shift
+  no_highlight = 1
+  cal.d = nil
+end
+
+if(ARGV[0] == "--html") then
+  ARGV.shift
+  html = 1
+end
+
+if(ARGV[0] == "-j") then
+  ARGV.shift
+  julian = 1
+  if(ARGV.length == 1) then
+    if(ARGV[0] == "-y") then
+      cal.d = nil
+      cal.j_yearly
+      exit
+    else
+      cal.m = ARGV[0]
+      cal.d = nil
+    end
+  elsif(ARGV.length == 2) then
+    if(ARGV[0] == "-y") then
+      cal.y = ARGV[1]
+      cal.d = nil
+      cal.j_yearly
+      exit
+    else
+      cal.m, cal.y = ARGV[0], ARGV[1]
+      cal.d = nil
+    end
+  elsif(ARGV.length == 3) then
+    cal.m, cal.d, cal.y = ARGV[0], ARGV[1], ARGV[2]
+  end
+  cal.d = nil if(no_highlight)
+end
+
+if(ARGV[0] == "--ncal") then
+  ncal = 1
+  nc = Ncal.new(month, day, year)
+  ARGV.shift
+  if(ARGV.length == 1) then
+    if(ARGV[0] == "-y") then
+      nc.d = nil
+      nc.ncal_yearly
+      exit
+    elsif(ARGV[0] == "-j") then
+      nc.d = nil if(no_highlight)
+      nc.j_print_ncal
+      exit
+    else
+      nc.m = ARGV[0]
+      nc.d = nil
+    end
+  elsif(ARGV.length == 2) then
+    if(ARGV[0] == "-j") && (ARGV[1] == "-y") then
+      nc.d = nil
+      nc.j_ncal_yearly
+      exit
+    elsif(ARGV[0] == "-j") then
+      nc.m = ARGV[1]
+      nc.d = nil
+      nc.j_print_ncal
+      exit
+    elsif(ARGV[0] == "-y") then
+      nc.y = ARGV[1]
+      nc.d = nil
+      nc.ncal_yearly
+      exit
+    else
+      nc.m = ARGV[0]
+      nc.y = ARGV[1]
+      nc.d = nil
+    end
+  elsif(ARGV.length == 3) then
+    if(ARGV[0] == "-j") && (ARGV[1] == "-y") then
+      nc.y = ARGV[2]
+      nc.d = nil
+      nc.j_ncal_yearly
+      exit
+    end
+    if(ARGV[0] == "-j") then
+      nc.m = ARGV[1]
+      nc.y = ARGV[2]
+      nc.d = nil
+      nc.j_print_ncal
+      exit
+    else
+      nc.m, nc.d, nc.y = ARGV[0], ARGV[1], ARGV[2]
+      nc.d = nil if(no_highlight)
+    end
+  elsif(ARGV.length == 4) then
+    if(ARGV[0] == "-j")
+      nc.m, nc.d, nc.y = ARGV[1], ARGV[2], ARGV[3]
+      nc.d = nil if(no_highlight)
+      nc.j_print_ncal
+      exit
+    end
+  elsif(ARGV.length == 2) then
+     nc.m, nc.d, nc.y = ARGV[0], nil,  ARGV[1]
+  end
+end
+
+if(ARGV[0] == "-w") then
+  ARGV.shift
+  show_week = 1
+end
+
+if(ARGV[0] == "-W") then
+  puts cal.week_num(month.to_i, day.to_i, year.to_i)
+  exit
+end
+
+if(ARGV[0] == "-p") then
+  cal.shift_month_backward
+  cal.print_g_monthly
+  exit
+end
+
+if(ARGV[0] == "-n") then
+  cal.shift_month_forward
+  cal.print_g_monthly
+  exit
+end
+
+if(ARGV.length == 1) then
+  if(ARGV[0].to_i >= 1753) && (ARGV[0].to_i <= 9999) then
+    cal.d = nil
+    cal.y = ARGV[0]
+    cal.yearly
+    exit
+  else
+    cal.m, cal.d = ARGV[0].to_i, nil
+  end
+end
+
+if(ARGV.length == 2) then
+  cal.m, cal.d, cal.y =  ARGV[0].to_i, nil, ARGV[1].to_i
+end
+
+if(ARGV.length == 3) then
+  cal.m, cal.d, cal.y =  ARGV[0].to_i, ARGV[1].to_i, ARGV[2].to_i
+end
+
+cal.d = nil if(no_highlight)
+
+### PROGRAM START ###
+
+if(julian)
+  cal.print_j_monthly
+elsif(show_week)
+  cal.print_weeknums
+elsif(html)
+  cal.to_html
+elsif(three)
+  cal.month3
+elsif(ncal)
+  nc.d = nil if(no_highlight)
+  nc.print_ncal
+else
+  cal.print_g_monthly
+end
+
+### EOF ####################################################################
