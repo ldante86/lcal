@@ -106,7 +106,7 @@ sub day_in_year {
     my $i;
 
     for ( $i = 1; $i <= ( $m - 1 ); $i++ ) {
-        &get_month_length($y);
+        get_month_length($y);
         $d += $month_length[$i];
     }
     $d;
@@ -120,8 +120,8 @@ sub center {
 sub gregorian_data {
     @calendar_data = ();
     my ( $m, $y ) = @_;
-    &get_month_length($y);
-    $month_starts_on = &day_of_week( $m, 1, $y );
+    get_month_length($y);
+    $month_starts_on = day_of_week( $m, 1, $y );
     my $len = $month_length[$m];
     my $i;
 
@@ -149,10 +149,10 @@ sub print_gregorian_month {
     my $dd = $d;
     $d =~ s/^0+//;
 
-    &gregorian_data( $m, $y );
+    gregorian_data( $m, $y );
 
     print "\n";
-    &center( $calendar_width, "$space$month_names_long[$m] $y" );
+    center( $calendar_width, "$space$month_names_long[$m] $y" );
     print "$space@day_names_shorter\n";
 
     my $i;
@@ -184,12 +184,12 @@ sub print_gregorian_month_brackets {
     $d =~ s/^\s+//;
     $d =~ s/^0+//;
 
-    &gregorian_data( $m, $y );
+    gregorian_data( $m, $y );
 
     my $sp = '';
 
     print "\n";
-    &center( $calendar_width, "$space$month_names_long[$m] $y" );
+    center( $calendar_width, "$space$month_names_long[$m] $y" );
     print "$space@day_names_shorter\n";
 
     my $i;
@@ -212,7 +212,7 @@ sub print_gregorian_month_brackets {
             $sp = 1;
         }
         else {
-            if ( $sp and &day_of_week( $m, $d, $y ) == 6 ) {
+            if ( $sp and day_of_week( $m, $d, $y ) == 6 ) {
                 print "$space$calendar_data[$i]";
                 $sp = '';
             }
@@ -286,19 +286,19 @@ GetOptions(
 ## Program start ##
 
 if ($help) {
-    print &help();
+    print help();
     exit;
 }
 
 if ($previous) {
-    &decrement_month($month);
-    &print_gregorian_month( $month, $day, $year );
+    decrement_month($month);
+    print_gregorian_month( $month, $day, $year );
     exit;
 }
 
 if ($next) {
-    &increment_month($month);
-    &print_gregorian_month( $month, $day, $year );
+    increment_month($month);
+    print_gregorian_month( $month, $day, $year );
     exit;
 }
 
@@ -307,9 +307,9 @@ if ($no_highlight) {
 }
 
 if ($month1) {
-    &validate_month($month1);
+    validate_month($month1);
     $day = 0;
-    &print_gregorian_month( $month1, $day, $year );
+    print_gregorian_month( $month1, $day, $year );
     exit;
 }
 
@@ -324,13 +324,13 @@ if ( "$^O" eq 'MSWin32' or $bold ) {
         $day = 0;
     }
     else {
-        &print_gregorian_month_brackets( $month, $day, $year );
+        print_gregorian_month_brackets( $month, $day, $year );
         exit;
     }
 }
 
 #Standard calendar - no options
-&print_gregorian_month( $month, $day, $year );
+print_gregorian_month( $month, $day, $year );
 
 __END__
 
