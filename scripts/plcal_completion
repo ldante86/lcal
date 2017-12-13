@@ -1,0 +1,18 @@
+_plcal()
+{
+	COMPREPLY=()
+	local word=${COMP_WORDS[COMP_CWORD]}
+
+	local LONG_FLAGS="--date --help --month"
+	local SHORT_FLAGS="-b -h -n -p "
+
+	case "$word" in
+		--*)	COMPREPLY=( $( compgen -W "$LONG_FLAGS" -- $word) )
+			return 0
+			;;
+
+		-*)	COMPREPLY=( $( compgen -W "$SHORT_FLAGS" -- $word ) )
+			return 0
+			;;
+	esac
+} && complete -F _plcal plcal_completion plcal
