@@ -1,11 +1,11 @@
 #!/bin/bash -
 #
-# SCRIPT: year.sh
+# SCRIPT: stardate-month.sh
 # AUTHOR: Luciano D. Cecere
 # DATE: 02/01/2018-03:21:18 AM
 ########################################################################
 #
-# year.sh - Print stardate for month/year
+# stardate-month.sh - Print stardate for month/year
 # Copyright (C) 2018 Luciano D. Cecere <ldante1986@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
