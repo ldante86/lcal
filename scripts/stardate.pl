@@ -23,7 +23,7 @@ my $year  = strftime "%Y", localtime;
 # Starting date is based on Star Trek: The Next Generation, Gregorian
 # year 2323.
 my $b = 2323;
-my $c = 00000 . 00;
+my $c = 00000.00;
 
 sub month_array {
     my $y = $_[0];
