@@ -1,0 +1,8 @@
+bin/monthly.sh
+bin/stardate.pl
+Changes
+lib/Stardate.pm
+Makefile.PL
+MANIFEST
+README
+t/Stardate.t

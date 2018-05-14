@@ -1,4 +1,4 @@
-.
+lcal
 ├── bin
 │   ├── cal
 │   ├── dcal
@@ -6,6 +6,7 @@
 │   ├── pc
 │   ├── plcal
 │   ├── PLCAL_README.md
+│   ├── rcal
 │   └── README.md
 ├── BUGS.md
 ├── COPYING
@@ -56,6 +57,20 @@
 │   ├── plcal.1
 │   └── showman.sh
 ├── MANIFEST
+├── perl
+│   └── modules
+│       └── Stardate
+│           ├── bin
+│           │   ├── monthly.sh
+│           │   └── stardate.pl
+│           ├── Changes
+│           ├── lib
+│           │   └── Stardate.pm
+│           ├── Makefile.PL
+│           ├── MANIFEST
+│           ├── README
+│           └── t
+│               └── Stardate.t
 ├── rcal
 │   ├── AUTHOR
 │   ├── bin
@@ -100,7 +115,10 @@
 │   ├── lcal-funcs.sh
 │   ├── ldoc
 │   ├── lhtml
+│   ├── plcal_completion
+│   ├── stardate-month.sh
+│   ├── stardate.pl
 │   └── weeknum_test.sh
 └── TODO.md
 
-19 directories, 84 files
+25 directories, 96 files

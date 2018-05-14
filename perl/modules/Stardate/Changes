@@ -1,0 +1,6 @@
+Revision history for Perl extension Stardate.
+
+0.01  Wed Jan 31 18:19:19 2018
+	- original version; created by h2xs 1.23 with options
+		-AXc -n Stardate
+
