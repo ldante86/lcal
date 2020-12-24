@@ -252,7 +252,7 @@ Parameters: *year*
 
 	 Use the first two digits of year to
 
-	 find the cooresponding number on the chart.
+	 find the corresponding number on the chart.
 
 Function: **_orthodox_western_last_2**
 
@@ -260,7 +260,7 @@ Parameters: *year*
 
 	 Use the last two digits of year to
 
-	 find the cooresponding number on the chart.
+	 find the corresponding number on the chart.
 
 Function: **_show_western_easter**
 
@@ -274,7 +274,7 @@ Parameters: *year*
 
 	 Use the first two digits of year to
 
-	 find the cooresponding number on the chart.
+	 find the corresponding number on the chart.
 
 Function: **_orthodox_pfm_date**
 
